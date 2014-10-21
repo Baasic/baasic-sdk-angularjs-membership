@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+    <metadata>
+        <id>Baasic.Angular.Membership</id>
+        <version>$version$</version>
+        <title>Baasic Angular Membership Module</title>
+        <authors>Kristijan Horvat</authors>
+        <owners>Mono Ltd.</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>AngularJS Membership module making calls to the Baasic Membership API easy.</description>
+        <summary />
+        <copyright>Mono Ltd.</copyright>
+        <language>en-US</language>
+        <tags>Javascript, Baasic, AngularJs, Membership</tags>
+		<dependencies>     
+            <dependency id="Baasic.Angular.Core" version="(,2.0)" />                        
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="..\dist\baasic-angular-membership.js" target="content\Scripts\baasic-angular-membership.js" />
+		<file src="..\dist\baasic-angular-membership.min.js" target="content\Scripts\baasic-angular.membership.min.js" />
+    </files>
+</package>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,33 @@
+{
+  "name": "baasic-angular-membership",
+  "version": "0.1.21",
+  "description": "Baasic AngularJS SDK membership modules and services.",
+  "keywords": [
+    "angularjs",
+    "baasic",
+	"ajax",
+    "backend"
+  ],
+  "license": "MIT",
+  "main": "dist/baasic-angular-membership.js",
+  "ignore": [
+		"**/.*",
+		"node_modules",
+		"bower_components",
+		"test",
+		"tests",
+        "src",
+        "spec",
+		"NuGet",
+		"lib",
+        "bower.json",
+        "gulpfile.js",
+        "package.json",
+        "README.md"
+    ],
+  "devDependencies": {
+  },
+  "dependencies": {
+	"baasic-angular-core": "baasic/baasic-sdk-angularjs-core"
+  }
+}
