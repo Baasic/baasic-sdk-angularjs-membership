@@ -18,7 +18,7 @@
     </metadata>
     <files>
         <file src="..\dist\baasic-angular-membership.js" target="content\Scripts\baasic-angular-membership.js" />
-		<file src="..\dist\baasic-angular-membership.min.js" target="content\Scripts\baasic-angular.membership.min.js" />
+		<file src="..\dist\baasic-angular-membership.min.js" target="content\Scripts\baasic-angular-membership.min.js" />
     </files>
 </package>
 
