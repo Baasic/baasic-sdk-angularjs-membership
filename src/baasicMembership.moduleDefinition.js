@@ -1,1 +1,1 @@
-﻿var module = angular.module("baasic.baasicMembership", ["baasic.baasicApi"]);
+﻿var module = angular.module("baasic.membership", ["baasic.api"]);
