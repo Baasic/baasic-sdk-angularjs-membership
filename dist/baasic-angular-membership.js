@@ -64,8 +64,8 @@
         "use strict";
         module.service("baasicPasswordRecoveryRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
             return {
-                passwordRecovery: uriTemplateService.parse("RecoverPassword"),
-                changePassword: uriTemplateService.parse("RecoverPassword/user/{username}/change"),
+                passwordRecovery: uriTemplateService.parse("recover-password"),
+                changePassword: uriTemplateService.parse("recover-password/users/{username}/change"),
                 parse: uriTemplateService.parse
             };
         }]);
@@ -73,21 +73,20 @@
     (function (angular, module, undefined) {
         "use strict";
         module.service("baasicPasswordRecoveryService", ["baasicApiHttp", "baasicPasswordRecoveryRouteService", function (baasicApiHttp, passwordRecoveryRouteService) {
-
             return {
                 routeService: passwordRecoveryRouteService,
-                requestReset: function (request) {
+                requestReset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
                         method: "POST",
-                        data: request
+                        data: data
                     });
                 },
-                reset: function (reset) {
+                reset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
                         method: "PUT",
-                        data: reset
+                        data: data
                     });
                 },
                 change: function (username, data) {
@@ -106,9 +105,9 @@
         "use strict";
         module.service("baasicRoleRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
             return {
-                find: uriTemplateService.parse("role/{?searchQuery,page,rpp,sort,embed,fields}"),
-                get: uriTemplateService.parse("role/{roleId}/{?embed,fields}"),
-                create: uriTemplateService.parse("role"),
+                find: uriTemplateService.parse("roles/{?searchQuery,page,rpp,sort,embed,fields}"),
+                get: uriTemplateService.parse("roles/{id}/{?embed,fields}"),
+                create: uriTemplateService.parse("roles"),
                 parse: uriTemplateService.parse
             };
         }]);
@@ -118,11 +117,11 @@
         module.service("baasicRoleService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicRoleRouteService", function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
             return {
                 routeService: roleRouteService,
-                find: function (data) {
-                    return baasicApiHttp.get(roleRouteService.find.expand(baasicApiService.findParams(data)));
+                find: function (options) {
+                    return baasicApiHttp.get(roleRouteService.find.expand(baasicApiService.findParams(options)));
                 },
-                get: function (data) {
-                    return baasicApiHttp.get(roleRouteService.get.expand(baasicApiService.getParams(data, 'roleId')));
+                get: function (id, options) {
+                    return baasicApiHttp.get(roleRouteService.get.expand(baasicApiService.getParams(id, options)));
                 },
                 create: function (data) {
                     return baasicApiHttp.post(roleRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
@@ -142,10 +141,11 @@
         "use strict";
         module.service("baasicUserRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
             return {
-                find: uriTemplateService.parse("user/{?searchQuery,page,rpp,sort,embed,fields}"),
-                get: uriTemplateService.parse("user/{username}/{?embed,fields}"),
-                create: uriTemplateService.parse("user"),
-                activate: uriTemplateService.parse("user/activate/{activationToken}/"),
+                exists: uriTemplateService.parse("users/{username}/exists/"),
+                find: uriTemplateService.parse("users/{?searchQuery,page,rpp,sort,embed,fields}"),
+                get: uriTemplateService.parse("users/{username}/{?embed,fields}"),
+                create: uriTemplateService.parse("users"),
+                activate: uriTemplateService.parse("users/activate/{activationToken}/"),
                 parse: uriTemplateService.parse
             };
         }]);
@@ -155,11 +155,14 @@
         module.service("baasicUserService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicUserRouteService", function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
                 routeService: userRouteService,
-                find: function (data) {
-                    return baasicApiHttp.get(userRouteService.find.expand(baasicApiService.findParams(data)));
+                exists: function (username, options) {
+                    return baasicApiHttp.get(userRouteService.exists.expand(baasicApiService.getParams(username, options, 'username')));
                 },
-                get: function (data) {
-                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'username')));
+                find: function (options) {
+                    return baasicApiHttp.get(userRouteService.find.expand(baasicApiService.findParams(options)));
+                },
+                get: function (username, options) {
+                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(username, options, 'username')));
                 },
                 create: function (data) {
                     return baasicApiHttp.post(userRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
@@ -180,8 +183,8 @@
                     var params = baasicApiService.updateParams(data);
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href, {});
                 },
-                activate: function (data) {
-                    var params = baasicApiService.getParams(data, 'activationToken');
+                activate: function (activationToken, options) {
+                    var params = baasicApiService.getParams(activationToken, options, 'activationToken');
                     return baasicApiHttp.put(userRouteService.activate.expand(params), {});
                 }
             };

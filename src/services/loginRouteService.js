@@ -4,7 +4,7 @@
         function (uriTemplateService) {
             return {
                 login: uriTemplateService.parse("login/{?embed,fields,options}"),
-				parse: uriTemplateService.parse
+                parse: uriTemplateService.parse
             };
         }]);
 }(angular, module));

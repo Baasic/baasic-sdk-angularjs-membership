@@ -3,12 +3,15 @@
     module.service("baasicUserService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicUserRouteService",
         function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
-				routeService: userRouteService,
-                find: function (data) {
-                    return baasicApiHttp.get(userRouteService.find.expand(baasicApiService.findParams(data)));
+                routeService: userRouteService,
+                exists: function (username, options) {
+                    return baasicApiHttp.get(userRouteService.exists.expand(baasicApiService.getParams(username, options, 'username')));
                 },
-                get: function (data) {
-                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'username')));
+                find: function (options) {
+                    return baasicApiHttp.get(userRouteService.find.expand(baasicApiService.findParams(options)));
+                },
+                get: function (username, options) {
+                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(username, options, 'username')));
                 },
                 create: function (data) {
                     return baasicApiHttp.post(userRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
@@ -29,11 +32,10 @@
                     var params = baasicApiService.updateParams(data);
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href, {});
                 },
-                activate: function (data) {
-                    var params = baasicApiService.getParams(data, 'activationToken');
+                activate: function (activationToken, options) {
+                    var params = baasicApiService.getParams(activationToken, options, 'activationToken');
                     return baasicApiHttp.put(userRouteService.activate.expand(params), {});
                 }
             };
-        }
-    ]);
+        }]);
 }(angular, module));

@@ -3,9 +3,9 @@
     module.service("baasicRoleRouteService", ["baasicUriTemplateService",
         function (uriTemplateService) {
             return {
-                find: uriTemplateService.parse("role/{?searchQuery,page,rpp,sort,embed,fields}"),
-                get: uriTemplateService.parse("role/{roleId}/{?embed,fields}"),
-                create: uriTemplateService.parse("role"),
+                find: uriTemplateService.parse("roles/{?searchQuery,page,rpp,sort,embed,fields}"),
+                get: uriTemplateService.parse("roles/{id}/{?embed,fields}"),
+                create: uriTemplateService.parse("roles"),
                 parse: uriTemplateService.parse
             };
         }]);

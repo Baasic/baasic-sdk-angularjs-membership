@@ -2,24 +2,23 @@
     "use strict";
     module.service("baasicPasswordRecoveryService", ["baasicApiHttp", "baasicPasswordRecoveryRouteService",
         function (baasicApiHttp, passwordRecoveryRouteService) {
-            
             return {
-				routeService: passwordRecoveryRouteService,
-                requestReset: function (request) {
+                routeService: passwordRecoveryRouteService,
+                requestReset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
                         method: "POST",
-                        data: request
+                        data: data
                     });
                 },
-                reset: function (reset) {
+                reset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
                         method: "PUT",
-                        data: reset
+                        data: data
                     });
                 },
-				change: function (username, data) {
+                change: function (username, data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.changePassword.expand({ username: username }),
                         method: "PUT",
