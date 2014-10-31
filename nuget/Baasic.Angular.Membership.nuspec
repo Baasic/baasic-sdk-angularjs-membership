@@ -9,6 +9,7 @@
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
         <description>AngularJS Membership module making calls to the Baasic Membership API easy.</description>
         <summary />
+		<projectUrl>https://github.com/Baasic/baasic-sdk-angularjs-membership</projectUrl>
         <copyright>Mono Ltd.</copyright>
         <language>en-US</language>
         <tags>Javascript, Baasic, AngularJs, Membership</tags>
