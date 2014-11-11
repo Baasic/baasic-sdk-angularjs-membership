@@ -4,7 +4,7 @@
         function (uriTemplateService) {
             return {
                 passwordRecovery: uriTemplateService.parse("recover-password"),
-                changePassword: uriTemplateService.parse("recover-password/users/{userName}/change"),
+                changePassword: uriTemplateService.parse("users/{userName}/change"),
                 parse: uriTemplateService.parse
             };
         }]);

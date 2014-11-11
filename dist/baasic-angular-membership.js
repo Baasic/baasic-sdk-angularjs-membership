@@ -65,7 +65,7 @@
         module.service("baasicPasswordRecoveryRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
             return {
                 passwordRecovery: uriTemplateService.parse("recover-password"),
-                changePassword: uriTemplateService.parse("recover-password/users/{userName}/change"),
+                changePassword: uriTemplateService.parse("users/{userName}/change"),
                 parse: uriTemplateService.parse
             };
         }]);
@@ -169,14 +169,7 @@
                 find: uriTemplateService.parse("users/{?searchQuery,page,rpp,sort,embed,fields}"),
                 get: uriTemplateService.parse("users/{userName}/{?embed,fields}"),
                 parse: uriTemplateService.parse,
-                update: uriTemplateService.parse("users/{userName}/update"),
-                create: uriTemplateService.parse("users"),
-                sendPasswordRecovery: uriTemplateService.parse("users/{userName}/send-password-recovery"),
-                approve: uriTemplateService.parse("users/{userName}/approve"),
-                disapprove: uriTemplateService.parse("users/{userName}/disapprove"),
-                lock: uriTemplateService.parse("users/{userName}/lock"),
-                unlock: uriTemplateService.parse("users/{userName}/unlock"),
-                remove: uriTemplateService.parse("users/{userName}"),
+                create: uriTemplateService.parse("users")
             };
         }]);
     }(angular, module));
@@ -198,26 +191,34 @@
                     return baasicApiHttp.post(userRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                 update: function (data) {
-                    return baasicApiHttp.put(userRouteService.update.expand(baasicApiService.findParams(data, 'userName')), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
+                    var params = baasicApiService.updateParams(data);
+                    return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                 remove: function (data) {
-                    return baasicApiHttp.delete(userRouteService.remove.expand(baasicApiService.findParams(data, 'userName')), {});
+                    var params = baasicApiService.removeParams(data);
+                    return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
                 },
                 unlock: function (data) {
-                    return baasicApiHttp.put(userRouteService.unlock.expand(baasicApiService.findParams(data, 'userName')), {});
+                    var params = baasicApiService.updateParams(data);
+                    return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('unlock').href);
                 },
                 lock: function (data) {
-                    return baasicApiHttp.put(userRouteService.lock.expand(baasicApiService.findParams(data, 'userName')), {});
+                    var params = baasicApiService.updateParams(data);
+                    return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);
                 },
                 sendPasswordRecovery: function (data) {
-                    return baasicApiHttp.put(userRouteService.sendPasswordRecovery.expand(baasicApiService.findParams(data, 'userName')), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
+                    var params = baasicApiService.updateParams(data);
+                    var model = params[baasicConstants.modelPropertyName];
+                    return baasicApiHttp.put(model.links('sendpasswordrecovery').href);
                 },
                 approve: function (data) {
-                    return baasicApiHttp.put(userRouteService.approve.expand(baasicApiService.findParams(data, 'userName')), {});
+                    var params = baasicApiService.updateParams(data);
+                    return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('approve').href);
                 },
                 disapprove: function (data) {
-                    return baasicApiHttp.put(userRouteService.disapprove.expand(baasicApiService.findParams(data, 'userName')), {});
-                },
+                    var params = baasicApiService.updateParams(data);
+                    return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('disapprove').href);
+                }
             };
         }]);
     }(angular, module));
