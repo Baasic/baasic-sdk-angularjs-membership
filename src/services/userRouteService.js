@@ -7,7 +7,8 @@
                 find: uriTemplateService.parse("users/{?searchQuery,page,rpp,sort,embed,fields}"),
                 get: uriTemplateService.parse("users/{userName}/{?embed,fields}"),
                 parse: uriTemplateService.parse,
-                create: uriTemplateService.parse("users")
+                create: uriTemplateService.parse("users"),
+				changePassword: uriTemplateService.parse("users/{userName}/change-password"),
             };
         }]);
 }(angular, module));

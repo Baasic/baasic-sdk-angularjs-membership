@@ -32,11 +32,6 @@
                     var params = baasicApiService.updateParams(data);
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);                    
                 },
-                sendPasswordRecovery: function (data) {
-					var params = baasicApiService.updateParams(data);
-					var model = params[baasicConstants.modelPropertyName];
-                    return baasicApiHttp.put(model.links('sendpasswordrecovery').href); 
-                },
                 approve: function (data) {
                     var params = baasicApiService.updateParams(data);
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('approve').href);
@@ -44,7 +39,14 @@
                 disapprove: function (data) {
                     var params = baasicApiService.updateParams(data);
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('disapprove').href);
-                }
+                },
+                changePassword: function (userName, data) {
+                    return baasicApiHttp({
+                        url: userRouteService.changePassword.expand({ userName: userName }),
+                        method: "PUT",
+                        data: data
+                    });
+                }				
             };
         }]);
 }(angular, module));

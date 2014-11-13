@@ -65,7 +65,6 @@
         module.service("baasicPasswordRecoveryRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
             return {
                 passwordRecovery: uriTemplateService.parse("recover-password"),
-                changePassword: uriTemplateService.parse("users/{userName}/change"),
                 parse: uriTemplateService.parse
             };
         }]);
@@ -85,15 +84,6 @@
                 reset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
-                        method: "PUT",
-                        data: data
-                    });
-                },
-                change: function (userName, data) {
-                    return baasicApiHttp({
-                        url: passwordRecoveryRouteService.changePassword.expand({
-                            userName: userName
-                        }),
                         method: "PUT",
                         data: data
                     });
@@ -169,7 +159,8 @@
                 find: uriTemplateService.parse("users/{?searchQuery,page,rpp,sort,embed,fields}"),
                 get: uriTemplateService.parse("users/{userName}/{?embed,fields}"),
                 parse: uriTemplateService.parse,
-                create: uriTemplateService.parse("users")
+                create: uriTemplateService.parse("users"),
+                changePassword: uriTemplateService.parse("users/{userName}/change-password"),
             };
         }]);
     }(angular, module));
@@ -206,11 +197,6 @@
                     var params = baasicApiService.updateParams(data);
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);
                 },
-                sendPasswordRecovery: function (data) {
-                    var params = baasicApiService.updateParams(data);
-                    var model = params[baasicConstants.modelPropertyName];
-                    return baasicApiHttp.put(model.links('sendpasswordrecovery').href);
-                },
                 approve: function (data) {
                     var params = baasicApiService.updateParams(data);
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('approve').href);
@@ -218,6 +204,15 @@
                 disapprove: function (data) {
                     var params = baasicApiService.updateParams(data);
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('disapprove').href);
+                },
+                changePassword: function (userName, data) {
+                    return baasicApiHttp({
+                        url: userRouteService.changePassword.expand({
+                            userName: userName
+                        }),
+                        method: "PUT",
+                        data: data
+                    });
                 }
             };
         }]);

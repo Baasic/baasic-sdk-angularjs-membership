@@ -17,13 +17,6 @@
                         method: "PUT",
                         data: data
                     });
-                },
-                change: function (userName, data) {
-                    return baasicApiHttp({
-                        url: passwordRecoveryRouteService.changePassword.expand({ userName: userName }),
-                        method: "PUT",
-                        data: data
-                    });
                 }
             };
         }]);
