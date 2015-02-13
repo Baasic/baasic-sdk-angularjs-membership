@@ -1,1 +1,3 @@
-﻿var module = angular.module("baasic.membership", ["baasic.api"]);
+﻿/* exported module */
+
+var module = angular.module('baasic.membership', ['baasic.api']);

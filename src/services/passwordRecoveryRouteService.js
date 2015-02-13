@@ -1,9 +1,11 @@
-﻿(function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicPasswordRecoveryRouteService", ["baasicUriTemplateService",
+﻿/* globals module */
+
+(function (angular, module, undefined) {
+    'use strict';
+    module.service('baasicPasswordRecoveryRouteService', ['baasicUriTemplateService',
         function (uriTemplateService) {
             return {
-                passwordRecovery: uriTemplateService.parse("recover-password"),                
+                passwordRecovery: uriTemplateService.parse('recover-password'),                
                 parse: uriTemplateService.parse
             };
         }]);

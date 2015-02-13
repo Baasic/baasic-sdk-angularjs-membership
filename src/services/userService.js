@@ -1,6 +1,8 @@
-﻿(function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicUserService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicUserRouteService",
+﻿/* globals module */
+
+(function (angular, module, undefined) {
+    'use strict';
+    module.service('baasicUserService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRouteService',
         function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
                 routeService: userRouteService,
@@ -43,7 +45,7 @@
                 changePassword: function (userName, data) {
                     return baasicApiHttp({
                         url: userRouteService.changePassword.expand({ userName: userName }),
-                        method: "PUT",
+                        method: 'PUT',
                         data: data
                     });
                 }				

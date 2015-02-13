@@ -1,22 +1,22 @@
-(function (angular, undefined) {
-    var module = angular.module("baasic.membership", ["baasic.api"]);
+(function (angular, undefined) { /* exported module */
 
-    module.config(["$provide", function config($provide) {
+    var module = angular.module('baasic.membership', ['baasic.api']);
 
-    }]);
+    /* globals module */
 
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicLoginRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
+        'use strict';
+        module.service('baasicLoginRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
             return {
-                login: uriTemplateService.parse("login/{?embed,fields,options}"),
+                login: uriTemplateService.parse('login/{?embed,fields,options}'),
                 parse: uriTemplateService.parse
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicLoginService", ["baasicApiHttp", "baasicLoginRouteService", function (baasicApiHttp, loginRouteService) {
+        'use strict';
+        module.service('baasicLoginService', ['baasicApiHttp', 'baasicLoginRouteService', function (baasicApiHttp, loginRouteService) {
             return {
                 routeService: loginRouteService,
                 login: function login(data) {
@@ -32,10 +32,10 @@
 
                     return baasicApiHttp({
                         url: loginRouteService.login.expand(settings),
-                        method: "POST",
+                        method: 'POST',
                         data: formData,
                         headers: {
-                            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                         }
                     });
                 },
@@ -43,14 +43,14 @@
                     data = data || {};
                     return baasicApiHttp.get(loginRouteService.login.expand(data), {
                         headers: {
-                            "Accept": "application/json; charset=UTF-8"
+                            'Accept': 'application/json; charset=UTF-8'
                         }
                     });
                 },
                 logout: function logout(token, type) {
                     return baasicApiHttp({
                         url: loginRouteService.login.expand({}),
-                        method: "DELETE",
+                        method: 'DELETE',
                         data: {
                             token: token,
                             type: type
@@ -59,50 +59,54 @@
                 }
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicPasswordRecoveryRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
+        'use strict';
+        module.service('baasicPasswordRecoveryRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
             return {
-                passwordRecovery: uriTemplateService.parse("recover-password"),
+                passwordRecovery: uriTemplateService.parse('recover-password'),
                 parse: uriTemplateService.parse
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicPasswordRecoveryService", ["baasicApiHttp", "baasicPasswordRecoveryRouteService", function (baasicApiHttp, passwordRecoveryRouteService) {
+        'use strict';
+        module.service('baasicPasswordRecoveryService', ['baasicApiHttp', 'baasicPasswordRecoveryRouteService', function (baasicApiHttp, passwordRecoveryRouteService) {
             return {
                 routeService: passwordRecoveryRouteService,
                 requestReset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
-                        method: "POST",
+                        method: 'POST',
                         data: data
                     });
                 },
                 reset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
-                        method: "PUT",
+                        method: 'PUT',
                         data: data
                     });
                 }
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicUserRegisterRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
+        'use strict';
+        module.service('baasicUserRegisterRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
             return {
-                create: uriTemplateService.parse("register"),
-                activate: uriTemplateService.parse("register/activate/{activationToken}/")
+                create: uriTemplateService.parse('register'),
+                activate: uriTemplateService.parse('register/activate/{activationToken}/')
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicUserRegisterService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicUserRegisterRouteService", function (baasicApiHttp, baasicApiService, baasicConstants, baasicUserRegisterRouteService) {
+        'use strict';
+        module.service('baasicUserRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRegisterRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, baasicUserRegisterRouteService) {
             return {
                 routeService: baasicUserRegisterRouteService,
                 create: function (data) {
@@ -114,21 +118,23 @@
                 }
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicRoleRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
+        'use strict';
+        module.service('baasicRoleRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
             return {
-                find: uriTemplateService.parse("roles/{?searchQuery,page,rpp,sort,embed,fields}"),
-                get: uriTemplateService.parse("roles/{id}/{?embed,fields}"),
-                create: uriTemplateService.parse("roles"),
+                find: uriTemplateService.parse('roles/{?searchQuery,page,rpp,sort,embed,fields}'),
+                get: uriTemplateService.parse('roles/{id}/{?embed,fields}'),
+                create: uriTemplateService.parse('roles'),
                 parse: uriTemplateService.parse
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicRoleService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicRoleRouteService", function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
+        'use strict';
+        module.service('baasicRoleService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRoleRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
             return {
                 routeService: roleRouteService,
                 find: function (options) {
@@ -150,23 +156,25 @@
                 }
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicUserRouteService", ["baasicUriTemplateService", function (uriTemplateService) {
+        'use strict';
+        module.service('baasicUserRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
             return {
-                exists: uriTemplateService.parse("users/{userName}/exists/"),
-                find: uriTemplateService.parse("users/{?searchQuery,page,rpp,sort,embed,fields}"),
-                get: uriTemplateService.parse("users/{userName}/{?embed,fields}"),
+                exists: uriTemplateService.parse('users/{userName}/exists/'),
+                find: uriTemplateService.parse('users/{?searchQuery,page,rpp,sort,embed,fields}'),
+                get: uriTemplateService.parse('users/{userName}/{?embed,fields}'),
                 parse: uriTemplateService.parse,
-                create: uriTemplateService.parse("users"),
-                changePassword: uriTemplateService.parse("users/{userName}/change-password"),
+                create: uriTemplateService.parse('users'),
+                changePassword: uriTemplateService.parse('users/{userName}/change-password'),
             };
         }]);
-    }(angular, module));
+    }(angular, module)); /* globals module */
+
     (function (angular, module, undefined) {
-        "use strict";
-        module.service("baasicUserService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicUserRouteService", function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
+        'use strict';
+        module.service('baasicUserService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
                 routeService: userRouteService,
                 exists: function (userName, options) {
@@ -210,7 +218,7 @@
                         url: userRouteService.changePassword.expand({
                             userName: userName
                         }),
-                        method: "PUT",
+                        method: 'PUT',
                         data: data
                     });
                 }

@@ -1,6 +1,8 @@
+/* globals module */
+
 (function (angular, module, undefined) {
-	"use strict";
-	module.service("baasicUserRegisterService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicUserRegisterRouteService", 
+	'use strict';
+	module.service('baasicUserRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRegisterRouteService', 
 		function (baasicApiHttp, baasicApiService, baasicConstants, baasicUserRegisterRouteService) {
 			return {
 				routeService: baasicUserRegisterRouteService,

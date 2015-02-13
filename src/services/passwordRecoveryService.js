@@ -1,20 +1,22 @@
-﻿(function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicPasswordRecoveryService", ["baasicApiHttp", "baasicPasswordRecoveryRouteService",
+﻿/* globals module */
+
+(function (angular, module, undefined) {
+    'use strict';
+    module.service('baasicPasswordRecoveryService', ['baasicApiHttp', 'baasicPasswordRecoveryRouteService',
         function (baasicApiHttp, passwordRecoveryRouteService) {
             return {
                 routeService: passwordRecoveryRouteService,
                 requestReset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
-                        method: "POST",
+                        method: 'POST',
                         data: data
                     });
                 },
                 reset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
-                        method: "PUT",
+                        method: 'PUT',
                         data: data
                     });
                 }

@@ -1,6 +1,8 @@
-﻿(function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicRoleService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicRoleRouteService",
+﻿/* globals module */
+
+(function (angular, module, undefined) {
+    'use strict';
+    module.service('baasicRoleService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRoleRouteService',
         function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
             return {
                 routeService: roleRouteService,

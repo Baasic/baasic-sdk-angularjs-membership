@@ -1,6 +1,8 @@
-﻿(function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicLoginService", ["baasicApiHttp", "baasicLoginRouteService",
+﻿/* globals module */
+
+(function (angular, module, undefined) {
+    'use strict';
+    module.service('baasicLoginService', ['baasicApiHttp', 'baasicLoginRouteService',
         function (baasicApiHttp, loginRouteService) {
             return {
                 routeService: loginRouteService,
@@ -17,21 +19,21 @@
 
                     return baasicApiHttp({
                         url: loginRouteService.login.expand(settings),
-                        method: "POST",
+                        method: 'POST',
                         data: formData,
                         headers: {
-                            "Content-Type": "application/x-www-form-urlencoded; charset=UTF-8"
+                            'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                         }
                     });
                 },
                 loadUserData: function loadUserData(data) {
                     data = data || {};
-                    return baasicApiHttp.get(loginRouteService.login.expand(data), { headers: { "Accept": "application/json; charset=UTF-8" } });
+                    return baasicApiHttp.get(loginRouteService.login.expand(data), { headers: { 'Accept': 'application/json; charset=UTF-8' } });
                 },
                 logout: function logout(token, type) {
                     return baasicApiHttp({
                         url: loginRouteService.login.expand({}),
-                        method: "DELETE",
+                        method: 'DELETE',
                         data: {
                             token: token,
                             type: type
