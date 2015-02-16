@@ -1,4 +1,5 @@
-﻿/**
+﻿/* globals module */
+/**
  * @module baasicRoleService
 **/
 
@@ -9,8 +10,8 @@
  * @author Mono-Software
 */
 (function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicRoleService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicRoleRouteService",
+    'use strict';
+    module.service('baasicRoleService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRoleRouteService',
         function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
             return {
                 routeService: roleRouteService,

@@ -1,4 +1,5 @@
-﻿/**
+﻿/* globals module */
+/**
  * @module baasicLoginRouteService
 **/
 
@@ -9,8 +10,8 @@
  * @author Mono-Software
 */
 (function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicLoginRouteService", ["baasicUriTemplateService",
+    'use strict';
+    module.service('baasicLoginRouteService', ['baasicUriTemplateService',
         function (uriTemplateService) {
             return {
                  /**
@@ -20,7 +21,7 @@
                  * @method        
                  * @example baasicLoginRouteService.login.expand({options: 'sliding', type: 'oauth'});               
                  **/   			
-                login: uriTemplateService.parse("login/{?embed,fields,options}"),
+                login: uriTemplateService.parse('login/{?embed,fields,options}'),
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [github](https://github.com/Baasic/uritemplate-js) page.
                  * @method

@@ -1,4 +1,5 @@
-﻿/**
+﻿/* globals module */
+/**
  * @module baasicPasswordRecoveryService
 **/
 
@@ -9,8 +10,8 @@
  * @author Mono-Software
 */
 (function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicPasswordRecoveryService", ["baasicApiHttp", "baasicPasswordRecoveryRouteService",
+    'use strict';
+    module.service('baasicPasswordRecoveryService', ['baasicApiHttp', 'baasicPasswordRecoveryRouteService',
         function (baasicApiHttp, passwordRecoveryRouteService) {
             return {
                 routeService: passwordRecoveryRouteService,
@@ -35,7 +36,7 @@ baasicPasswordRecoveryRouteService.requestReset({
                 requestReset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
-                        method: "POST",
+                        method: 'POST',
                         data: data
                     });
                 },
@@ -58,7 +59,7 @@ baasicPasswordRecoveryRouteService.reset({
                 reset: function (data) {
                     return baasicApiHttp({
                         url: passwordRecoveryRouteService.passwordRecovery.expand({}),
-                        method: "PUT",
+                        method: 'PUT',
                         data: data
                     });
                 }

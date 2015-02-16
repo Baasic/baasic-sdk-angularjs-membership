@@ -1,4 +1,5 @@
-﻿/**
+﻿/* globals module */
+/**
  * @module baasicPasswordRecoveryRouteService
 **/
 
@@ -9,8 +10,8 @@
  * @author Mono-Software
 */
 (function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicPasswordRecoveryRouteService", ["baasicUriTemplateService",
+    'use strict';
+    module.service('baasicPasswordRecoveryRouteService', ['baasicUriTemplateService',
         function (uriTemplateService) {
             return {
                  /**
@@ -18,7 +19,7 @@
                  * @method        
                  * @example baasicPasswordRecoveryRouteService.passwordRecovery.expand({});               
                  **/   			
-                passwordRecovery: uriTemplateService.parse("recover-password"), 
+                passwordRecovery: uriTemplateService.parse('recover-password'), 
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [github](https://github.com/Baasic/uritemplate-js) page.
                  * @method

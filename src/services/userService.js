@@ -1,4 +1,5 @@
-﻿/**
+﻿/* globals module */
+/**
  * @module baasicUserService
 **/
 
@@ -9,8 +10,8 @@
  * @author Mono-Software
 */
 (function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicUserService", ["baasicApiHttp", "baasicApiService", "baasicConstants", "baasicUserRouteService",
+    'use strict';
+    module.service('baasicUserService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRouteService',
         function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
                 routeService: userRouteService,
@@ -214,7 +215,7 @@ userService.changePassword("userName", {
                 changePassword: function (userName, data) {
                     return baasicApiHttp({
                         url: userRouteService.changePassword.expand({ userName: userName }),
-                        method: "PUT",
+                        method: 'PUT',
                         data: data
                     });
                 }				

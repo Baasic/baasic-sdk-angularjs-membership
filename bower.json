@@ -1,6 +1,6 @@
 {
   "name": "baasic-angular-membership",
-  "version": "0.1.26",
+  "version": "0.2.0",
   "description": "Baasic AngularJS SDK membership modules and services.",
   "keywords": [
     "angularjs",
@@ -28,6 +28,6 @@
   "devDependencies": {
   },
   "dependencies": {
-	"baasic-angular-core": "baasic/baasic-sdk-angularjs-core"
+	"baasic-angular-core": "http://gitserver/monosoftware/baasic-sdk-angularjs-core.git#~0.2.0"
   }
 }

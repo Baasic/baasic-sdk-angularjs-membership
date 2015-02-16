@@ -1,4 +1,6 @@
-﻿/**
+﻿/* globals module */
+
+/**
  * @module baasicUserRouteService
 **/
 
@@ -9,8 +11,8 @@
  * @author Mono-Software
 */
 (function (angular, module, undefined) {
-    "use strict";
-    module.service("baasicUserRouteService", ["baasicUriTemplateService",
+    'use strict';
+    module.service('baasicUserRouteService', ['baasicUriTemplateService',
         function (uriTemplateService) {
             return {
                 /**
@@ -18,7 +20,7 @@
                 * @method        
                 * @example baasicUserRouteService.exists.expand({userName: "userNameToCheck"});               
                 **/			
-				exists: uriTemplateService.parse("users/{userName}/exists/"),
+				exists: uriTemplateService.parse('users/{userName}/exists/'),
                 /**
                 * Parses find user route which can be expanded with additional options. Supported items are: 
                 * - `searchQuery` - A string referencing resource properties using the phrase or query search.
@@ -29,14 +31,14 @@
                 * @method        
                 * @example baasicUserRouteService.find.expand({searchQuery: "searchTerm"});               
                 **/  				
-                find: uriTemplateService.parse("users/{?searchQuery,page,rpp,sort,embed,fields}"),
+                find: uriTemplateService.parse('users/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
                 * Parses get user route which must be expanded with the userName of the previously created resource in the system. Additional expand supported items are:
 				* - `embed` - Comma separated list of resources to be contained within the current representation.
                 * @method        
                 * @example baasicUserRouteService.get.expand({userName: "userNameToFetch"});               
                 **/   					
-                get: uriTemplateService.parse("users/{userName}/{?embed,fields}"),
+                get: uriTemplateService.parse('users/{userName}/{?embed,fields}'),
                 /**
                 * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [github](https://github.com/Baasic/uritemplate-js) page.
                 * @method
@@ -48,13 +50,13 @@
                 * @method        
                 * @example baasicUserRouteService.create.expand({});              
                 **/  								
-                create: uriTemplateService.parse("users"),  
+                create: uriTemplateService.parse('users'),  
                 /**
                 * Parses change password route, URI template should be expanded with the Username of the user resource whose password should be updated.
                 * @method        
                 * @example baasicUserRouteService.changePassword.expand({userName: "userName"});              
                 **/ 				
-				changePassword: uriTemplateService.parse("users/{userName}/change-password"),
+                changePassword: uriTemplateService.parse('users/{userName}/change-password'),
             };
         }]);
 }(angular, module));
