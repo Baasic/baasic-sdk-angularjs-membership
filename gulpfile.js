@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var plugins = require('gulp-load-plugins')();
+var docgen = require('baasic-javascript-docgen');
 
 var paths = {
   scripts: ['src/**/*.js']
@@ -18,6 +19,8 @@ gulp.task('scripts', function() {
 	.pipe(gulp.dest('dist'));
 });
 
+gulp.task('docs', function() {
+  docgen.generateBaasicDocs("src", "wiki", "Baasic Membership Navigation", ["config.js"]);
+});
 
-
-gulp.task('default', ['scripts']);
+gulp.task('default', ['scripts', 'docs']);
