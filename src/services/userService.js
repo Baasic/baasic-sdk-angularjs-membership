@@ -112,7 +112,7 @@ baasicUserService.update(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the remove user action has been performed. If the action is successfully completed the resource is permanently removed from the system.
+                 * Returns a promise that is resolved once the remove user action has been performed. If the action is successfully completed the user resource is permanently removed from the system.
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
@@ -129,7 +129,7 @@ baasicUserService.remove(existingResource)
                     return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
                 },
                  /**
-                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the resource which was previously locked either manually or automatically by the system.
+                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system.
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
@@ -163,7 +163,7 @@ baasicUserService.lock(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);                    
                 },
                  /**
-                 * Returns a promise that is resolved once the approve user action has been performed. This action will approve mark the user resource as approved in the system.
+                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as approved in the system.
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
@@ -197,7 +197,7 @@ baasicUserService.lock(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('disapprove').href);
                 },
                  /**
-                 * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user password selection.
+                 * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user's password selection.
                  * @method        
                  * @example 
 userService.changePassword("userName", {

@@ -89,7 +89,7 @@ baasicRoleService.update(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the remove role action has been performed. If the action is successfully completed the resource is permanently removed from the system.
+                 * Returns a promise that is resolved once the remove role action has been performed. If the action is successfully completed the role resource is permanently removed from the system.
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 

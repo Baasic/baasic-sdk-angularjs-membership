@@ -31,7 +31,7 @@
                 **/   					
                 get: uriTemplateService.parse('roles/{id}/{?embed,fields}'),
                 /**
-                * Parses create role route, this URI template does not expose any additional options.
+                * Parses create role route; this URI template does not expose any additional options.
                 * @method        
                 * @example baasicRoleRouteService.create.expand({});               
                 **/   				

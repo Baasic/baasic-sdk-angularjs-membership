@@ -16,7 +16,7 @@
         function (uriTemplateService) {
             return {
                 /**
-                * Parses user exists route, URI template should be expanded with the username whose availability you'd like to check.                
+                * Parses user exists route; URI template should be expanded with the username whose availability you'd like to check.                
                 * @method        
                 * @example baasicUserRouteService.exists.expand({userName: "userNameToCheck"});               
                 **/			
@@ -33,7 +33,7 @@
                 **/  				
                 find: uriTemplateService.parse('users/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
-                * Parses get user route which must be expanded with the userName of the previously created resource in the system. Additional expand supported items are:
+                * Parses get user route which must be expanded with the userName of the previously created user resource in the system. Additional expand supported items are:
 				* - `embed` - Comma separated list of resources to be contained within the current representation.
                 * @method        
                 * @example baasicUserRouteService.get.expand({userName: "userNameToFetch"});               

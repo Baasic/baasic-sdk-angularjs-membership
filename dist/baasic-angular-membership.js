@@ -273,7 +273,7 @@
                  **/
                 create: uriTemplateService.parse('register'),
                 /**
-                 * Parses activation route, route should be expanded with the activationToken which uniquely identifies the user account that needs to be activated.
+                 * Parses activation route; route should be expanded with the activationToken which uniquely identifies the user account that needs to be activated.
                  * @method        
                  * @example baasicLoginRouteService.activate.expand({activationToken: "activationToken"});               
                  **/
@@ -373,7 +373,7 @@
                  **/
                 get: uriTemplateService.parse('roles/{id}/{?embed,fields}'),
                 /**
-                 * Parses create role route, this URI template does not expose any additional options.
+                 * Parses create role route; this URI template does not expose any additional options.
                  * @method        
                  * @example baasicRoleRouteService.create.expand({});               
                  **/
@@ -476,7 +476,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the remove role action has been performed. If the action is successfully completed the resource is permanently removed from the system.
+                 * Returns a promise that is resolved once the remove role action has been performed. If the action is successfully completed the role resource is permanently removed from the system.
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -511,7 +511,7 @@
         module.service('baasicUserRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
             return {
                 /**
-                 * Parses user exists route, URI template should be expanded with the username whose availability you'd like to check.                
+                 * Parses user exists route; URI template should be expanded with the username whose availability you'd like to check.                
                  * @method        
                  * @example baasicUserRouteService.exists.expand({userName: "userNameToCheck"});               
                  **/
@@ -528,7 +528,7 @@
                  **/
                 find: uriTemplateService.parse('users/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
-                 * Parses get user route which must be expanded with the userName of the previously created resource in the system. Additional expand supported items are:
+                 * Parses get user route which must be expanded with the userName of the previously created user resource in the system. Additional expand supported items are:
                  * - `embed` - Comma separated list of resources to be contained within the current representation.
                  * @method        
                  * @example baasicUserRouteService.get.expand({userName: "userNameToFetch"});               
@@ -667,7 +667,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the remove user action has been performed. If the action is successfully completed the resource is permanently removed from the system.
+                 * Returns a promise that is resolved once the remove user action has been performed. If the action is successfully completed the user resource is permanently removed from the system.
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -684,7 +684,7 @@
                     return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the resource which was previously locked either manually or automatically by the system.
+                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system.
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -718,7 +718,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the approve user action has been performed. This action will approve mark the user resource as approved in the system.
+                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as approved in the system.
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -752,7 +752,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('disapprove').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user password selection.
+                 * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user's password selection.
                  * @method        
                  * @example 
                  userService.changePassword("userName", {
