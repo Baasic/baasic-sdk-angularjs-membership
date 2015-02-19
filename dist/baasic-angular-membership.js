@@ -253,7 +253,7 @@
         }]);
     }(angular, module)); /* globals module */
     /**
-     * @module baasicUserRegisterRouteService
+     * @module baasicRegisterRouteService
      **/
 
     /** 
@@ -264,12 +264,12 @@
      */
     (function (angular, module, undefined) {
         'use strict';
-        module.service('baasicUserRegisterRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
+        module.service('baasicRegisterRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
             return {
                 /**
                  * Parses register route, this route doesn't support any additional properties. 
                  * @method        
-                 * @example baasicUserRegisterRouteService.create.expand({});               
+                 * @example baasicRegisterRouteService.create.expand({});               
                  **/
                 create: uriTemplateService.parse('register'),
                 /**
@@ -282,7 +282,7 @@
         }]);
     }(angular, module)); /* globals module */
     /**
-     * @module baasicUserRegisterService
+     * @module baasicRegisterService
      **/
 
     /** 
@@ -293,14 +293,14 @@
      */
     (function (angular, module, undefined) {
         'use strict';
-        module.service('baasicUserRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRegisterRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, baasicUserRegisterRouteService) {
+        module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRegisterRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, baasicUserRegisterRouteService) {
             return {
                 routeService: baasicUserRegisterRouteService,
                 /**
                  * Returns a promise that is resolved once the register create has been performed. Success response returns the created user resource.
                  * @method        
                  * @example 
-                 baasicUserRegisterService.create({
+                 baasicRegisterService.create({
                  activationUrl : "activationUrl",
                  challengeIdentifier : "challengeIdentifier",
                  challengeResponse : "challengeResponse",
@@ -324,7 +324,7 @@
                  * Returns a promise that is resolved once the acount activation action has been performed.
                  * @method        
                  * @example 
-                 baasicUserRegisterService.activate({
+                 baasicRegisterService.activate({
                  activationToken : "activationToken"
                  })
                  .success(function (data) {

@@ -1,6 +1,6 @@
 /* globals module */
 /**
- * @module baasicUserRegisterService
+ * @module baasicRegisterService
 **/
 
 /** 
@@ -11,7 +11,7 @@
 */
 (function (angular, module, undefined) {
 	'use strict';
-	module.service('baasicUserRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRegisterRouteService', 
+	module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRegisterRouteService', 
 		function (baasicApiHttp, baasicApiService, baasicConstants, baasicUserRegisterRouteService) {
 			return {
 				routeService: baasicUserRegisterRouteService,
@@ -19,7 +19,7 @@
                 * Returns a promise that is resolved once the register create has been performed. Success response returns the created user resource.
                 * @method        
                 * @example 
-baasicUserRegisterService.create({
+baasicRegisterService.create({
   activationUrl : "activationUrl",
   challengeIdentifier : "challengeIdentifier",
   challengeResponse : "challengeResponse",
@@ -43,7 +43,7 @@ baasicUserRegisterService.create({
                 * Returns a promise that is resolved once the acount activation action has been performed.
                 * @method        
                 * @example 
-baasicUserRegisterService.activate({
+baasicRegisterService.activate({
   activationToken : "activationToken"
 })
 .success(function (data) {

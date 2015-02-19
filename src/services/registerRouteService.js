@@ -1,6 +1,6 @@
 /* globals module */
 /**
- * @module baasicUserRegisterRouteService
+ * @module baasicRegisterRouteService
 **/
 
 /** 
@@ -11,12 +11,12 @@
 */
 (function (angular, module, undefined) {
 	'use strict';
-	module.service('baasicUserRegisterRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
+	module.service('baasicRegisterRouteService', ['baasicUriTemplateService', function (uriTemplateService) {
 		return {
 			/**
 			* Parses register route, this route doesn't support any additional properties. 
 			* @method        
-			* @example baasicUserRegisterRouteService.create.expand({});               
+			* @example baasicRegisterRouteService.create.expand({});               
 			**/ 		
 			create: uriTemplateService.parse('register'),
 			/**
