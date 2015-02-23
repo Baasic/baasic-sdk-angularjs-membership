@@ -11,10 +11,10 @@
 */
 (function (angular, module, undefined) {
 	'use strict';
-	module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRegisterRouteService', 
-		function (baasicApiHttp, baasicApiService, baasicConstants, baasicUserRegisterRouteService) {
+	module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRegisterRouteService', 
+		function (baasicApiHttp, baasicApiService, baasicConstants, baasicRegisterRouteService) {
 			return {
-				routeService: baasicUserRegisterRouteService,
+				routeService: baasicRegisterRouteService,
                 /**
                 * Returns a promise that is resolved once the register create has been performed. Success response returns the created user resource.
                 * @method        
@@ -37,7 +37,7 @@ baasicRegisterService.create({
 .finally (function () {});
                 **/  					
 				create: function (data) {
-					return baasicApiHttp.post(baasicUserRegisterRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
+					return baasicApiHttp.post(baasicRegisterRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
 				},
                 /**
                 * Returns a promise that is resolved once the acount activation action has been performed.
@@ -56,7 +56,7 @@ baasicRegisterService.activate({
                 **/  				
 				activate: function (data) {
 					var params = baasicApiService.getParams(data, 'activationToken');
-					return baasicApiHttp.put(baasicUserRegisterRouteService.activate.expand(params), {});
+					return baasicApiHttp.put(baasicRegisterRouteService.activate.expand(params), {});
 				}
 			};
 		}]);
