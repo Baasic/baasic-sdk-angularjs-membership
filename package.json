@@ -2,7 +2,7 @@
   "name": "baasic-angular-membership",
   "version": "0.2.1",
   "devDependencies": {
-    "baasic-javascript-docgen": "git://github.com/mzilic/baasic-javascript-docgen",
+    "baasic-javascript-docgen": "git://github.com/Baasic/baasic-javascript-docgen",
     "gulp": ">3.4.0",
     "gulp-beautify": "1.0.3",
     "gulp-concat": ">2.1.7",
