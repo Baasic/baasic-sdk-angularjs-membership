@@ -54,7 +54,7 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [github](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example uriTemplateService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicLoginRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
                  **/
                 parse: uriTemplateService.parse
             };
@@ -180,7 +180,7 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [github](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example uriTemplateService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicPasswordRecoveryRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
                  **/
                 parse: uriTemplateService.parse
             };
@@ -205,7 +205,7 @@
                  * Returns a promise that is resolved once the password recovery requestReset action is completed. This initiates the password recovery process for the user.
                  * @method
                  * @example
-                 baasicPasswordRecoveryRouteService.requestReset({
+                 baasicPasswordRecoveryService.requestReset({
                  challengeIdentifier : "challengeIdentifier",
                  challengeResponse : "challengeResponse",
                  recoverUrl : "recoverUrl",
@@ -230,7 +230,7 @@
                  * Returns a promise that is resolved once the password reset action is completed. This updates the user password selection.
                  * @method
                  * @example
-                 baasicPasswordRecoveryRouteService.reset({
+                 baasicPasswordRecoveryService.reset({
                  newPassword : "newPassword",
                  passwordRecoveryToken : "passwordRecoveryToken"
                  })
@@ -275,7 +275,7 @@
                 /**
                  * Parses activation route; route should be expanded with the activationToken which uniquely identifies the user account that needs to be activated.
                  * @method        
-                 * @example baasicLoginRouteService.activate.expand({activationToken: "activationToken"});               
+                 * @example baasicRegisterRouteService.activate.expand({activationToken: "activationToken"});               
                  **/
                 activate: uriTemplateService.parse('register/activate/{activationToken}/')
             };
@@ -381,7 +381,7 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [github](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example uriTemplateService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicRoleRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
                  **/
                 parse: uriTemplateService.parse
             };
@@ -537,7 +537,7 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [github](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example uriTemplateService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicUserRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
                  **/
                 parse: uriTemplateService.parse,
                 /**
@@ -755,7 +755,7 @@
                  * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user's password selection.
                  * @method        
                  * @example 
-                 userService.changePassword("userName", {
+                 baasicUserService.changePassword("userName", {
                  newPassword : "new password",
                  sendMailNotification : false
                  })

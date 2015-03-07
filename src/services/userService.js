@@ -200,7 +200,7 @@ baasicUserService.lock(existingResource)
                  * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user's password selection.
                  * @method        
                  * @example 
-userService.changePassword("userName", {
+baasicUserService.changePassword("userName", {
   newPassword : "new password",
   sendMailNotification : false
 })

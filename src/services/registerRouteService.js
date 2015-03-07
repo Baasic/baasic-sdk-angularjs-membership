@@ -22,7 +22,7 @@
 			/**
 			* Parses activation route; route should be expanded with the activationToken which uniquely identifies the user account that needs to be activated.
 			* @method        
-			* @example baasicLoginRouteService.activate.expand({activationToken: "activationToken"});               
+			* @example baasicRegisterRouteService.activate.expand({activationToken: "activationToken"});               
 			**/ 			
 			activate: uriTemplateService.parse('register/activate/{activationToken}/')
 		};

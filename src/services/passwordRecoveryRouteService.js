@@ -23,7 +23,7 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [github](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example uriTemplateService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicPasswordRecoveryRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
                  **/  				
                 parse: uriTemplateService.parse
             };

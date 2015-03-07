@@ -19,7 +19,7 @@
 				* Returns a promise that is resolved once the password recovery requestReset action is completed. This initiates the password recovery process for the user.
 				* @method
 				* @example
-baasicPasswordRecoveryRouteService.requestReset({
+baasicPasswordRecoveryService.requestReset({
   challengeIdentifier : "challengeIdentifier",
   challengeResponse : "challengeResponse",
   recoverUrl : "recoverUrl",
@@ -44,7 +44,7 @@ baasicPasswordRecoveryRouteService.requestReset({
 				* Returns a promise that is resolved once the password reset action is completed. This updates the user password selection.
 				* @method
 				* @example
-baasicPasswordRecoveryRouteService.reset({
+baasicPasswordRecoveryService.reset({
   newPassword : "newPassword",
   passwordRecoveryToken : "passwordRecoveryToken"
 })
