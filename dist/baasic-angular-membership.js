@@ -1,13 +1,9 @@
 (function (angular, undefined) { /* exported module */
     /** 
-     * @overview The angular.module is a global place for creating, registering or retrieving modules. All modules should be registered in an application using this mechanism.
+     * @description The angular.module is a global place for creating, registering or retrieving modules. All modules should be registered in an application using this mechanism. An angular module is a container for the different parts of your app - services, directives etc. In order to use `baasic.membership` module functionality it must be added as a dependency to your app.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
-     */
-
-    /**
-     * An angular module is a container for the different parts of your app - services, directives etc. In order to use baasic.membership module functionality it must be added as a dependency to your app.
      * @module baasic.membership 
      * @example
      (function (Main) {
@@ -31,10 +27,7 @@
     /* globals module */
     /**
      * @module baasicLoginRouteService
-     **/
-
-    /** 
-     * @overview Login route service.
+     * @description Baasic Login Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicLoginService` uses `baasicLoginRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -62,10 +55,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicLoginService
-     **/
-
-    /** 
-     * @overview Login service.
+     * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -158,11 +148,8 @@
         }]);
     }(angular, module)); /* globals module */
     /**
-     * @module baasicPasswordRecoveryRouteService
-     **/
-
-    /** 
-     * @overview Password recovery route service.
+     * @module baasicPasswordRecoveryRouteService 
+     * @description Baasic Password Recovery Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -188,10 +175,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicPasswordRecoveryService
-     **/
-
-    /** 
-     * @overview Password recovery service.
+     * @description Baasic PasswordRecovery Service provides an easy way to consume Baasic application password recovery features.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -254,10 +238,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicRegisterRouteService
-     **/
-
-    /** 
-     * @overview Register route service.
+     * @description Baasic Register Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRegisterService` uses `baasicRegisterRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -283,10 +264,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicRegisterService
-     **/
-
-    /** 
-     * @overview Register service.
+     * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -344,10 +322,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicRoleRouteService
-     **/
-
-    /** 
-     * @overview Role route service.
+     * @description Baasic Role Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRoleService` uses `baasicRoleRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -389,10 +364,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicRoleService
-     **/
-
-    /** 
-     * @overview Role service.
+     * @description Baasic Role Service provides an easy way to consume Baasic application user role features.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -498,10 +470,7 @@
 
     /**
      * @module baasicUserRouteService
-     **/
-
-    /** 
-     * @overview User route service.
+     * @description Baasic User Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicUserService` uses `baasicUserRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software
@@ -557,10 +526,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicUserService
-     **/
-
-    /** 
-     * @overview User service.
+     * @description Baasic User Service provides an easy way to consume Baasic User features.
      * @copyright (c) 2015 Mono-Software
      * @license MIT
      * @author Mono-Software

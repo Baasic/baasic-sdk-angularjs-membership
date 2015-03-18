@@ -1,10 +1,7 @@
 ﻿/* globals module */
 /**
  * @module baasicUserService
-**/
-
-/** 
- * @overview User service.
+ * @description Baasic User Service provides an easy way to consume Baasic User features.
  * @copyright (c) 2015 Mono-Software
  * @license MIT
  * @author Mono-Software

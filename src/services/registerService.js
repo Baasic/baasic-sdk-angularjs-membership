@@ -1,10 +1,7 @@
 /* globals module */
 /**
  * @module baasicRegisterService
-**/
-
-/** 
- * @overview Register service.
+ * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
  * @copyright (c) 2015 Mono-Software
  * @license MIT
  * @author Mono-Software

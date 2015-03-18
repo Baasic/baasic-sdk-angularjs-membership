@@ -1,10 +1,7 @@
 ﻿/* globals module */
 /**
  * @module baasicRoleService
-**/
-
-/** 
- * @overview Role service.
+ * @description Baasic Role Service provides an easy way to consume Baasic application user role features.
  * @copyright (c) 2015 Mono-Software
  * @license MIT
  * @author Mono-Software
