@@ -17,8 +17,8 @@
                  * @method        
                  * @example 
 baasicLoginService.login({
-  userName : "userName",
-  password : "password",
+  userName : "<userName>",
+  password : "<password>",
   options : ['session', 'sliding']
 })
 .success(function (data) {

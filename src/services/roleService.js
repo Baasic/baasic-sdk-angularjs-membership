@@ -21,7 +21,7 @@ baasicRoleService.find({
   pageSize : 10,
   orderBy : "name",
   orderDirection : "desc",
-  search : "searchTerm"
+  search : "<search-phrase>"
 })
 .success(function (collection) {
   // perform success action here
@@ -37,7 +37,7 @@ baasicRoleService.find({
                  * Returns a promise that is resolved once the get action has been performed. Success response returns the role resource.
                  * @method        
                  * @example 
-baasicRoleService.get("uniqueID")
+baasicRoleService.get("<role-id>")
 .success(function (data) {
   // perform success action here
 })
@@ -53,8 +53,8 @@ baasicRoleService.get("uniqueID")
                  * @method        
                  * @example 
 baasicRoleService.create({
-  description : "role description",
-  name : "role name"
+  description : "<description>",
+  name : "<name>"
 })
 .success(function (data) {
   // perform success action here
@@ -71,7 +71,7 @@ baasicRoleService.create({
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.
-existingResource.name = "updated role name";
+existingResource.name = "<new-name>";
 baasicRoleService.update(existingResource)
 .success(function (data) {
   // perform success action here

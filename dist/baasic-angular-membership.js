@@ -40,13 +40,13 @@
                  * Parses login route which can be expanded with additional options. Supported items are:                  
                  * - `options` - Comma separated list of options used to setup authentication token with cookie session. Supported values are: "session" and "sliding".
                  * @method        
-                 * @example baasicLoginRouteService.login.expand({options: 'sliding', type: 'oauth'});               
+                 * @example baasicLoginRouteService.login.expand({options: 'sliding'});               
                  **/
                 login: uriTemplateService.parse('login/{?embed,fields,options}'),
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicLoginRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicLoginRouteService.parse("route/{?embed,fields,options}").expand({embed: "<embedded-resource>"});
                  **/
                 parse: uriTemplateService.parse
             };
@@ -69,8 +69,8 @@
                  * @method        
                  * @example 
                  baasicLoginService.login({
-                 userName : "userName",
-                 password : "password",
+                 userName : "<userName>",
+                 password : "<password>",
                  options : ['session', 'sliding']
                  })
                  .success(function (data) {
@@ -166,7 +166,7 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicPasswordRecoveryRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicPasswordRecoveryRouteService.parse("route/{?embed,fields,options}").expand({embed: "<embedded-resource>"});
                  **/
                 parse: uriTemplateService.parse
             };
@@ -189,10 +189,10 @@
                  * @method
                  * @example
                  baasicPasswordRecoveryService.requestReset({
-                 challengeIdentifier : "challengeIdentifier",
-                 challengeResponse : "challengeResponse",
-                 recoverUrl : "recoverUrl",
-                 userName : "userName"
+                 challengeIdentifier : "<challenge-identifier>",
+                 challengeResponse : "<challenge-response>",
+                 recoverUrl : "<recover-url>",
+                 userName : "<username>"
                  })
                  .success(function () {
                  // perform success action here
@@ -214,8 +214,8 @@
                  * @method
                  * @example
                  baasicPasswordRecoveryService.reset({
-                 newPassword : "newPassword",
-                 passwordRecoveryToken : "passwordRecoveryToken"
+                 newPassword : "<new-password>",
+                 passwordRecoveryToken : "<password-recovery-token>"
                  })
                  .success(function () {
                  // perform success action here
@@ -255,7 +255,7 @@
                 /**
                  * Parses activation route; route should be expanded with the activationToken which uniquely identifies the user account that needs to be activated.
                  * @method        
-                 * @example baasicRegisterRouteService.activate.expand({activationToken: "activationToken"});               
+                 * @example baasicRegisterRouteService.activate.expand({activationToken: "<activation-token>"});               
                  **/
                 activate: uriTemplateService.parse('register/activate/{activationToken}/')
             };
@@ -278,13 +278,13 @@
                  * @method        
                  * @example 
                  baasicRegisterService.create({
-                 activationUrl : "activationUrl",
-                 challengeIdentifier : "challengeIdentifier",
-                 challengeResponse : "challengeResponse",
-                 confirmPassword : "confirmPassword",
-                 email : "email",
-                 password : "password",
-                 userName : "userName"
+                 activationUrl : "<activation-url>",
+                 challengeIdentifier : "<challenge-identifier>",
+                 challengeResponse : "<challenge-response>",
+                 confirmPassword : "<confirm-password>",
+                 email : "<email>",
+                 password : "<password>",
+                 userName : ">userName>"
                  })
                  .success(function (data) {
                  // perform success actions here
@@ -302,7 +302,7 @@
                  * @method        
                  * @example 
                  baasicRegisterService.activate({
-                 activationToken : "activationToken"
+                 activationToken : "<activation-token>"
                  })
                  .success(function (data) {
                  // perform success actions here
@@ -337,13 +337,13 @@
                  * - `rpp` - A value used to limit the size of result set per page.
                  * - `sort` - A string used to set the role property to sort the result collection by.
                  * @method        
-                 * @example baasicRoleRouteService.find.expand({searchQuery: "searchTerm"});               
+                 * @example baasicRoleRouteService.find.expand({searchQuery: "<search-phrase>"});               
                  **/
                 find: uriTemplateService.parse('roles/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
                  * Parses get role route which should be expanded with the role Id. Note that the role Id is the primary key of the role.
                  * @method        
-                 * @example baasicRoleRouteService.get.expand({id: "uniqueID"});               
+                 * @example baasicRoleRouteService.get.expand({id: "<role-id>"});               
                  **/
                 get: uriTemplateService.parse('roles/{id}/{?embed,fields}'),
                 /**
@@ -355,7 +355,7 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicRoleRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicRoleRouteService.parse("route/{?embed,fields,options}").expand({embed: "<embedded-resource>"});
                  **/
                 parse: uriTemplateService.parse
             };
@@ -382,7 +382,7 @@
                  pageSize : 10,
                  orderBy : "name",
                  orderDirection : "desc",
-                 search : "searchTerm"
+                 search : "<search-phrase>"
                  })
                  .success(function (collection) {
                  // perform success action here
@@ -398,7 +398,7 @@
                  * Returns a promise that is resolved once the get action has been performed. Success response returns the role resource.
                  * @method        
                  * @example 
-                 baasicRoleService.get("uniqueID")
+                 baasicRoleService.get("<role-id>")
                  .success(function (data) {
                  // perform success action here
                  })
@@ -414,8 +414,8 @@
                  * @method        
                  * @example 
                  baasicRoleService.create({
-                 description : "role description",
-                 name : "role name"
+                 description : "<description>",
+                 name : "<name>"
                  })
                  .success(function (data) {
                  // perform success action here
@@ -432,7 +432,7 @@
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 existingResource.name = "updated role name";
+                 existingResource.name = "<new-name>";
                  baasicRoleService.update(existingResource)
                  .success(function (data) {
                  // perform success action here
@@ -481,7 +481,7 @@
                 /**
                  * Parses user exists route; URI template should be expanded with the username whose availability you'd like to check.                
                  * @method        
-                 * @example baasicUserRouteService.exists.expand({userName: "userNameToCheck"});               
+                 * @example baasicUserRouteService.exists.expand({userName: "<username-to-check>"});               
                  **/
                 exists: uriTemplateService.parse('users/{userName}/exists/'),
                 /**
@@ -492,20 +492,20 @@
                  * - `sort` - A string used to set the role property to sort the result collection by.
                  * - `embed` - Comma separated list of resources to be contained within the current representation.
                  * @method        
-                 * @example baasicUserRouteService.find.expand({searchQuery: "searchTerm"});               
+                 * @example baasicUserRouteService.find.expand({searchQuery: "<search-phrase>"});               
                  **/
                 find: uriTemplateService.parse('users/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
                  * Parses get user route which must be expanded with the userName of the previously created user resource in the system. Additional expand supported items are:
                  * - `embed` - Comma separated list of resources to be contained within the current representation.
                  * @method        
-                 * @example baasicUserRouteService.get.expand({userName: "userNameToFetch"});               
+                 * @example baasicUserRouteService.get.expand({userName: "<username-to-fetch>"});               
                  **/
                 get: uriTemplateService.parse('users/{userName}/{?embed,fields}'),
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicUserRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                 * @example baasicUserRouteService.parse("route/{?embed,fields,options}").expand({embed: "<embedded-resource>"});
                  **/
                 parse: uriTemplateService.parse,
                 /**
@@ -517,7 +517,7 @@
                 /**
                  * Parses change password route, URI template should be expanded with the Username of the user resource whose password should be updated.
                  * @method        
-                 * @example baasicUserRouteService.changePassword.expand({userName: "userName"});              
+                 * @example baasicUserRouteService.changePassword.expand({userName: "<username>"});              
                  **/
                 changePassword: uriTemplateService.parse('users/{userName}/change-password'),
             };
@@ -539,7 +539,7 @@
                  * Returns a promise that is resolved once the exists action has been performed. The action checks the availability of a desired Username.
                  * @method        
                  * @example 
-                 baasicUserService.exists("userNameToCheck")
+                 baasicUserService.exists("<userName-to-check>")
                  .success(function (data) {
                  // perform success action here
                  })
@@ -559,7 +559,7 @@
                  pageSize : 10,
                  orderBy : "username",
                  orderDirection : "desc",
-                 search : "searchTerm"
+                 search : "<search-phrase>"
                  })
                  .success(function (collection) {
                  // perform success action here
@@ -576,8 +576,8 @@
                  * @method        
                  * @example 
                  baasicUserService.get({
-                 userName : "userName",
-                 embed : "embeddedResource"
+                 userName : "<userName>",
+                 embed : "<embedded-resource>"
                  })
                  .success(function (data) {
                  // perform success action here
@@ -594,13 +594,13 @@
                  * @method        
                  * @example 
                  baasicUserService.create({
-                 confirmPassword : "password",
-                 email : "email",
-                 password : "password",
+                 confirmPassword : "<password>",
+                 email : "<email>",
+                 password : "<password>",
                  sendEmailNotification : true,
-                 userName : "userName",
-                 roles: ["role"],
-                 additionalProperty: "additionalProperty"  
+                 userName : "<username>",
+                 roles: ["<role-name>"],
+                 additionalProperty: "<additionalProperty>"  
                  })
                  .success(function (data) {
                  // perform success action here
@@ -617,8 +617,8 @@
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 existingResource.roles = ["role", "new role"];
-                 existingResource.email = "new email";
+                 existingResource.roles = ["<role-name>", "<new-role-name>"];
+                 existingResource.email = "<new-email>";
                  baasicUserService.update(existingResource)
                  .success(function (data) {
                  // perform success action here
@@ -720,8 +720,8 @@
                  * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user's password selection.
                  * @method        
                  * @example 
-                 baasicUserService.changePassword("userName", {
-                 newPassword : "new password",
+                 baasicUserService.changePassword("<username>", {
+                 newPassword : "<new-password>",
                  sendMailNotification : false
                  })
                  .success(function () {

@@ -16,7 +16,7 @@
                  * Returns a promise that is resolved once the exists action has been performed. The action checks the availability of a desired Username.
                  * @method        
                  * @example 
-baasicUserService.exists("userNameToCheck")
+baasicUserService.exists("<userName-to-check>")
 .success(function (data) {
   // perform success action here
 })
@@ -36,7 +36,7 @@ baasicUserService.find({
   pageSize : 10,
   orderBy : "username",
   orderDirection : "desc",
-  search : "searchTerm"
+  search : "<search-phrase>"
 })
 .success(function (collection) {
   // perform success action here
@@ -53,8 +53,8 @@ baasicUserService.find({
                  * @method        
                  * @example 
 baasicUserService.get({
-  userName : "userName",
-  embed : "embeddedResource"
+  userName : "<userName>",
+  embed : "<embedded-resource>"
 })
 .success(function (data) {
   // perform success action here
@@ -71,13 +71,13 @@ baasicUserService.get({
                  * @method        
                  * @example 
 baasicUserService.create({
-  confirmPassword : "password",
-  email : "email",
-  password : "password",
+  confirmPassword : "<password>",
+  email : "<email>",
+  password : "<password>",
   sendEmailNotification : true,
-  userName : "userName",
-  roles: ["role"],
-  additionalProperty: "additionalProperty"  
+  userName : "<username>",
+  roles: ["<role-name>"],
+  additionalProperty: "<additionalProperty>"  
 })
 .success(function (data) {
   // perform success action here
@@ -94,8 +94,8 @@ baasicUserService.create({
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.
-existingResource.roles = ["role", "new role"];
-existingResource.email = "new email";
+existingResource.roles = ["<role-name>", "<new-role-name>"];
+existingResource.email = "<new-email>";
 baasicUserService.update(existingResource)
 .success(function (data) {
   // perform success action here
@@ -197,8 +197,8 @@ baasicUserService.lock(existingResource)
                  * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user's password selection.
                  * @method        
                  * @example 
-baasicUserService.changePassword("userName", {
-  newPassword : "new password",
+baasicUserService.changePassword("<username>", {
+  newPassword : "<new-password>",
   sendMailNotification : false
 })
 .success(function () {

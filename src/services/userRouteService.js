@@ -15,7 +15,7 @@
                 /**
                 * Parses user exists route; URI template should be expanded with the username whose availability you'd like to check.                
                 * @method        
-                * @example baasicUserRouteService.exists.expand({userName: "userNameToCheck"});               
+                * @example baasicUserRouteService.exists.expand({userName: "<username-to-check>"});               
                 **/			
 				exists: uriTemplateService.parse('users/{userName}/exists/'),
                 /**
@@ -26,20 +26,20 @@
                 * - `sort` - A string used to set the role property to sort the result collection by.
 				* - `embed` - Comma separated list of resources to be contained within the current representation.
                 * @method        
-                * @example baasicUserRouteService.find.expand({searchQuery: "searchTerm"});               
+                * @example baasicUserRouteService.find.expand({searchQuery: "<search-phrase>"});               
                 **/  				
                 find: uriTemplateService.parse('users/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
                 * Parses get user route which must be expanded with the userName of the previously created user resource in the system. Additional expand supported items are:
 				* - `embed` - Comma separated list of resources to be contained within the current representation.
                 * @method        
-                * @example baasicUserRouteService.get.expand({userName: "userNameToFetch"});               
+                * @example baasicUserRouteService.get.expand({userName: "<username-to-fetch>"});               
                 **/   					
                 get: uriTemplateService.parse('users/{userName}/{?embed,fields}'),
                 /**
                 * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                 * @method
-                * @example baasicUserRouteService.parse("route/{?embed,fields,options}").expand({embed: "embeddedResource"});
+                * @example baasicUserRouteService.parse("route/{?embed,fields,options}").expand({embed: "<embedded-resource>"});
                 **/   				
                 parse: uriTemplateService.parse,
                 /**
@@ -51,7 +51,7 @@
                 /**
                 * Parses change password route, URI template should be expanded with the Username of the user resource whose password should be updated.
                 * @method        
-                * @example baasicUserRouteService.changePassword.expand({userName: "userName"});              
+                * @example baasicUserRouteService.changePassword.expand({userName: "<username>"});              
                 **/ 				
                 changePassword: uriTemplateService.parse('users/{userName}/change-password'),
             };

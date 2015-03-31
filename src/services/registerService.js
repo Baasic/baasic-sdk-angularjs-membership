@@ -17,13 +17,13 @@
                 * @method        
                 * @example 
 baasicRegisterService.create({
-  activationUrl : "activationUrl",
-  challengeIdentifier : "challengeIdentifier",
-  challengeResponse : "challengeResponse",
-  confirmPassword : "confirmPassword",
-  email : "email",
-  password : "password",
-  userName : "userName"
+  activationUrl : "<activation-url>",
+  challengeIdentifier : "<challenge-identifier>",
+  challengeResponse : "<challenge-response>",
+  confirmPassword : "<confirm-password>",
+  email : "<email>",
+  password : "<password>",
+  userName : ">userName>"
 })
 .success(function (data) {
   // perform success actions here
@@ -41,7 +41,7 @@ baasicRegisterService.create({
                 * @method        
                 * @example 
 baasicRegisterService.activate({
-  activationToken : "activationToken"
+  activationToken : "<activation-token>"
 })
 .success(function (data) {
   // perform success actions here
