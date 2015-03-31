@@ -2,18 +2,23 @@
 /**
  * @module baasicUserService
  * @description Baasic User Service provides an easy way to consume Baasic User features.
- * @copyright (c) 2015 Mono-Software
+ * @copyright (c) 2015 Mono
  * @license MIT
- * @author Mono-Software
+ * @author Mono
 */
 (function (angular, module, undefined) {
     'use strict';
     module.service('baasicUserService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRouteService',
         function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
+                /**
+                * Provides direct access to `baasicUserRouteService`.
+                * @method        
+                * @example baasicUserService.routeService.get.expand(expandObject);
+                **/               
                 routeService: userRouteService,
                  /**
-                 * Returns a promise that is resolved once the exists action has been performed. The action checks the availability of a desired Username.
+                 * Returns a promise that is resolved once the exists action has been performed. This action checks if user exists in the application.
                  * @method        
                  * @example 
 baasicUserService.exists("<userName-to-check>")
@@ -28,14 +33,14 @@ baasicUserService.exists("<userName-to-check>")
                     return baasicApiHttp.get(userRouteService.exists.expand(baasicApiService.getParams(userName, options, 'userName')));
                 },
                  /**
-                 * Returns a promise that is resolved once the find action has been performed. Success response returns a list of user resources.
+                 * Returns a promise that is resolved once the find action has been performed. Success response returns a list of user resources matching the given criteria.
                  * @method        
                  * @example 
 baasicUserService.find({
   pageNumber : 1,
   pageSize : 10,
-  orderBy : "username",
-  orderDirection : "desc",
+  orderBy : "<username>",
+  orderDirection : "<desc>",
   search : "<search-phrase>"
 })
 .success(function (collection) {
@@ -49,7 +54,7 @@ baasicUserService.find({
                     return baasicApiHttp.get(userRouteService.find.expand(baasicApiService.findParams(data)));
                 },
                  /**
-                 * Returns a promise that is resolved once the get action has been performed. Success response returns the user resource.
+                 * Returns a promise that is resolved once the get action has been performed. Success response returns the sepecified user resource.
                  * @method        
                  * @example 
 baasicUserService.get({
@@ -67,7 +72,7 @@ baasicUserService.get({
                     return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'userName')));
                 },
                  /**
-                 * Returns a promise that is resolved once the create user action has been performed. Success response returns the created user resource.
+                 * Returns a promise that is resolved once the create user action has been performed, this action creates a new user.
                  * @method        
                  * @example 
 baasicUserService.create({
@@ -90,7 +95,11 @@ baasicUserService.create({
                     return baasicApiHttp.post(userRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the update user action has been performed.
+                 * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `update` route can be obtained from user resource (HAL enabled) objects like this:
+```
+var params = baasicApiService.removeParams(userObject);
+var uri = params["model"].links('put').href;
+```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.
@@ -109,7 +118,11 @@ baasicUserService.update(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the remove user action has been performed. If the action is successfully completed the user resource is permanently removed from the system.
+                 * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `remove` route can be obtained from user resource (HAL enabled) objects like this:
+```
+var params = baasicApiService.removeParams(userObject);
+var uri = params["model"].links('delete').href;
+```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
@@ -126,7 +139,11 @@ baasicUserService.remove(existingResource)
                     return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
                 },
                  /**
-                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system.
+                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `unlock` route can be obtained from user resource (HAL enabled) objects like this:
+```
+var params = baasicApiService.removeParams(userObject);
+var uri = params["model"].links('unlock').href;
+```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
@@ -143,7 +160,11 @@ baasicUserService.unlock(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('unlock').href);                    
                 },
                  /**
-                 * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system.
+                 * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `lock` route can be obtained from user resource (HAL enabled) objects like this:
+```
+var params = baasicApiService.removeParams(userObject);
+var uri = params["model"].links('lock').href;
+```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
@@ -160,7 +181,11 @@ baasicUserService.lock(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);                    
                 },
                  /**
-                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as approved in the system.
+                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as "approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `approve` route can be obtained from user resource (HAL enabled) objects like this:
+```
+var params = baasicApiService.removeParams(userObject);
+var uri = params["model"].links('approve').href;
+```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
@@ -177,7 +202,11 @@ baasicUserService.lock(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('approve').href);
                 },
                  /**
-                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as not approved in the system.
+                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as "not approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `disapprove` route can be obtained from user resource (HAL enabled) objects like this:
+```
+var params = baasicApiService.removeParams(userObject);
+var uri = params["model"].links('disapprove').href;
+```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 

@@ -2,18 +2,23 @@
 /**
  * @module baasicLoginService
  * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
- * @copyright (c) 2015 Mono-Software
+ * @copyright (c) 2015 Mono
  * @license MIT
- * @author Mono-Software
+ * @author Mono
 */
 (function (angular, module, undefined) {
     'use strict';
     module.service('baasicLoginService', ['baasicApiHttp', 'baasicLoginRouteService',
         function (baasicApiHttp, loginRouteService) {
             return {
+                /**
+                * Provides direct access to `baasicLoginRouteService`.
+                * @method        
+                * @example baasicLoginService.routeService.get.expand(expandObject);
+                **/             
                 routeService: loginRouteService,
                  /**
-                 * Returns a promise that is resolved once the login action has been performed. Success response returns the token resource.
+                 * Returns a promise that is resolved once the login action has been performed. This action logs user into the application and success response returns the token resource.
                  * @method        
                  * @example 
 baasicLoginService.login({

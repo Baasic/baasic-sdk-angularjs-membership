@@ -1,9 +1,9 @@
 (function (angular, undefined) { /* exported module */
     /** 
      * @description The angular.module is a global place for creating, registering or retrieving modules. All modules should be registered in an application using this mechanism. An angular module is a container for the different parts of your app - services, directives etc. In order to use `baasic.membership` module functionality it must be added as a dependency to your app.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      * @module baasic.membership 
      * @example
      (function (Main) {
@@ -28,9 +28,9 @@
     /**
      * @module baasicLoginRouteService
      * @description Baasic Login Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicLoginService` uses `baasicLoginRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -55,17 +55,22 @@
     /**
      * @module baasicLoginService
      * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicLoginService', ['baasicApiHttp', 'baasicLoginRouteService', function (baasicApiHttp, loginRouteService) {
             return {
+                /**
+                 * Provides direct access to `baasicLoginRouteService`.
+                 * @method        
+                 * @example baasicLoginService.routeService.get.expand(expandObject);
+                 **/
                 routeService: loginRouteService,
                 /**
-                 * Returns a promise that is resolved once the login action has been performed. Success response returns the token resource.
+                 * Returns a promise that is resolved once the login action has been performed. This action logs user into the application and success response returns the token resource.
                  * @method        
                  * @example 
                  baasicLoginService.login({
@@ -149,9 +154,9 @@
     /**
      * @module baasicPasswordRecoveryRouteService 
      * @description Baasic Password Recovery Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -175,17 +180,22 @@
     /**
      * @module baasicPasswordRecoveryService
      * @description Baasic PasswordRecovery Service provides an easy way to consume Baasic application password recovery features.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicPasswordRecoveryService', ['baasicApiHttp', 'baasicPasswordRecoveryRouteService', function (baasicApiHttp, passwordRecoveryRouteService) {
             return {
+                /**
+                 * Provides direct access to `baasicPasswordRecoveryRouteService`.
+                 * @method        
+                 * @example baasicPasswordRecoveryService.routeService.get.expand(expandObject);
+                 **/
                 routeService: passwordRecoveryRouteService,
                 /**
-                 * Returns a promise that is resolved once the password recovery requestReset action is completed. This initiates the password recovery process for the user.
+                 * Returns a promise that is resolved once the password recovery requestReset action is completed. This action initiates the password recovery process for the user.
                  * @method
                  * @example
                  baasicPasswordRecoveryService.requestReset({
@@ -238,9 +248,9 @@
     /**
      * @module baasicRegisterRouteService
      * @description Baasic Register Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRegisterService` uses `baasicRegisterRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -264,17 +274,22 @@
     /**
      * @module baasicRegisterService
      * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRegisterRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, baasicRegisterRouteService) {
             return {
+                /**
+                 * Provides direct access to `baasicRegisterRouteService`.
+                 * @method        
+                 * @example baasicRegisterService.routeService.get.expand(expandObject);
+                 **/
                 routeService: baasicRegisterRouteService,
                 /**
-                 * Returns a promise that is resolved once the register create has been performed. Success response returns the created user resource.
+                 * Returns a promise that is resolved once the register create has been performed. This action creates a new user, if completed successfully.
                  * @method        
                  * @example 
                  baasicRegisterService.create({
@@ -284,7 +299,7 @@
                  confirmPassword : "<confirm-password>",
                  email : "<email>",
                  password : "<password>",
-                 userName : ">userName>"
+                 userName : "<userName>"
                  })
                  .success(function (data) {
                  // perform success actions here
@@ -298,7 +313,7 @@
                     return baasicApiHttp.post(baasicRegisterRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the acount activation action has been performed.
+                 * Returns a promise that is resolved once the acount activation action has been performed, this action activates a user account.
                  * @method        
                  * @example 
                  baasicRegisterService.activate({
@@ -322,9 +337,9 @@
     /**
      * @module baasicRoleRouteService
      * @description Baasic Role Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRoleService` uses `baasicRoleRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -364,24 +379,29 @@
     /**
      * @module baasicRoleService
      * @description Baasic Role Service provides an easy way to consume Baasic application user role features.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicRoleService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRoleRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
             return {
+                /**
+                 * Provides direct access to `baasicRoleRouteService`.
+                 * @method        
+                 * @example baasicRoleService.routeService.get.expand(expandObject);
+                 **/
                 routeService: roleRouteService,
                 /**
-                 * Returns a promise that is resolved once the find action has been performed. Success response returns a list of role resources.
+                 * Returns a promise that is resolved once the find action has been performed. Success response returns a list of role resources matching the given criteria.
                  * @method        
                  * @example 
                  baasicRoleService.find({
                  pageNumber : 1,
                  pageSize : 10,
-                 orderBy : "name",
-                 orderDirection : "desc",
+                 orderBy : "<name>",
+                 orderDirection : "<desc>",
                  search : "<search-phrase>"
                  })
                  .success(function (collection) {
@@ -395,7 +415,7 @@
                     return baasicApiHttp.get(roleRouteService.find.expand(baasicApiService.findParams(options)));
                 },
                 /**
-                 * Returns a promise that is resolved once the get action has been performed. Success response returns the role resource.
+                 * Returns a promise that is resolved once the get action has been performed. Success response returns the specified role resource.
                  * @method        
                  * @example 
                  baasicRoleService.get("<role-id>")
@@ -410,7 +430,7 @@
                     return baasicApiHttp.get(roleRouteService.get.expand(baasicApiService.getParams(id, options)));
                 },
                 /**
-                 * Returns a promise that is resolved once the create action has been performed. Success response returns the requested role resource.
+                 * Returns a promise that is resolved once the create action has been performed, this action creates a role.
                  * @method        
                  * @example 
                  baasicRoleService.create({
@@ -428,7 +448,11 @@
                     return baasicApiHttp.post(roleRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the update role action has been performed.
+                 * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `update` route can be obtained from role resource (HAL enabled) objects like this:
+                 ```
+                 var params = baasicApiService.removeParams(roleObject);
+                 var uri = params["model"].links('put').href;
+                 ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -447,7 +471,11 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the remove role action has been performed. If the action is successfully completed the role resource is permanently removed from the system.
+                 * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `remove` route can be obtained from role resource (HAL enabled) objects like this:
+                 ```
+                 var params = baasicApiService.removeParams(roleObject);
+                 var uri = params["model"].links('delete').href;
+                 ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -470,9 +498,9 @@
     /**
      * @module baasicUserRouteService
      * @description Baasic User Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicUserService` uses `baasicUserRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -526,17 +554,22 @@
     /**
      * @module baasicUserService
      * @description Baasic User Service provides an easy way to consume Baasic User features.
-     * @copyright (c) 2015 Mono-Software
+     * @copyright (c) 2015 Mono
      * @license MIT
-     * @author Mono-Software
+     * @author Mono
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicUserService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
+                /**
+                 * Provides direct access to `baasicUserRouteService`.
+                 * @method        
+                 * @example baasicUserService.routeService.get.expand(expandObject);
+                 **/
                 routeService: userRouteService,
                 /**
-                 * Returns a promise that is resolved once the exists action has been performed. The action checks the availability of a desired Username.
+                 * Returns a promise that is resolved once the exists action has been performed. This action checks if user exists in the application.
                  * @method        
                  * @example 
                  baasicUserService.exists("<userName-to-check>")
@@ -551,14 +584,14 @@
                     return baasicApiHttp.get(userRouteService.exists.expand(baasicApiService.getParams(userName, options, 'userName')));
                 },
                 /**
-                 * Returns a promise that is resolved once the find action has been performed. Success response returns a list of user resources.
+                 * Returns a promise that is resolved once the find action has been performed. Success response returns a list of user resources matching the given criteria.
                  * @method        
                  * @example 
                  baasicUserService.find({
                  pageNumber : 1,
                  pageSize : 10,
-                 orderBy : "username",
-                 orderDirection : "desc",
+                 orderBy : "<username>",
+                 orderDirection : "<desc>",
                  search : "<search-phrase>"
                  })
                  .success(function (collection) {
@@ -572,7 +605,7 @@
                     return baasicApiHttp.get(userRouteService.find.expand(baasicApiService.findParams(data)));
                 },
                 /**
-                 * Returns a promise that is resolved once the get action has been performed. Success response returns the user resource.
+                 * Returns a promise that is resolved once the get action has been performed. Success response returns the sepecified user resource.
                  * @method        
                  * @example 
                  baasicUserService.get({
@@ -590,7 +623,7 @@
                     return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'userName')));
                 },
                 /**
-                 * Returns a promise that is resolved once the create user action has been performed. Success response returns the created user resource.
+                 * Returns a promise that is resolved once the create user action has been performed, this action creates a new user.
                  * @method        
                  * @example 
                  baasicUserService.create({
@@ -613,7 +646,11 @@
                     return baasicApiHttp.post(userRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the update user action has been performed.
+                 * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `update` route can be obtained from user resource (HAL enabled) objects like this:
+                 ```
+                 var params = baasicApiService.removeParams(userObject);
+                 var uri = params["model"].links('put').href;
+                 ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -632,7 +669,11 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the remove user action has been performed. If the action is successfully completed the user resource is permanently removed from the system.
+                 * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `remove` route can be obtained from user resource (HAL enabled) objects like this:
+                 ```
+                 var params = baasicApiService.removeParams(userObject);
+                 var uri = params["model"].links('delete').href;
+                 ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -649,7 +690,11 @@
                     return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system.
+                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `unlock` route can be obtained from user resource (HAL enabled) objects like this:
+                 ```
+                 var params = baasicApiService.removeParams(userObject);
+                 var uri = params["model"].links('unlock').href;
+                 ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -666,7 +711,11 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('unlock').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system.
+                 * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `lock` route can be obtained from user resource (HAL enabled) objects like this:
+                 ```
+                 var params = baasicApiService.removeParams(userObject);
+                 var uri = params["model"].links('lock').href;
+                 ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -683,7 +732,11 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as approved in the system.
+                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as "approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `approve` route can be obtained from user resource (HAL enabled) objects like this:
+                 ```
+                 var params = baasicApiService.removeParams(userObject);
+                 var uri = params["model"].links('approve').href;
+                 ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
@@ -700,7 +753,11 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('approve').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as not approved in the system.
+                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as "not approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `disapprove` route can be obtained from user resource (HAL enabled) objects like this:
+                 ```
+                 var params = baasicApiService.removeParams(userObject);
+                 var uri = params["model"].links('disapprove').href;
+                 ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.

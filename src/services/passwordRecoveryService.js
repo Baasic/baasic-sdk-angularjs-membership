@@ -2,18 +2,23 @@
 /**
  * @module baasicPasswordRecoveryService
  * @description Baasic PasswordRecovery Service provides an easy way to consume Baasic application password recovery features.
- * @copyright (c) 2015 Mono-Software
+ * @copyright (c) 2015 Mono
  * @license MIT
- * @author Mono-Software
+ * @author Mono
 */
 (function (angular, module, undefined) {
     'use strict';
     module.service('baasicPasswordRecoveryService', ['baasicApiHttp', 'baasicPasswordRecoveryRouteService',
         function (baasicApiHttp, passwordRecoveryRouteService) {
             return {
+                /**
+                * Provides direct access to `baasicPasswordRecoveryRouteService`.
+                * @method        
+                * @example baasicPasswordRecoveryService.routeService.get.expand(expandObject);
+                **/             
                 routeService: passwordRecoveryRouteService,
 				/**
-				* Returns a promise that is resolved once the password recovery requestReset action is completed. This initiates the password recovery process for the user.
+				* Returns a promise that is resolved once the password recovery requestReset action is completed. This action initiates the password recovery process for the user.
 				* @method
 				* @example
 baasicPasswordRecoveryService.requestReset({

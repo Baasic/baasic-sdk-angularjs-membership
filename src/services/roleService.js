@@ -2,25 +2,30 @@
 /**
  * @module baasicRoleService
  * @description Baasic Role Service provides an easy way to consume Baasic application user role features.
- * @copyright (c) 2015 Mono-Software
+ * @copyright (c) 2015 Mono
  * @license MIT
- * @author Mono-Software
+ * @author Mono
 */
 (function (angular, module, undefined) {
     'use strict';
     module.service('baasicRoleService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRoleRouteService',
         function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
             return {
+                /**
+                * Provides direct access to `baasicRoleRouteService`.
+                * @method        
+                * @example baasicRoleService.routeService.get.expand(expandObject);
+                **/             
                 routeService: roleRouteService,
                  /**
-                 * Returns a promise that is resolved once the find action has been performed. Success response returns a list of role resources.
+                 * Returns a promise that is resolved once the find action has been performed. Success response returns a list of role resources matching the given criteria.
                  * @method        
                  * @example 
 baasicRoleService.find({
   pageNumber : 1,
   pageSize : 10,
-  orderBy : "name",
-  orderDirection : "desc",
+  orderBy : "<name>",
+  orderDirection : "<desc>",
   search : "<search-phrase>"
 })
 .success(function (collection) {
@@ -34,7 +39,7 @@ baasicRoleService.find({
                     return baasicApiHttp.get(roleRouteService.find.expand(baasicApiService.findParams(options)));
                 },
                  /**
-                 * Returns a promise that is resolved once the get action has been performed. Success response returns the role resource.
+                 * Returns a promise that is resolved once the get action has been performed. Success response returns the specified role resource.
                  * @method        
                  * @example 
 baasicRoleService.get("<role-id>")
@@ -49,7 +54,7 @@ baasicRoleService.get("<role-id>")
                     return baasicApiHttp.get(roleRouteService.get.expand(baasicApiService.getParams(id, options)));
                 },
                  /**
-                 * Returns a promise that is resolved once the create action has been performed. Success response returns the requested role resource.
+                 * Returns a promise that is resolved once the create action has been performed, this action creates a role.
                  * @method        
                  * @example 
 baasicRoleService.create({
@@ -67,7 +72,11 @@ baasicRoleService.create({
                     return baasicApiHttp.post(roleRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the update role action has been performed.
+                 * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `update` route can be obtained from role resource (HAL enabled) objects like this:
+```
+var params = baasicApiService.removeParams(roleObject);
+var uri = params["model"].links('put').href;
+```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.
@@ -86,7 +95,11 @@ baasicRoleService.update(existingResource)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the remove role action has been performed. If the action is successfully completed the role resource is permanently removed from the system.
+                 * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `remove` route can be obtained from role resource (HAL enabled) objects like this:
+```
+var params = baasicApiService.removeParams(roleObject);
+var uri = params["model"].links('delete').href;
+```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
