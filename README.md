@@ -17,12 +17,9 @@ This section will describe how to add the Baasic AngularJS Membership library to
 Please add the _Baasic Membership_ include after the _Baasic Angular Core_ include:
 
 ```html
-<script src='//cdn.net/js/baasic-angular-1.0.0.min.js'></script>
-<script src='//cdn.net/js/baasic-angular-membership-1.0.0.min.js'></script>
+<script src='/js/baasic-angular-1.0.0.min.js'></script>
+<script src='/js/baasic-angular-membership-1.0.0.min.js'></script>
 ```
-
-The recommended way of serving the library is through a [CDN](http://en.wikipedia.org/wiki/Content_delivery_network) but note that this is not a requirement. If you prefer adding library files directly to your project instead, please modify the includes accordingly.
-
 
 ### Initialization
 
