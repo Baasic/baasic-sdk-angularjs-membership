@@ -1,10 +1,7 @@
 ﻿/* globals module */
 /**
  * @module baasicRoleService
- * @description Baasic Role Service provides an easy way to consume Baasic application user role features.
- * @copyright (c) 2015 Mono
- * @license MIT
- * @author Mono
+ * @description Baasic Role Service provides an easy way to consume Baasic application user role features. In order to obtain a needed routes `baasicRoleService` uses `baasicRoleRouteService`.
 */
 (function (angular, module, undefined) {
     'use strict';
@@ -118,3 +115,12 @@ baasicRoleService.remove(role)
             };
         }]);
 }(angular, module));
+/**
+ * @copyright (c) 2015 Mono
+ * @license MIT
+ * @author Mono
+ * @overview 
+ ***Notes:**
+ - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+ - All end-point objects are transformed by the associated route service.
+*/

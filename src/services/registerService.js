@@ -1,10 +1,7 @@
 /* globals module */
 /**
  * @module baasicRegisterService
- * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
- * @copyright (c) 2015 Mono
- * @license MIT
- * @author Mono
+ * @description Baasic Register Service provides an easy way to consume Baasic application registration features. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
 */
 (function (angular, module, undefined) {
 	'use strict';
@@ -63,3 +60,12 @@ baasicRegisterService.activate({
 			};
 		}]);
 }(angular, module));
+/**
+ * @copyright (c) 2015 Mono
+ * @license MIT
+ * @author Mono
+ * @overview 
+ ***Notes:**
+ - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+ - All end-point objects are transformed by the associated route service.
+*/
