@@ -390,7 +390,7 @@
                 /**
                  * Parses find role route which can be expanded with additional options. Supported items are: 
                  * - `searchQuery` - A string referencing resource properties using the phrase or query search.
-                 * - `page` - A value used to set the page size, i.e. to retrieve certain resource subset from the storage.
+                 * - `page` - A value used to set the page offset, i.e. to retrieve certain resource subset from the storage.
                  * - `rpp` - A value used to limit the size of result set per page.
                  * - `sort` - A string used to set the role property to sort the result collection by.
                  * @method        
@@ -572,7 +572,7 @@
                 /**
                  * Parses find user route which can be expanded with additional options. Supported items are: 
                  * - `searchQuery` - A string referencing resource properties using the phrase or query search.
-                 * - `page` - A value used to set the page size, i.e. to retrieve certain resource subset from the storage.
+                 * - `page` - A value used to set the page offset, i.e. to retrieve certain resource subset from the storage.
                  * - `rpp` - A value used to limit the size of result set per page.
                  * - `sort` - A string used to set the role property to sort the result collection by.
                  * - `embed` - Comma separated list of resources to be contained within the current representation.
