@@ -18,7 +18,7 @@
                 **/                
 				routeService: baasicRegisterRouteService,
                 /**
-                * Returns a promise that is resolved once the register create has been performed. This action creates a new user, if completed successfully.
+                * Returns a promise that is resolved once the register create has been performed. This action creates a new user, if completed successfully. Created user is not approved immediately, instead an activation e-mail is sent to the user.
                 * @method        
                 * @example 
 baasicRegisterService.create({
