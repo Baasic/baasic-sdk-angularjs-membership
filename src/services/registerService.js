@@ -28,7 +28,7 @@ baasicRegisterService.create({
   confirmPassword : "<confirm-password>",
   email : "<email>",
   password : "<password>",
-  userName : "<userName>"
+  username : "<username>"
 })
 .success(function (data) {
   // perform success actions here

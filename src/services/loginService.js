@@ -22,7 +22,7 @@
                  * @method        
                  * @example 
 baasicLoginService.login({
-  userName : "<userName>",
+  username : "<username>",
   password : "<password>",
   options : ['session', 'sliding']
 })
@@ -36,7 +36,7 @@ baasicLoginService.login({
                  **/  				
                 login: function login(data) {
                     var settings = angular.copy(data);
-                    var formData = 'grant_type=password&username=' + settings.userName + '&password=' + settings.password;
+                    var formData = 'grant_type=password&username=' + settings.username + '&password=' + settings.password;
 
                     if (settings.options) {
                         var options = settings.options;

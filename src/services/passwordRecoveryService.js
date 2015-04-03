@@ -25,7 +25,7 @@ baasicPasswordRecoveryService.requestReset({
   challengeIdentifier : "<challenge-identifier>",
   challengeResponse : "<challenge-response>",
   recoverUrl : "<recover-url>",
-  userName : "<username>"
+  username : "<username>"
 })
 .success(function () {
   // perform success action here

@@ -21,7 +21,7 @@
                  * Returns a promise that is resolved once the exists action has been performed. This action checks if user exists in the application.
                  * @method        
                  * @example 
-baasicUserService.exists("<userName-to-check>")
+baasicUserService.exists("<username>")
 .success(function (data) {
   // perform success action here
 })
@@ -29,8 +29,8 @@ baasicUserService.exists("<userName-to-check>")
   // perform error handling here
 });  
                  **/ 					
-                exists: function (userName, options) {
-                    return baasicApiHttp.get(userRouteService.exists.expand(baasicApiService.getParams(userName, options, 'userName')));
+                exists: function (username, options) {
+                    return baasicApiHttp.get(userRouteService.exists.expand(baasicApiService.getParams(username, options, 'username')));
                 },
                  /**
                  * Returns a promise that is resolved once the find action has been performed. Success response returns a list of user resources matching the given criteria.
@@ -40,7 +40,7 @@ baasicUserService.find({
   pageNumber : 1,
   pageSize : 10,
   orderBy : "<username>",
-  orderDirection : "<desc>",
+  orderDirection : "<asc|desc>",
   search : "<search-phrase>"
 })
 .success(function (collection) {
@@ -58,7 +58,7 @@ baasicUserService.find({
                  * @method        
                  * @example 
 baasicUserService.get({
-  userName : "<userName>",
+  username : "<username>",
   embed : "<embedded-resource>"
 })
 .success(function (data) {
@@ -69,7 +69,7 @@ baasicUserService.get({
 });
                  **/ 					
                 get: function (data) {
-                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'userName')));
+                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'username')));
                 },
                  /**
                  * Returns a promise that is resolved once the create user action has been performed, this action creates a new user.
@@ -80,9 +80,9 @@ baasicUserService.create({
   email : "<email>",
   password : "<password>",
   sendEmailNotification : true,
-  userName : "<username>",
+  username : "<username>",
   roles: ["<role-name>"],
-  additionalProperty: "<additionalProperty>"  
+  additionalProperty: "<additional-property>"  
 })
 .success(function (data) {
   // perform success action here
@@ -97,15 +97,15 @@ baasicUserService.create({
                  /**
                  * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `update` route can be obtained from user resource (HAL enabled) objects like this:
 ```
-var params = baasicApiService.removeParams(userObject);
+var params = baasicApiService.removeParams(user);
 var uri = params["model"].links('put').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.
-existingResource.roles = ["<role-name>", "<new-role-name>"];
-existingResource.email = "<new-email>";
-baasicUserService.update(existingResource)
+user.roles = ["<role-name>", "<new-role-name>"];
+user.email = "<new-email>";
+baasicUserService.update(user)
 .success(function (data) {
   // perform success action here
 })
@@ -120,13 +120,13 @@ baasicUserService.update(existingResource)
                  /**
                  * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `remove` route can be obtained from user resource (HAL enabled) objects like this:
 ```
-var params = baasicApiService.removeParams(userObject);
+var params = baasicApiService.removeParams(user);
 var uri = params["model"].links('delete').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
-baasicUserService.remove(existingResource)
+baasicUserService.remove(user)
 .success(function (data) {
   // perform success action here
 })
@@ -141,13 +141,13 @@ baasicUserService.remove(existingResource)
                  /**
                  * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `unlock` route can be obtained from user resource (HAL enabled) objects like this:
 ```
-var params = baasicApiService.removeParams(userObject);
+var params = baasicApiService.removeParams(user);
 var uri = params["model"].links('unlock').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
-baasicUserService.unlock(existingResource)
+baasicUserService.unlock(user)
 .success(function (data) {
   // perform success action here
 })
@@ -162,13 +162,13 @@ baasicUserService.unlock(existingResource)
                  /**
                  * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `lock` route can be obtained from user resource (HAL enabled) objects like this:
 ```
-var params = baasicApiService.removeParams(userObject);
+var params = baasicApiService.removeParams(user);
 var uri = params["model"].links('lock').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
-baasicUserService.lock(existingResource)
+baasicUserService.lock(user)
 .success(function (data) {
   // perform success action here
 })
@@ -183,13 +183,13 @@ baasicUserService.lock(existingResource)
                  /**
                  * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as "approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `approve` route can be obtained from user resource (HAL enabled) objects like this:
 ```
-var params = baasicApiService.removeParams(userObject);
+var params = baasicApiService.removeParams(user);
 var uri = params["model"].links('approve').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
-baasicUserService.lock(existingResource)
+baasicUserService.lock(user)
 .success(function (data) {
   // perform success action here
 })
@@ -204,13 +204,13 @@ baasicUserService.lock(existingResource)
                  /**
                  * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as "not approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `disapprove` route can be obtained from user resource (HAL enabled) objects like this:
 ```
-var params = baasicApiService.removeParams(userObject);
+var params = baasicApiService.removeParams(user);
 var uri = params["model"].links('disapprove').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
-baasicUserService.lock(existingResource)
+baasicUserService.lock(user)
 .success(function (data) {
   // perform success action here
 })
@@ -238,9 +238,9 @@ baasicUserService.changePassword("<username>", {
 })
 .finally (function () {});
 				**/					
-                changePassword: function (userName, data) {
+                changePassword: function (username, data) {
                     return baasicApiHttp({
-                        url: userRouteService.changePassword.expand({ userName: userName }),
+                        url: userRouteService.changePassword.expand({ username: username }),
                         method: 'PUT',
                         data: data
                     });

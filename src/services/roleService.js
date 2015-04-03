@@ -25,7 +25,7 @@ baasicRoleService.find({
   pageNumber : 1,
   pageSize : 10,
   orderBy : "<name>",
-  orderDirection : "<desc>",
+  orderDirection : "<asc|desc>",
   search : "<search-phrase>"
 })
 .success(function (collection) {
@@ -74,14 +74,14 @@ baasicRoleService.create({
                  /**
                  * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `update` route can be obtained from role resource (HAL enabled) objects like this:
 ```
-var params = baasicApiService.removeParams(roleObject);
+var params = baasicApiService.removeParams(role);
 var uri = params["model"].links('put').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.
-existingResource.name = "<new-name>";
-baasicRoleService.update(existingResource)
+role.name = "<new-name>";
+baasicRoleService.update(role)
 .success(function (data) {
   // perform success action here
 })
@@ -97,13 +97,13 @@ baasicRoleService.update(existingResource)
                  /**
                  * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `remove` route can be obtained from role resource (HAL enabled) objects like this:
 ```
-var params = baasicApiService.removeParams(roleObject);
+var params = baasicApiService.removeParams(role);
 var uri = params["model"].links('delete').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.				 
-baasicRoleService.remove(existingResource)
+baasicRoleService.remove(role)
 .success(function (data) {
   // perform success action here
 })

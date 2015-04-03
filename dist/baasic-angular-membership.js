@@ -27,7 +27,7 @@
     /* globals module */
     /**
      * @module baasicLoginRouteService
-     * @description Baasic Login Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicLoginService` uses `baasicLoginRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
+     * @description Baasic Login Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicLoginService` uses `baasicLoginRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
@@ -74,7 +74,7 @@
                  * @method        
                  * @example 
                  baasicLoginService.login({
-                 userName : "<userName>",
+                 username : "<username>",
                  password : "<password>",
                  options : ['session', 'sliding']
                  })
@@ -88,7 +88,7 @@
                  **/
                 login: function login(data) {
                     var settings = angular.copy(data);
-                    var formData = 'grant_type=password&username=' + settings.userName + '&password=' + settings.password;
+                    var formData = 'grant_type=password&username=' + settings.username + '&password=' + settings.password;
 
                     if (settings.options) {
                         var options = settings.options;
@@ -153,7 +153,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicPasswordRecoveryRouteService 
-     * @description Baasic Password Recovery Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
+     * @description Baasic Password Recovery Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
@@ -202,7 +202,7 @@
                  challengeIdentifier : "<challenge-identifier>",
                  challengeResponse : "<challenge-response>",
                  recoverUrl : "<recover-url>",
-                 userName : "<username>"
+                 username : "<username>"
                  })
                  .success(function () {
                  // perform success action here
@@ -247,7 +247,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicRegisterRouteService
-     * @description Baasic Register Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRegisterService` uses `baasicRegisterRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
+     * @description Baasic Register Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRegisterService` uses `baasicRegisterRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
@@ -299,7 +299,7 @@
                  confirmPassword : "<confirm-password>",
                  email : "<email>",
                  password : "<password>",
-                 userName : "<userName>"
+                 username : "<username>"
                  })
                  .success(function (data) {
                  // perform success actions here
@@ -336,7 +336,7 @@
     }(angular, module)); /* globals module */
     /**
      * @module baasicRoleRouteService
-     * @description Baasic Role Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRoleService` uses `baasicRoleRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
+     * @description Baasic Role Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRoleService` uses `baasicRoleRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
@@ -401,7 +401,7 @@
                  pageNumber : 1,
                  pageSize : 10,
                  orderBy : "<name>",
-                 orderDirection : "<desc>",
+                 orderDirection : "<asc|desc>",
                  search : "<search-phrase>"
                  })
                  .success(function (collection) {
@@ -450,14 +450,14 @@
                 /**
                  * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `update` route can be obtained from role resource (HAL enabled) objects like this:
                  ```
-                 var params = baasicApiService.removeParams(roleObject);
+                 var params = baasicApiService.removeParams(role);
                  var uri = params["model"].links('put').href;
                  ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 existingResource.name = "<new-name>";
-                 baasicRoleService.update(existingResource)
+                 role.name = "<new-name>";
+                 baasicRoleService.update(role)
                  .success(function (data) {
                  // perform success action here
                  })
@@ -473,13 +473,13 @@
                 /**
                  * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `remove` route can be obtained from role resource (HAL enabled) objects like this:
                  ```
-                 var params = baasicApiService.removeParams(roleObject);
+                 var params = baasicApiService.removeParams(role);
                  var uri = params["model"].links('delete').href;
                  ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 baasicRoleService.remove(existingResource)
+                 baasicRoleService.remove(role)
                  .success(function (data) {
                  // perform success action here
                  })
@@ -497,7 +497,7 @@
 
     /**
      * @module baasicUserRouteService
-     * @description Baasic User Route Service provides Baasic route templates which can then be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicUserService` uses `baasicUserRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
+     * @description Baasic User Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicUserService` uses `baasicUserRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
@@ -509,9 +509,9 @@
                 /**
                  * Parses user exists route; URI template should be expanded with the username whose availability you'd like to check.                
                  * @method        
-                 * @example baasicUserRouteService.exists.expand({userName: "<username-to-check>"});               
+                 * @example baasicUserRouteService.exists.expand({username: "<username>"});               
                  **/
-                exists: uriTemplateService.parse('users/{userName}/exists/'),
+                exists: uriTemplateService.parse('users/{username}/exists/'),
                 /**
                  * Parses find user route which can be expanded with additional options. Supported items are: 
                  * - `searchQuery` - A string referencing resource properties using the phrase or query search.
@@ -524,12 +524,12 @@
                  **/
                 find: uriTemplateService.parse('users/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
-                 * Parses get user route which must be expanded with the userName of the previously created user resource in the system. Additional expand supported items are:
+                 * Parses get user route which must be expanded with the username of the previously created user resource in the system. Additional expand supported items are:
                  * - `embed` - Comma separated list of resources to be contained within the current representation.
                  * @method        
-                 * @example baasicUserRouteService.get.expand({userName: "<username-to-fetch>"});               
+                 * @example baasicUserRouteService.get.expand({username: "<username>"});               
                  **/
-                get: uriTemplateService.parse('users/{userName}/{?embed,fields}'),
+                get: uriTemplateService.parse('users/{username}/{?embed,fields}'),
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
@@ -543,11 +543,11 @@
                  **/
                 create: uriTemplateService.parse('users'),
                 /**
-                 * Parses change password route, URI template should be expanded with the Username of the user resource whose password should be updated.
+                 * Parses change password route, URI template should be expanded with the username of the user resource whose password should be updated.
                  * @method        
-                 * @example baasicUserRouteService.changePassword.expand({userName: "<username>"});              
+                 * @example baasicUserRouteService.changePassword.expand({username: "<username>"});              
                  **/
-                changePassword: uriTemplateService.parse('users/{userName}/change-password'),
+                changePassword: uriTemplateService.parse('users/{username}/change-password'),
             };
         }]);
     }(angular, module)); /* globals module */
@@ -572,7 +572,7 @@
                  * Returns a promise that is resolved once the exists action has been performed. This action checks if user exists in the application.
                  * @method        
                  * @example 
-                 baasicUserService.exists("<userName-to-check>")
+                 baasicUserService.exists("<username>")
                  .success(function (data) {
                  // perform success action here
                  })
@@ -580,8 +580,8 @@
                  // perform error handling here
                  });
                  **/
-                exists: function (userName, options) {
-                    return baasicApiHttp.get(userRouteService.exists.expand(baasicApiService.getParams(userName, options, 'userName')));
+                exists: function (username, options) {
+                    return baasicApiHttp.get(userRouteService.exists.expand(baasicApiService.getParams(username, options, 'username')));
                 },
                 /**
                  * Returns a promise that is resolved once the find action has been performed. Success response returns a list of user resources matching the given criteria.
@@ -591,7 +591,7 @@
                  pageNumber : 1,
                  pageSize : 10,
                  orderBy : "<username>",
-                 orderDirection : "<desc>",
+                 orderDirection : "<asc|desc>",
                  search : "<search-phrase>"
                  })
                  .success(function (collection) {
@@ -609,7 +609,7 @@
                  * @method        
                  * @example 
                  baasicUserService.get({
-                 userName : "<userName>",
+                 username : "<username>",
                  embed : "<embedded-resource>"
                  })
                  .success(function (data) {
@@ -620,7 +620,7 @@
                  });
                  **/
                 get: function (data) {
-                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'userName')));
+                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'username')));
                 },
                 /**
                  * Returns a promise that is resolved once the create user action has been performed, this action creates a new user.
@@ -631,9 +631,9 @@
                  email : "<email>",
                  password : "<password>",
                  sendEmailNotification : true,
-                 userName : "<username>",
+                 username : "<username>",
                  roles: ["<role-name>"],
-                 additionalProperty: "<additionalProperty>"  
+                 additionalProperty: "<additional-property>"  
                  })
                  .success(function (data) {
                  // perform success action here
@@ -648,15 +648,15 @@
                 /**
                  * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `update` route can be obtained from user resource (HAL enabled) objects like this:
                  ```
-                 var params = baasicApiService.removeParams(userObject);
+                 var params = baasicApiService.removeParams(user);
                  var uri = params["model"].links('put').href;
                  ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 existingResource.roles = ["<role-name>", "<new-role-name>"];
-                 existingResource.email = "<new-email>";
-                 baasicUserService.update(existingResource)
+                 user.roles = ["<role-name>", "<new-role-name>"];
+                 user.email = "<new-email>";
+                 baasicUserService.update(user)
                  .success(function (data) {
                  // perform success action here
                  })
@@ -671,13 +671,13 @@
                 /**
                  * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `remove` route can be obtained from user resource (HAL enabled) objects like this:
                  ```
-                 var params = baasicApiService.removeParams(userObject);
+                 var params = baasicApiService.removeParams(user);
                  var uri = params["model"].links('delete').href;
                  ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 baasicUserService.remove(existingResource)
+                 baasicUserService.remove(user)
                  .success(function (data) {
                  // perform success action here
                  })
@@ -692,13 +692,13 @@
                 /**
                  * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `unlock` route can be obtained from user resource (HAL enabled) objects like this:
                  ```
-                 var params = baasicApiService.removeParams(userObject);
+                 var params = baasicApiService.removeParams(user);
                  var uri = params["model"].links('unlock').href;
                  ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 baasicUserService.unlock(existingResource)
+                 baasicUserService.unlock(user)
                  .success(function (data) {
                  // perform success action here
                  })
@@ -713,13 +713,13 @@
                 /**
                  * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `lock` route can be obtained from user resource (HAL enabled) objects like this:
                  ```
-                 var params = baasicApiService.removeParams(userObject);
+                 var params = baasicApiService.removeParams(user);
                  var uri = params["model"].links('lock').href;
                  ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 baasicUserService.lock(existingResource)
+                 baasicUserService.lock(user)
                  .success(function (data) {
                  // perform success action here
                  })
@@ -734,13 +734,13 @@
                 /**
                  * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as "approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `approve` route can be obtained from user resource (HAL enabled) objects like this:
                  ```
-                 var params = baasicApiService.removeParams(userObject);
+                 var params = baasicApiService.removeParams(user);
                  var uri = params["model"].links('approve').href;
                  ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 baasicUserService.lock(existingResource)
+                 baasicUserService.lock(user)
                  .success(function (data) {
                  // perform success action here
                  })
@@ -755,13 +755,13 @@
                 /**
                  * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as "not approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `disapprove` route can be obtained from user resource (HAL enabled) objects like this:
                  ```
-                 var params = baasicApiService.removeParams(userObject);
+                 var params = baasicApiService.removeParams(user);
                  var uri = params["model"].links('disapprove').href;
                  ```
                  * @method        
                  * @example 
                  // Existing resource is a resource previously fetched using get action.
-                 baasicUserService.lock(existingResource)
+                 baasicUserService.lock(user)
                  .success(function (data) {
                  // perform success action here
                  })
@@ -789,10 +789,10 @@
                  })
                  .finally (function () {});
                  **/
-                changePassword: function (userName, data) {
+                changePassword: function (username, data) {
                     return baasicApiHttp({
                         url: userRouteService.changePassword.expand({
-                            userName: userName
+                            username: username
                         }),
                         method: 'PUT',
                         data: data
