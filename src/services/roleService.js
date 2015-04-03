@@ -69,7 +69,7 @@ baasicRoleService.create({
                     return baasicApiHttp.post(roleRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `update` route can be obtained from role resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicRoleService` route template, here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(role);
 var uri = params['model'].links('put').href;
@@ -92,7 +92,7 @@ baasicRoleService.update(role)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `remove` route can be obtained from role resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicRoleService` route template, here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(role);
 var uri = params['model'].links('delete').href;

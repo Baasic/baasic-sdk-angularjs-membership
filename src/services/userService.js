@@ -92,7 +92,7 @@ baasicUserService.create({
                     return baasicApiHttp.post(userRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `update` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(user);
 var uri = params['model'].links('put').href;
@@ -115,7 +115,7 @@ baasicUserService.update(user)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `remove` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(user);
 var uri = params['model'].links('delete').href;
@@ -136,7 +136,7 @@ baasicUserService.remove(user)
                     return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
                 },
                  /**
-                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `unlock` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(user);
 var uri = params['model'].links('unlock').href;
@@ -157,7 +157,7 @@ baasicUserService.unlock(user)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('unlock').href);                    
                 },
                  /**
-                 * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `lock` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(user);
 var uri = params['model'].links('lock').href;
@@ -178,7 +178,7 @@ baasicUserService.lock(user)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);                    
                 },
                  /**
-                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as 'approved' in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `approve` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as 'approved' in the system. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(user);
 var uri = params['model'].links('approve').href;
@@ -199,7 +199,7 @@ baasicUserService.lock(user)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('approve').href);
                 },
                  /**
-                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as 'not approved' in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `disapprove` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as 'not approved' in the system. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(user);
 var uri = params['model'].links('disapprove').href;
