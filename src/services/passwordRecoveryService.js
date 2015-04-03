@@ -22,10 +22,10 @@
 				* @method
 				* @example
 baasicPasswordRecoveryService.requestReset({
-  challengeIdentifier : "<challenge-identifier>",
-  challengeResponse : "<challenge-response>",
-  recoverUrl : "<recover-url>",
-  username : "<username>"
+  challengeIdentifier : '<challenge-identifier>',
+  challengeResponse : '<challenge-response>',
+  recoverUrl : '<recover-url>',
+  username : '<username>'
 })
 .success(function () {
   // perform success action here
@@ -47,8 +47,8 @@ baasicPasswordRecoveryService.requestReset({
 				* @method
 				* @example
 baasicPasswordRecoveryService.reset({
-  newPassword : "<new-password>",
-  passwordRecoveryToken : "<password-recovery-token>"
+  newPassword : '<new-password>',
+  passwordRecoveryToken : '<password-recovery-token>'
 })
 .success(function () {
   // perform success action here

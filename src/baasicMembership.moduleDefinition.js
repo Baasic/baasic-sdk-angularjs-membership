@@ -7,18 +7,18 @@
  * @module baasic.membership 
  * @example
 (function (Main) {
-  "use strict";
+  'use strict';
   var dependencies = [
-    "baasic.api",
-    "baasic.membership",
-    "baasic.security",
-    "baasic.appSettings",
-    "baasic.article",
-    "baasic.dynamicResource",
-    "baasic.keyValue",
-    "baasic.valueSet"
+    'baasic.api',
+    'baasic.membership',
+    'baasic.security',
+    'baasic.appSettings',
+    'baasic.article',
+    'baasic.dynamicResource',
+    'baasic.keyValue',
+    'baasic.valueSet'
   ];
-  Main.module = angular.module("myApp.Main", dependencies);
+  Main.module = angular.module('myApp.Main', dependencies);
 }
   (MyApp.Modules.Main = {})); 
 */

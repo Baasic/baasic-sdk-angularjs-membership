@@ -21,7 +21,7 @@
                  * Returns a promise that is resolved once the exists action has been performed. This action checks if user exists in the application.
                  * @method        
                  * @example 
-baasicUserService.exists("<username>")
+baasicUserService.exists('<username>')
 .success(function (data) {
   // perform success action here
 })
@@ -39,9 +39,9 @@ baasicUserService.exists("<username>")
 baasicUserService.find({
   pageNumber : 1,
   pageSize : 10,
-  orderBy : "<username>",
-  orderDirection : "<asc|desc>",
-  search : "<search-phrase>"
+  orderBy : '<username>',
+  orderDirection : '<asc|desc>',
+  search : '<search-phrase>'
 })
 .success(function (collection) {
   // perform success action here
@@ -58,8 +58,8 @@ baasicUserService.find({
                  * @method        
                  * @example 
 baasicUserService.get({
-  username : "<username>",
-  embed : "<embedded-resource>"
+  username : '<username>',
+  embed : '<embedded-resource>'
 })
 .success(function (data) {
   // perform success action here
@@ -76,13 +76,13 @@ baasicUserService.get({
                  * @method        
                  * @example 
 baasicUserService.create({
-  confirmPassword : "<password>",
-  email : "<email>",
-  password : "<password>",
+  confirmPassword : '<password>',
+  email : '<email>',
+  password : '<password>',
   sendEmailNotification : true,
-  username : "<username>",
-  roles: ["<role-name>"],
-  additionalProperty: "<additional-property>"  
+  username : '<username>',
+  roles: ['<role-name>'],
+  additionalProperty: '<additional-property>'  
 })
 .success(function (data) {
   // perform success action here
@@ -98,13 +98,13 @@ baasicUserService.create({
                  * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `update` route can be obtained from user resource (HAL enabled) objects like this:
 ```
 var params = baasicApiService.removeParams(user);
-var uri = params["model"].links('put').href;
+var uri = params['model'].links('put').href;
 ```
                  * @method        
                  * @example 
 // Existing resource is a resource previously fetched using get action.
-user.roles = ["<role-name>", "<new-role-name>"];
-user.email = "<new-email>";
+user.roles = ['<role-name>', '<new-role-name>'];
+user.email = '<new-email>';
 baasicUserService.update(user)
 .success(function (data) {
   // perform success action here
@@ -121,7 +121,7 @@ baasicUserService.update(user)
                  * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `remove` route can be obtained from user resource (HAL enabled) objects like this:
 ```
 var params = baasicApiService.removeParams(user);
-var uri = params["model"].links('delete').href;
+var uri = params['model'].links('delete').href;
 ```
                  * @method        
                  * @example 
@@ -142,7 +142,7 @@ baasicUserService.remove(user)
                  * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `unlock` route can be obtained from user resource (HAL enabled) objects like this:
 ```
 var params = baasicApiService.removeParams(user);
-var uri = params["model"].links('unlock').href;
+var uri = params['model'].links('unlock').href;
 ```
                  * @method        
                  * @example 
@@ -163,7 +163,7 @@ baasicUserService.unlock(user)
                  * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `lock` route can be obtained from user resource (HAL enabled) objects like this:
 ```
 var params = baasicApiService.removeParams(user);
-var uri = params["model"].links('lock').href;
+var uri = params['model'].links('lock').href;
 ```
                  * @method        
                  * @example 
@@ -181,10 +181,10 @@ baasicUserService.lock(user)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);                    
                 },
                  /**
-                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as "approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `approve` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as 'approved' in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `approve` route can be obtained from user resource (HAL enabled) objects like this:
 ```
 var params = baasicApiService.removeParams(user);
-var uri = params["model"].links('approve').href;
+var uri = params['model'].links('approve').href;
 ```
                  * @method        
                  * @example 
@@ -202,10 +202,10 @@ baasicUserService.lock(user)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('approve').href);
                 },
                  /**
-                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as "not approved" in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `disapprove` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as 'not approved' in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `disapprove` route can be obtained from user resource (HAL enabled) objects like this:
 ```
 var params = baasicApiService.removeParams(user);
-var uri = params["model"].links('disapprove').href;
+var uri = params['model'].links('disapprove').href;
 ```
                  * @method        
                  * @example 
@@ -226,8 +226,8 @@ baasicUserService.lock(user)
                  * Returns a promise that is resolved once the changePassword action has been performed. This action will update the user's password selection.
                  * @method        
                  * @example 
-baasicUserService.changePassword("<username>", {
-  newPassword : "<new-password>",
+baasicUserService.changePassword('<username>', {
+  newPassword : '<new-password>',
   sendMailNotification : false
 })
 .success(function () {
