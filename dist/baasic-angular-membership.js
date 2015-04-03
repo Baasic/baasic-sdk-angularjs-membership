@@ -27,10 +27,7 @@
     /* globals module */
     /**
      * @module baasicLoginRouteService
-     * @description Baasic Login Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicLoginService` uses `baasicLoginRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
-     * @copyright (c) 2015 Mono
-     * @license MIT
-     * @author Mono
+     * @description Baasic Login Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Login Route Service to obtain a needed routes while some routes will be obtained through HAL. By convention, all route services  use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -46,18 +43,26 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicLoginRouteService.parse('route/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
+                 * @example baasicLoginRouteService.parse('<route>/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
                  **/
                 parse: uriTemplateService.parse
             };
         }]);
-    }(angular, module)); /* globals module */
+    }(angular, module));
     /**
-     * @module baasicLoginService
-     * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - [URI Template](https://github.com/Baasic/uritemplate-js) syntax enables expanding the Baasic route templates to Baasic REST URIs providing it with an object that contains URI parameters.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+    /**
+     * @module baasicLoginService
+     * @description Baasic Register Service provides an easy way to consume Baasic application registration features. In order to obtain a needed routes `baasicLoginService` uses `baasicLoginRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -150,13 +155,20 @@
                 }
             };
         }]);
-    }(angular, module)); /* globals module */
+    }(angular, module));
     /**
-     * @module baasicPasswordRecoveryRouteService 
-     * @description Baasic Password Recovery Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+    /**
+     * @module baasicPasswordRecoveryRouteService 
+     * @description Baasic Password Recovery Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Password Recovery Route Service to obtain a needed routes while some routes will be obtained through HAL. By convention, all route services  use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -171,18 +183,26 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicPasswordRecoveryRouteService.parse('route/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
+                 * @example baasicPasswordRecoveryRouteService.parse('<route>/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
                  **/
                 parse: uriTemplateService.parse
             };
         }]);
-    }(angular, module)); /* globals module */
+    }(angular, module));
     /**
-     * @module baasicPasswordRecoveryService
-     * @description Baasic PasswordRecovery Service provides an easy way to consume Baasic application password recovery features.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - [URI Template](https://github.com/Baasic/uritemplate-js) syntax enables expanding the Baasic route templates to Baasic REST URIs providing it with an object that contains URI parameters.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+    /**
+     * @module baasicPasswordRecoveryService
+     * @description Baasic Password Recovery Service provides an easy way to consume Baasic application password recovery features. In order to obtain a needed routes `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -244,13 +264,20 @@
                 }
             };
         }]);
-    }(angular, module)); /* globals module */
+    }(angular, module));
     /**
-     * @module baasicRegisterRouteService
-     * @description Baasic Register Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRegisterService` uses `baasicRegisterRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+    /**
+     * @module baasicRegisterRouteService
+     * @description Baasic Register Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Register Route Service to obtain a needed routes while some routes will be obtained through HAL. By convention, all route services  use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -270,13 +297,21 @@
                 activate: uriTemplateService.parse('register/activate/{activationToken}/')
             };
         }]);
-    }(angular, module)); /* globals module */
+    }(angular, module));
     /**
-     * @module baasicRegisterService
-     * @description Baasic Register Service provides an easy way to consume Baasic application registration features.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - [URI Template](https://github.com/Baasic/uritemplate-js) syntax enables expanding the Baasic route templates to Baasic REST URIs providing it with an object that contains URI parameters.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+    /**
+     * @module baasicRegisterService
+     * @description Baasic Register Service provides an easy way to consume Baasic application registration features. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -289,7 +324,7 @@
                  **/
                 routeService: baasicRegisterRouteService,
                 /**
-                 * Returns a promise that is resolved once the register create has been performed. This action creates a new user, if completed successfully.
+                 * Returns a promise that is resolved once the register create has been performed. This action creates a new user, if completed successfully. Created user is not approved immediately, instead an activation e-mail is sent to the user.
                  * @method        
                  * @example 
                  baasicRegisterService.create({
@@ -333,13 +368,20 @@
                 }
             };
         }]);
-    }(angular, module)); /* globals module */
+    }(angular, module));
     /**
-     * @module baasicRoleRouteService
-     * @description Baasic Role Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicRoleService` uses `baasicRoleRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+    /**
+     * @module baasicRoleRouteService
+     * @description Baasic Role Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Role Route Service to obtain a needed routes while some routes will be obtained through HAL. By convention, all route services  use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -370,18 +412,26 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicRoleRouteService.parse('route/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
+                 * @example baasicRoleRouteService.parse('<route>/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
                  **/
                 parse: uriTemplateService.parse
             };
         }]);
-    }(angular, module)); /* globals module */
+    }(angular, module));
     /**
-     * @module baasicRoleService
-     * @description Baasic Role Service provides an easy way to consume Baasic application user role features.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - [URI Template](https://github.com/Baasic/uritemplate-js) syntax enables expanding the Baasic route templates to Baasic REST URIs providing it with an object that contains URI parameters.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+    /**
+     * @module baasicRoleService
+     * @description Baasic Role Service provides an easy way to consume Baasic application user role features. In order to obtain a needed routes `baasicRoleService` uses `baasicRoleRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -448,7 +498,7 @@
                     return baasicApiHttp.post(roleRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `update` route can be obtained from role resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicRoleService` route template, here is an example of how a route can be obtained from HAL enabled objects:
                  ```
                  var params = baasicApiService.removeParams(role);
                  var uri = params['model'].links('put').href;
@@ -471,7 +521,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This function doesn't use `baasicRoleRouteService` for obtaining route templates, however `remove` route can be obtained from role resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicRoleService` route template, here is an example of how a route can be obtained from HAL enabled objects:
                  ```
                  var params = baasicApiService.removeParams(role);
                  var uri = params['model'].links('delete').href;
@@ -493,14 +543,21 @@
                 }
             };
         }]);
-    }(angular, module)); /* globals module */
-
+    }(angular, module));
     /**
-     * @module baasicUserRouteService
-     * @description Baasic User Route Service provides Baasic route templates which can be expanded to Baasic REST URI's through the [URI Template](https://github.com/Baasic/uritemplate-js) by providing it with an object that contains URI parameters. For example `baasicUserService` uses `baasicUserRouteService` to obtain a part of needed routes while the other part is obtained through HAL. Route services by convention use the same function names as their corresponding services.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+
+    /**
+     * @module baasicUserRouteService
+     * @description Baasic User Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic User Route Service to obtain a needed routes while some routes will be obtained through HAL. By convention, all route services  use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -533,7 +590,7 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicUserRouteService.parse('route/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
+                 * @example baasicUserRouteService.parse('<route>/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
                  **/
                 parse: uriTemplateService.parse,
                 /**
@@ -550,13 +607,21 @@
                 changePassword: uriTemplateService.parse('users/{username}/change-password'),
             };
         }]);
-    }(angular, module)); /* globals module */
+    }(angular, module));
     /**
-     * @module baasicUserService
-     * @description Baasic User Service provides an easy way to consume Baasic User features.
      * @copyright (c) 2015 Mono
      * @license MIT
      * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - [URI Template](https://github.com/Baasic/uritemplate-js) syntax enables expanding the Baasic route templates to Baasic REST URIs providing it with an object that contains URI parameters.
+     - All end-point objects are transformed by the associated route service.
+     */
+    /* globals module */
+    /**
+     * @module baasicUserService
+     * @description Baasic User Service provides an easy way to consume Baasic User features. In order to obtain a needed routes `baasicUserService` uses `baasicUserRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -646,7 +711,7 @@
                     return baasicApiHttp.post(userRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `update` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the update user action has been performed, this action updates a user. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
                  ```
                  var params = baasicApiService.removeParams(user);
                  var uri = params['model'].links('put').href;
@@ -669,7 +734,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `remove` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the remove user action has been performed. This action removes a user from the system if successfully completed. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
                  ```
                  var params = baasicApiService.removeParams(user);
                  var uri = params['model'].links('delete').href;
@@ -690,7 +755,7 @@
                     return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `unlock` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the unlock user action has been performed. This action will unlock the user resource which was previously locked either manually or automatically by the system. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
                  ```
                  var params = baasicApiService.removeParams(user);
                  var uri = params['model'].links('unlock').href;
@@ -711,7 +776,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('unlock').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `lock` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the lock user action has been performed. This action will lock the user resource out of the system. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
                  ```
                  var params = baasicApiService.removeParams(user);
                  var uri = params['model'].links('lock').href;
@@ -732,7 +797,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('lock').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as 'approved' in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `approve` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the approve user action has been performed. This action will mark the user resource as 'approved' in the system. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
                  ```
                  var params = baasicApiService.removeParams(user);
                  var uri = params['model'].links('approve').href;
@@ -753,7 +818,7 @@
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('approve').href);
                 },
                 /**
-                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as 'not approved' in the system. This function doesn't use `baasicUserRouteService` for obtaining route templates, however `disapprove` route can be obtained from user resource (HAL enabled) objects like this:
+                 * Returns a promise that is resolved once the disapprove user action has been performed. This action will mark the user resource as 'not approved' in the system. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicUserRouteService` route template, here is an example of how a route can be obtained from HAL enabled objects:
                  ```
                  var params = baasicApiService.removeParams(user);
                  var uri = params['model'].links('disapprove').href;
@@ -801,4 +866,13 @@
             };
         }]);
     }(angular, module));
+    /**
+     * @copyright (c) 2015 Mono
+     * @license MIT
+     * @author Mono
+     * @overview 
+     ***Notes:**
+     - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+     - All end-point objects are transformed by the associated route service.
+     */
 })(angular);
