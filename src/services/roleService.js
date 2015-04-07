@@ -51,7 +51,7 @@ baasicRoleService.get('<role-id>')
                     return baasicApiHttp.get(roleRouteService.get.expand(baasicApiService.getParams(id, options)));
                 },
                  /**
-                 * Returns a promise that is resolved once the create action has been performed, this action creates a role.
+                 * Returns a promise that is resolved once the create action has been performed; this action creates a role.
                  * @method        
                  * @example 
 baasicRoleService.create({
@@ -69,14 +69,14 @@ baasicRoleService.create({
                     return baasicApiHttp.post(roleRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the update role action has been performed, this action updates a role. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicRoleService` route template, here is an example of how a route can be obtained from HAL enabled objects:
+                 * Returns a promise that is resolved once the update role action has been performed; this action updates a role. This route uses HAL enabled objects to obtain routes and therefore it doesn't apply `baasicRoleService` route template. Here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(role);
 var uri = params['model'].links('put').href;
 ```
                  * @method        
                  * @example 
-// Existing resource is a resource previously fetched using get action.
+// role is a resource previously fetched using get action.
 role.name = '<new-name>';
 baasicRoleService.update(role)
 .success(function (data) {
@@ -92,14 +92,14 @@ baasicRoleService.update(role)
                     return baasicApiHttp.put(params[baasicConstants.modelPropertyName].links('put').href, params[baasicConstants.modelPropertyName]);
                 },
                  /**
-                 * Returns a promise that is resolved once the remove role action has been performed. This action removes a role from the system, if completed successfully. This route uses HAL enabled objects to obtain routes and therefore it doesn't use `baasicRoleService` route template, here is an example of how a route can be obtained from HAL enabled objects:
+                 * Returns a promise that is resolved once the remove role action has been performed. This action will remove a role from the system, if completed successfully. This route uses HAL enabled objects to obtain routes and therefore it doesn't apply `baasicRoleService` route template. Here is an example of how a route can be obtained from HAL enabled objects:
 ```
 var params = baasicApiService.removeParams(role);
 var uri = params['model'].links('delete').href;
 ```
                  * @method        
                  * @example 
-// Existing resource is a resource previously fetched using get action.				 
+// Role is a resource previously fetched using get action.				 
 baasicRoleService.remove(role)
 .success(function (data) {
   // perform success action here
@@ -121,6 +121,6 @@ baasicRoleService.remove(role)
  * @author Mono
  * @overview 
  ***Notes:**
- - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+ - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about available Baasic REST API end-points.
  - All end-point objects are transformed by the associated route service.
 */

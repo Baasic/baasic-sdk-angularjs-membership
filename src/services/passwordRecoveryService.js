@@ -40,7 +40,7 @@ baasicPasswordRecoveryService.requestReset({
                     });
                 },
 				/**
-				* Returns a promise that is resolved once the password reset action is completed. This updates the user password selection.
+				* Returns a promise that is resolved once the password reset action is completed. This updates user's password selection.
 				* @method
 				* @example
 baasicPasswordRecoveryService.reset({
@@ -71,6 +71,6 @@ baasicPasswordRecoveryService.reset({
  * @author Mono
  * @overview 
  ***Notes:**
- - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+ - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about available Baasic REST API end-points.
  - All end-point objects are transformed by the associated route service.
 */

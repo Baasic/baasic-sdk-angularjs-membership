@@ -52,7 +52,7 @@ baasicLoginService.login({
                     });
                 },
 				/**
-				* Returns a promise that is resolved once the loadUserData action has been performed. This action retrives the account information of the currently logged in user.
+				* Returns a promise that is resolved once the loadUserData action has been performed. This action retrieves the account information of the currently logged in user.
 				* @method
 				* @example
 baasicLoginService.loadUserData()
@@ -98,6 +98,6 @@ baasicLoginService.logout(token.access_token, token.token_type)
  * @author Mono
  * @overview 
  ***Notes:**
- - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about Baasic REST API end-points.
+ - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about available Baasic REST API end-points.
  - All end-point objects are transformed by the associated route service.
 */
