@@ -17,10 +17,10 @@
 				exists: uriTemplateService.parse('users/{username}/exists/'),
                 /**
                 * Parses find user route which can be expanded with additional options. Supported items are: 
-                * - `searchQuery` - A string referencing resource properties using the phrase or query search.
-                * - `page` - A value used to set the page offset, i.e. to retrieve certain resource subset from the storage.
+                * - `searchQuery` - A string referencing user properties using the phrase or BQL (Baasic Query Language) search.
+                * - `page` - A value used to set the page number, i.e. to retrieve certain user subset from the storage.
                 * - `rpp` - A value used to limit the size of result set per page.
-                * - `sort` - A string used to set the role property to sort the result collection by.
+                * - `sort` - A string used to set the user property to sort the result collection by.
 				* - `embed` - Comma separated list of resources to be contained within the current representation.
                 * @method        
                 * @example baasicUserRouteService.find.expand({searchQuery: '<search-phrase>'});               

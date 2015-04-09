@@ -17,7 +17,7 @@ This section will describe how to add the Baasic AngularJS Membership library to
 Please add the _Baasic Membership_ include after the _Baasic Angular Core_ include:
 
 ```html
-<script src='/js/baasic-angular-1.0.0.min.js'></script>
+<script src='/js/baasic-angular-core-1.0.0.min.js'></script>
 <script src='/js/baasic-angular-membership-1.0.0.min.js'></script>
 ```
 

@@ -1,19 +1,13 @@
 /* globals module */
 /**
  * @module baasicRegisterService
- * @description Baasic Register Service provides an easy way to consume Baasic application registration features. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
+ * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
 */
 (function (angular, module, undefined) {
 	'use strict';
 	module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRegisterRouteService', 
 		function (baasicApiHttp, baasicApiService, baasicConstants, baasicRegisterRouteService) {
 			return {
-                /**
-                * Provides direct access to `baasicRegisterRouteService`.
-                * @method        
-                * @example baasicRegisterService.routeService.get.expand(expandObject);
-                **/                
-				routeService: baasicRegisterRouteService,
                 /**
                 * Returns a promise that is resolved once the register create has been performed. This action will create a new user if completed successfully. Created user is not approved immediately, instead an activation e-mail is sent to the user.
                 * @method        
@@ -56,7 +50,13 @@ baasicRegisterService.activate({
 				activate: function (data) {
 					var params = baasicApiService.getParams(data, 'activationToken');
 					return baasicApiHttp.put(baasicRegisterRouteService.activate.expand(params), {});
-				}
+				},
+                /**
+                * Provides direct access to `baasicRegisterRouteService`.
+                * @method        
+                * @example baasicRegisterService.routeService.get.expand(expandObject);
+                **/                
+				routeService: baasicRegisterRouteService
 			};
 		}]);
 }(angular, module));

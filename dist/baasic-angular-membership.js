@@ -62,18 +62,12 @@
     /* globals module */
     /**
      * @module baasicLoginService
-     * @description Baasic Register Service provides an easy way to consume Baasic application registration features. In order to obtain a needed routes `baasicLoginService` uses `baasicLoginRouteService`.
+     * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain a needed routes `baasicLoginService` uses `baasicLoginRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicLoginService', ['baasicApiHttp', 'baasicLoginRouteService', function (baasicApiHttp, loginRouteService) {
             return {
-                /**
-                 * Provides direct access to `baasicLoginRouteService`.
-                 * @method        
-                 * @example baasicLoginService.routeService.get.expand(expandObject);
-                 **/
-                routeService: loginRouteService,
                 /**
                  * Returns a promise that is resolved once the login action has been performed. This action logs user into the application and success response returns the token resource.
                  * @method        
@@ -112,7 +106,7 @@
                     });
                 },
                 /**
-                 * Returns a promise that is resolved once the loadUserData action has been performed. This action retrieves the account information of the currently logged in user.
+                 * Returns a promise that is resolved once the loadUserData action has been performed. This action retrieves the account information of the currently logged in user. Retrieved account information will contain permission collection which identifies access policies assigned to the user and application sections.
                  * @method
                  * @example
                  baasicLoginService.loadUserData()
@@ -152,7 +146,13 @@
                             type: type
                         }
                     });
-                }
+                },
+                /**
+                 * Provides direct access to `baasicLoginRouteService`.
+                 * @method        
+                 * @example baasicLoginService.routeService.get.expand(expandObject);
+                 **/
+                routeService: loginRouteService
             };
         }]);
     }(angular, module));
@@ -202,18 +202,12 @@
     /* globals module */
     /**
      * @module baasicPasswordRecoveryService
-     * @description Baasic Password Recovery Service provides an easy way to consume Baasic application password recovery features. In order to obtain a needed routes `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService`.
+     * @description Baasic Password Recovery Service provides an easy way to consume Baasic Password Recovery REST API end-points. In order to obtain a needed routes `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicPasswordRecoveryService', ['baasicApiHttp', 'baasicPasswordRecoveryRouteService', function (baasicApiHttp, passwordRecoveryRouteService) {
             return {
-                /**
-                 * Provides direct access to `baasicPasswordRecoveryRouteService`.
-                 * @method        
-                 * @example baasicPasswordRecoveryService.routeService.get.expand(expandObject);
-                 **/
-                routeService: passwordRecoveryRouteService,
                 /**
                  * Returns a promise that is resolved once the password recovery requestReset action is completed. This action initiates the password recovery process for the user.
                  * @method
@@ -261,7 +255,13 @@
                         method: 'PUT',
                         data: data
                     });
-                }
+                },
+                /**
+                 * Provides direct access to `baasicPasswordRecoveryRouteService`.
+                 * @method        
+                 * @example baasicPasswordRecoveryService.routeService.get.expand(expandObject);
+                 **/
+                routeService: passwordRecoveryRouteService
             };
         }]);
     }(angular, module));
@@ -311,18 +311,12 @@
     /* globals module */
     /**
      * @module baasicRegisterService
-     * @description Baasic Register Service provides an easy way to consume Baasic application registration features. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
+     * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRegisterRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, baasicRegisterRouteService) {
             return {
-                /**
-                 * Provides direct access to `baasicRegisterRouteService`.
-                 * @method        
-                 * @example baasicRegisterService.routeService.get.expand(expandObject);
-                 **/
-                routeService: baasicRegisterRouteService,
                 /**
                  * Returns a promise that is resolved once the register create has been performed. This action will create a new user if completed successfully. Created user is not approved immediately, instead an activation e-mail is sent to the user.
                  * @method        
@@ -365,7 +359,13 @@
                 activate: function (data) {
                     var params = baasicApiService.getParams(data, 'activationToken');
                     return baasicApiHttp.put(baasicRegisterRouteService.activate.expand(params), {});
-                }
+                },
+                /**
+                 * Provides direct access to `baasicRegisterRouteService`.
+                 * @method        
+                 * @example baasicRegisterService.routeService.get.expand(expandObject);
+                 **/
+                routeService: baasicRegisterRouteService
             };
         }]);
     }(angular, module));
@@ -389,8 +389,8 @@
             return {
                 /**
                  * Parses find role route which can be expanded with additional options. Supported items are: 
-                 * - `searchQuery` - A string referencing resource properties using the phrase or query search.
-                 * - `page` - A value used to set the page offset, i.e. to retrieve certain resource subset from the storage.
+                 * - `searchQuery` - A string value used to identify role resources using the phrase search.
+                 * - `page` - A value used to set the page number, i.e. to retrieve certain role subset from the storage.
                  * - `rpp` - A value used to limit the size of result set per page.
                  * - `sort` - A string used to set the role property to sort the result collection by.
                  * @method        
@@ -431,18 +431,12 @@
     /* globals module */
     /**
      * @module baasicRoleService
-     * @description Baasic Role Service provides an easy way to consume Baasic application user role features. In order to obtain a needed routes `baasicRoleService` uses `baasicRoleRouteService`.
+     * @description Baasic Role Service provides an easy way to consume Baasic Role REST API end-points. In order to obtain a needed routes `baasicRoleService` uses `baasicRoleRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicRoleService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRoleRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
             return {
-                /**
-                 * Provides direct access to `baasicRoleRouteService`.
-                 * @method        
-                 * @example baasicRoleService.routeService.get.expand(expandObject);
-                 **/
-                routeService: roleRouteService,
                 /**
                  * Returns a promise that is resolved once the find action has been performed. Success response returns a list of role resources matching the given criteria.
                  * @method        
@@ -450,7 +444,7 @@
                  baasicRoleService.find({
                  pageNumber : 1,
                  pageSize : 10,
-                 orderBy : '<name>',
+                 orderBy : '<field>',
                  orderDirection : '<asc|desc>',
                  search : '<search-phrase>'
                  })
@@ -540,7 +534,13 @@
                 remove: function (data) {
                     var params = baasicApiService.removeParams(data);
                     return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
-                }
+                },
+                /**
+                 * Provides direct access to `baasicRoleRouteService`.
+                 * @method        
+                 * @example baasicRoleService.routeService.get.expand(expandObject);
+                 **/
+                routeService: roleRouteService
             };
         }]);
     }(angular, module));
@@ -571,10 +571,10 @@
                 exists: uriTemplateService.parse('users/{username}/exists/'),
                 /**
                  * Parses find user route which can be expanded with additional options. Supported items are: 
-                 * - `searchQuery` - A string referencing resource properties using the phrase or query search.
-                 * - `page` - A value used to set the page offset, i.e. to retrieve certain resource subset from the storage.
+                 * - `searchQuery` - A string referencing user properties using the phrase or BQL (Baasic Query Language) search.
+                 * - `page` - A value used to set the page number, i.e. to retrieve certain user subset from the storage.
                  * - `rpp` - A value used to limit the size of result set per page.
-                 * - `sort` - A string used to set the role property to sort the result collection by.
+                 * - `sort` - A string used to set the user property to sort the result collection by.
                  * - `embed` - Comma separated list of resources to be contained within the current representation.
                  * @method        
                  * @example baasicUserRouteService.find.expand({searchQuery: '<search-phrase>'});               
@@ -621,18 +621,12 @@
     /* globals module */
     /**
      * @module baasicUserService
-     * @description Baasic User Service provides an easy way to consume Baasic User features. In order to obtain a needed routes `baasicUserService` uses `baasicUserRouteService`.
+     * @description Baasic User Service provides an easy way to consume Baasic User REST API end-points. In order to obtain a needed routes `baasicUserService` uses `baasicUserRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicUserService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
-                /**
-                 * Provides direct access to `baasicUserRouteService`.
-                 * @method        
-                 * @example baasicUserService.routeService.get.expand(expandObject);
-                 **/
-                routeService: userRouteService,
                 /**
                  * Returns a promise that is resolved once the exists action has been performed. This action checks if user exists in the application.
                  * @method        
@@ -655,7 +649,7 @@
                  baasicUserService.find({
                  pageNumber : 1,
                  pageSize : 10,
-                 orderBy : '<username>',
+                 orderBy : '<field>',
                  orderDirection : '<asc|desc>',
                  search : '<search-phrase>'
                  })
@@ -862,7 +856,13 @@
                         method: 'PUT',
                         data: data
                     });
-                }
+                },
+                /**
+                 * Provides direct access to `baasicUserRouteService`.
+                 * @method        
+                 * @example baasicUserService.routeService.get.expand(expandObject);
+                 **/
+                routeService: userRouteService
             };
         }]);
     }(angular, module));

@@ -1,19 +1,13 @@
 ﻿/* globals module */
 /**
  * @module baasicLoginService
- * @description Baasic Register Service provides an easy way to consume Baasic application registration features. In order to obtain a needed routes `baasicLoginService` uses `baasicLoginRouteService`.
+ * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain a needed routes `baasicLoginService` uses `baasicLoginRouteService`.
 */
 (function (angular, module, undefined) {
     'use strict';
     module.service('baasicLoginService', ['baasicApiHttp', 'baasicLoginRouteService',
         function (baasicApiHttp, loginRouteService) {
             return {
-                /**
-                * Provides direct access to `baasicLoginRouteService`.
-                * @method        
-                * @example baasicLoginService.routeService.get.expand(expandObject);
-                **/             
-                routeService: loginRouteService,
                  /**
                  * Returns a promise that is resolved once the login action has been performed. This action logs user into the application and success response returns the token resource.
                  * @method        
@@ -52,7 +46,7 @@ baasicLoginService.login({
                     });
                 },
 				/**
-				* Returns a promise that is resolved once the loadUserData action has been performed. This action retrieves the account information of the currently logged in user.
+				* Returns a promise that is resolved once the loadUserData action has been performed. This action retrieves the account information of the currently logged in user. Retrieved account information will contain permission collection which identifies access policies assigned to the user and application sections.
 				* @method
 				* @example
 baasicLoginService.loadUserData()
@@ -88,7 +82,13 @@ baasicLoginService.logout(token.access_token, token.token_type)
                             type: type
                         }
                     });
-                }
+                },
+                /**
+                * Provides direct access to `baasicLoginRouteService`.
+                * @method        
+                * @example baasicLoginService.routeService.get.expand(expandObject);
+                **/             
+                routeService: loginRouteService
             };
         }]);
 }(angular, module));

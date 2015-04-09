@@ -1,19 +1,13 @@
 ﻿/* globals module */
 /**
  * @module baasicUserService
- * @description Baasic User Service provides an easy way to consume Baasic User features. In order to obtain a needed routes `baasicUserService` uses `baasicUserRouteService`.
+ * @description Baasic User Service provides an easy way to consume Baasic User REST API end-points. In order to obtain a needed routes `baasicUserService` uses `baasicUserRouteService`.
 */
 (function (angular, module, undefined) {
     'use strict';
     module.service('baasicUserService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicUserRouteService',
         function (baasicApiHttp, baasicApiService, baasicConstants, userRouteService) {
             return {
-                /**
-                * Provides direct access to `baasicUserRouteService`.
-                * @method        
-                * @example baasicUserService.routeService.get.expand(expandObject);
-                **/               
-                routeService: userRouteService,
                  /**
                  * Returns a promise that is resolved once the exists action has been performed. This action checks if user exists in the application.
                  * @method        
@@ -36,7 +30,7 @@ baasicUserService.exists('<username>')
 baasicUserService.find({
   pageNumber : 1,
   pageSize : 10,
-  orderBy : '<username>',
+  orderBy : '<field>',
   orderDirection : '<asc|desc>',
   search : '<search-phrase>'
 })
@@ -241,7 +235,13 @@ baasicUserService.changePassword('<username>', {
                         method: 'PUT',
                         data: data
                     });
-                }				
+                },
+                /**
+                * Provides direct access to `baasicUserRouteService`.
+                * @method        
+                * @example baasicUserService.routeService.get.expand(expandObject);
+                **/               
+                routeService: userRouteService				
             };
         }]);
 }(angular, module));

@@ -1,19 +1,13 @@
 ﻿/* globals module */
 /**
  * @module baasicRoleService
- * @description Baasic Role Service provides an easy way to consume Baasic application user role features. In order to obtain a needed routes `baasicRoleService` uses `baasicRoleRouteService`.
+ * @description Baasic Role Service provides an easy way to consume Baasic Role REST API end-points. In order to obtain a needed routes `baasicRoleService` uses `baasicRoleRouteService`.
 */
 (function (angular, module, undefined) {
     'use strict';
     module.service('baasicRoleService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRoleRouteService',
         function (baasicApiHttp, baasicApiService, baasicConstants, roleRouteService) {
             return {
-                /**
-                * Provides direct access to `baasicRoleRouteService`.
-                * @method        
-                * @example baasicRoleService.routeService.get.expand(expandObject);
-                **/             
-                routeService: roleRouteService,
                  /**
                  * Returns a promise that is resolved once the find action has been performed. Success response returns a list of role resources matching the given criteria.
                  * @method        
@@ -21,7 +15,7 @@
 baasicRoleService.find({
   pageNumber : 1,
   pageSize : 10,
-  orderBy : '<name>',
+  orderBy : '<field>',
   orderDirection : '<asc|desc>',
   search : '<search-phrase>'
 })
@@ -111,7 +105,13 @@ baasicRoleService.remove(role)
                 remove: function (data) {
                     var params = baasicApiService.removeParams(data);
                     return baasicApiHttp.delete(params[baasicConstants.modelPropertyName].links('delete').href);
-                }
+                },
+                /**
+                * Provides direct access to `baasicRoleRouteService`.
+                * @method        
+                * @example baasicRoleService.routeService.get.expand(expandObject);
+                **/             
+                routeService: roleRouteService
             };
         }]);
 }(angular, module));
