@@ -14,9 +14,12 @@
 			**/ 		
 			create: uriTemplateService.parse('register'),
 			/**
-			* Parses activation route; route should be expanded with the activationToken which uniquely identifies the user account that needs to be activated.
+			* Parses activation route; route should be expanded with the `activationToken` which uniquely identifies the user account that needs to be activated.
 			* @method        
-			* @example baasicRegisterRouteService.activate.expand({activationToken: '<activation-token>'});               
+			* @example 
+baasicRegisterRouteService.activate.expand(
+	{activationToken: '<activation-token>'}
+);               
 			**/ 			
 			activate: uriTemplateService.parse('register/activate/{activationToken}/')
 		};
