@@ -37,13 +37,21 @@
                  * Parses login route which can be expanded with additional options. Supported items are:                  
                  * - `options` - Comma separated list of options used to setup authentication token with cookie session. Supported values are: "session" and "sliding".
                  * @method        
-                 * @example baasicLoginRouteService.login.expand({options: 'sliding'});               
+                 * @example 
+                 baasicLoginRouteService.login.expand(
+                 {options: 'sliding'}
+                 );
                  **/
                 login: uriTemplateService.parse('login/{?embed,fields,options}'),
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicLoginRouteService.parse('<route>/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
+                 * @example 
+                 baasicLoginRouteService.parse(
+                 '<route>/{?embed,fields,options}'
+                 ).expand(
+                 {embed: '<embedded-resource>'}
+                 );
                  **/
                 parse: uriTemplateService.parse
             };
@@ -183,7 +191,12 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicPasswordRecoveryRouteService.parse('<route>/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
+                 * @example 
+                 baasicPasswordRecoveryRouteService.parse(
+                 '<route>/{?embed,fields,options}'
+                 ).expand(
+                 {embed: '<embedded-resource>'}
+                 );
                  **/
                 parse: uriTemplateService.parse
             };
@@ -290,9 +303,12 @@
                  **/
                 create: uriTemplateService.parse('register'),
                 /**
-                 * Parses activation route; route should be expanded with the activationToken which uniquely identifies the user account that needs to be activated.
+                 * Parses activation route; route should be expanded with the `activationToken` which uniquely identifies the user account that needs to be activated.
                  * @method        
-                 * @example baasicRegisterRouteService.activate.expand({activationToken: '<activation-token>'});               
+                 * @example 
+                 baasicRegisterRouteService.activate.expand(
+                 {activationToken: '<activation-token>'}
+                 );
                  **/
                 activate: uriTemplateService.parse('register/activate/{activationToken}/')
             };
@@ -394,13 +410,19 @@
                  * - `rpp` - A value used to limit the size of result set per page.
                  * - `sort` - A string used to set the role property to sort the result collection by.
                  * @method        
-                 * @example baasicRoleRouteService.find.expand({searchQuery: '<search-phrase>'});               
+                 * @example 
+                 baasicRoleRouteService.find.expand(
+                 {searchQuery: '<search-phrase>'}
+                 );
                  **/
                 find: uriTemplateService.parse('roles/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
                  * Parses get role route which should be expanded with the role Id. Note that the role Id is the primary key of the role.
                  * @method        
-                 * @example baasicRoleRouteService.get.expand({id: '<role-id>'});               
+                 * @example 
+                 baasicRoleRouteService.get.expand(
+                 {id: '<role-id>'}
+                 );
                  **/
                 get: uriTemplateService.parse('roles/{id}/{?embed,fields}'),
                 /**
@@ -412,7 +434,12 @@
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicRoleRouteService.parse('<route>/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
+                 * @example 
+                 baasicRoleRouteService.parse(
+                 '<route>/{?embed,fields,options}'
+                 ).expand(
+                 {embed: '<embedded-resource>'}
+                 );
                  **/
                 parse: uriTemplateService.parse
             };
@@ -566,7 +593,10 @@
                 /**
                  * Parses user exists route; URI template should be expanded with the username whose availability you'd like to check.                
                  * @method        
-                 * @example baasicUserRouteService.exists.expand({username: '<username>'});               
+                 * @example 
+                 baasicUserRouteService.exists.expand(
+                 {username: '<username>'}
+                 );
                  **/
                 exists: uriTemplateService.parse('users/{username}/exists/'),
                 /**
@@ -577,20 +607,31 @@
                  * - `sort` - A string used to set the user property to sort the result collection by.
                  * - `embed` - Comma separated list of resources to be contained within the current representation.
                  * @method        
-                 * @example baasicUserRouteService.find.expand({searchQuery: '<search-phrase>'});               
+                 * @example 
+                 baasicUserRouteService.find.expand(
+                 {searchQuery: '<search-phrase>'}
+                 );
                  **/
                 find: uriTemplateService.parse('users/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
                  * Parses get user route which must be expanded with the username of the previously created user resource in the system. Additional expand supported items are:
                  * - `embed` - Comma separated list of resources to be contained within the current representation.
                  * @method        
-                 * @example baasicUserRouteService.get.expand({username: '<username>'});               
+                 * @example 
+                 baasicUserRouteService.get.expand(
+                 {username: '<username>'}
+                 );
                  **/
                 get: uriTemplateService.parse('users/{username}/{?embed,fields}'),
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
-                 * @example baasicUserRouteService.parse('<route>/{?embed,fields,options}').expand({embed: '<embedded-resource>'});
+                 * @example 
+                 baasicUserRouteService.parse(
+                 '<route>/{?embed,fields,options}'
+                 ).expand(
+                 {embed: '<embedded-resource>'}
+                 );
                  **/
                 parse: uriTemplateService.parse,
                 /**
@@ -602,7 +643,10 @@
                 /**
                  * Parses change password route, URI template should be expanded with the username of the user resource whose password should be updated.
                  * @method        
-                 * @example baasicUserRouteService.changePassword.expand({username: '<username>'});              
+                 * @example 
+                 baasicUserRouteService.changePassword.expand(
+                 {username: '<username>'}
+                 );
                  **/
                 changePassword: uriTemplateService.parse('users/{username}/change-password'),
             };
