@@ -14,7 +14,7 @@
         <language>en-US</language>
         <tags>Javascript, Baasic, AngularJs, Membership</tags>
 		<dependencies>     
-            <dependency id="Baasic.Angular.Core" version="(,2.0)" />                        
+            <dependency id="Baasic.Angular.Security" version="(,2.0)" />                        
         </dependencies>
     </metadata>
     <files>

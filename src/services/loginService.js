@@ -5,8 +5,8 @@
 */
 (function (angular, module, undefined) {
     'use strict';
-    module.service('baasicLoginService', ['baasicApiHttp', 'baasicLoginRouteService',
-        function (baasicApiHttp, loginRouteService) {
+    module.service('baasicLoginService', ['baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService',
+        function (baasicApiHttp, authService, loginRouteService) {
             return {
                  /**
                  * Returns a promise that is resolved once the login action has been performed. This action logs user into the application and success response returns the token resource.
@@ -43,7 +43,10 @@ baasicLoginService.login({
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                         }
-                    });
+                    })
+					.success(function (data) {
+						authService.updateAccessToken(data);
+					});
                 },
 				/**
 				* Returns a promise that is resolved once the loadUserData action has been performed. This action retrieves the account information of the currently logged in user. Retrieved account information will contain permission collection which identifies access policies assigned to the user and application sections.
@@ -81,7 +84,10 @@ baasicLoginService.logout(token.access_token, token.token_type)
                             token: token,
                             type: type
                         }
-                    });
+                    })
+					.success(function () {
+						authService.updateAccessToken(null);
+					});
                 },
                 /**
                 * Provides direct access to `baasicLoginRouteService`.
