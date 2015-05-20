@@ -5,8 +5,25 @@
 */
 (function (angular, module, undefined) {
     'use strict';
-    module.service('baasicLoginService', ['baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService',
-        function (baasicApiHttp, authService, loginRouteService) {
+    module.service('baasicLoginService', ['baasicConstants', 'baasicApiService', 'baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService',
+        function (baasicConstants, baasicApiService, baasicApiHttp, authService, loginRouteService) {
+            // Getting query string values in javascript: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+            var parseUrlParams = function () {
+                var urlParams;
+                var match,
+                    pl = /\+/g,
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); },
+                    query = window.location.search.substring(1);
+
+                urlParams = {};
+                /*jshint -W084 */
+                while (match = search.exec(query)) {
+                    urlParams[decode(match[1])] = decode(match[2]);
+                }
+                return urlParams;
+            };        
+                
             return {
                  /**
                  * Returns a promise that is resolved once the login action has been performed. This action logs user into the application and success response returns the token resource.
@@ -94,7 +111,85 @@ baasicLoginService.logout(token.access_token, token.token_type)
                 * @method        
                 * @example baasicLoginService.routeService.get.expand(expandObject);
                 **/             
-                routeService: loginRouteService
+                routeService: loginRouteService,
+                social: {
+                    /**
+                    * Returns a promise that is resolved once the get action has been performed. Success response returns a resolved social login provider Url.
+                    * @method social.get
+                    * @example 
+baasicLoginService.social.get('<provider>', '<returnUrl>')
+.success(function (collection) {
+  // perform success action here
+})
+.error(function (response, status, headers, config) {
+  // perform error handling here
+});
+                    **/                 
+                    get: function (provider, returnUrl) {
+                        var params = {
+                            provider: provider,
+                            returnUrl: returnUrl
+                        };
+                        return baasicApiHttp.get(loginRouteService.social.get.expand(baasicApiService.findParams(params)));
+                    },
+                    /**
+                    * Returns a promise that is resolved once the post action has been performed. This action logs user into the application and success response returns the token resource.
+                    * @method social.get
+                    * @example 
+var postData = {
+  email : '<email>',
+  code::'<code>',
+  activationUrl : '<activationUrl>',
+  oAuthToken : '<oAuthToken>',
+  oAuthVerifier : '<oAuthVerifier>',
+  password : '<password>',
+  returnUrl : '<returnUrl>'
+};                    
+baasicLoginService.social.post('<provider>', postData)
+.success(function (collection) {
+  // perform success action here
+})
+.error(function (response, status, headers, config) {
+  // perform error handling here
+});
+                    **/                 
+                    post: function (provider, data) {  
+                        return baasicApiHttp({
+                            url: loginRouteService.social.post.expand({provider: provider}),
+                            method: 'POST',
+                            data: baasicApiService.createParams(data)[baasicConstants.modelPropertyName],
+                            headers: {
+                                'Content-Type': 'application/json; charset=UTF-8'
+                            }
+                        })
+                        .success(function (data) {
+                            if (data && !data.status) {
+                                authService.updateAccessToken(data);
+                            }
+                        });                                            
+                    },                    
+                    /**
+                    * Parses social provider response parameters.
+                    * @method social.parseResponse
+                    * @example baasicLoginService.social.parseResponse('<provider>');
+                    **/                      
+                    parseResponse: function(provider, returnUrl) {
+                        var params = parseUrlParams();
+                        var result = {};
+                        switch (provider) {
+                            case 'twitter':
+                                /*jshint camelcase: false */
+                                result.oAuthToken = params.oauth_token;
+                                result.oAuthVerifier = params.oauth_verifier;
+                                break;                            
+                            default:
+                                result.code = params.code;
+                                result.returnUrl = returnUrl;
+                                break;
+                        }
+                        return result;
+                    }
+                }                
             };
         }]);
 }(angular, module));

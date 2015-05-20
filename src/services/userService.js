@@ -241,7 +241,52 @@ baasicUserService.changePassword('<username>', {
                 * @method        
                 * @example baasicUserService.routeService.get.expand(expandObject);
                 **/               
-                routeService: userRouteService				
+                routeService: userRouteService,
+                social: {
+                    /**
+                    * Returns a promise that is resolved once the get action has been performed. Success response returns a list user resource connected social login providers.
+                    * @method social.get
+                    * @example 
+baasicUserService.social.get('<username>')
+.success(function (collection) {
+  // perform success action here
+})
+.error(function (response, status, headers, config) {
+  // perform error handling here
+});
+                    **/                 
+                    get: function (username) {
+                        return baasicApiHttp.get(userRouteService.social.get.expand({ username: username }));
+                    },
+                    /**
+                    * Returns a promise that is resolved once the remove action has been performed. This action removes the user resource social login connection from the specified provider.
+                    * @method social.remove
+                    * @example 
+baasicUserService.social.remove('<username>', '<provider>')
+.success(function (collection) {
+  // perform success action here
+})
+.error(function (response, status, headers, config) {
+  // perform error handling here
+});
+                    **/                     
+                    remove: function (username, provider){
+                        var params;
+                        if (provider.hasOwnProperty('abrv')){
+                            params = {
+                                provider: provider.abrv
+                            };
+                        } else if (provider.hasOwnProperty('id')){
+                            params = {
+                                provider: provider.id
+                            };                        
+                        } else{
+                            params = angular.extend({}, provider);
+                        }                        
+                        params.username = username;
+                        return baasicApiHttp.delete(userRouteService.social.remove.expand(baasicApiService.findParams(params)));
+                    }
+                }
             };
         }]);
 }(angular, module));

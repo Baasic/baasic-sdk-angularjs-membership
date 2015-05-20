@@ -50,7 +50,31 @@
                  {embed: '<embedded-resource>'}
                  );
                  **/
-                parse: uriTemplateService.parse
+                parse: uriTemplateService.parse,
+                social: {
+                    /**
+                     * Parses get social login route which can be expanded with additional items. Supported items are:
+                     * - `provider` - Provider name or Id for which the login URL should be generated.
+                     * - `returnUrl` - Redirect Uri for the provider which will be used when the user is redirected back to the application.
+                     * @method social.get       
+                     * @example 
+                     baasicUserRouteService.social.get.expand({
+                     provider : '<provider>',
+                     returnUrl: '<returnUrl>'
+                     });
+                     **/
+                    get: uriTemplateService.parse('login/social/{provider}/{?returnUrl}'),
+                    /**
+                     * Parses post social login route which can be expanded with additional items. Supported items are:
+                     * - `provider` - Provider name or Id being used to login with.
+                     * @method social.get       
+                     * @example 
+                     baasicUserRouteService.social.post.expand({
+                     provider : '<provider>'
+                     });
+                     **/
+                    post: uriTemplateService.parse('login/social/{provider}'),
+                }
             };
         }]);
     }(angular, module));
@@ -68,7 +92,24 @@
      */
     (function (angular, module, undefined) {
         'use strict';
-        module.service('baasicLoginService', ['baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService', function (baasicApiHttp, authService, loginRouteService) {
+        module.service('baasicLoginService', ['baasicConstants', 'baasicApiService', 'baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService', function (baasicConstants, baasicApiService, baasicApiHttp, authService, loginRouteService) {
+            // Getting query string values in javascript: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+            var parseUrlParams = function () {
+                var urlParams;
+                var match, pl = /\+/g,
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) {
+                        return decodeURIComponent(s.replace(pl, ' '));
+                    },
+                    query = window.location.search.substring(1);
+
+                urlParams = {}; /*jshint -W084 */
+                while (match = search.exec(query)) {
+                    urlParams[decode(match[1])] = decode(match[2]);
+                }
+                return urlParams;
+            };
+
             return {
                 /**
                  * Returns a promise that is resolved once the login action has been performed. This action logs user into the application and success response returns the token resource.
@@ -158,7 +199,86 @@
                  * @method        
                  * @example baasicLoginService.routeService.get.expand(expandObject);
                  **/
-                routeService: loginRouteService
+                routeService: loginRouteService,
+                social: {
+                    /**
+                     * Returns a promise that is resolved once the get action has been performed. Success response returns a resolved social login provider Url.
+                     * @method social.get
+                     * @example 
+                     baasicLoginService.social.get('<provider>', '<returnUrl>')
+                     .success(function (collection) {
+                     // perform success action here
+                     })
+                     .error(function (response, status, headers, config) {
+                     // perform error handling here
+                     });
+                     **/
+                    get: function (provider, returnUrl) {
+                        var params = {
+                            provider: provider,
+                            returnUrl: returnUrl
+                        };
+                        return baasicApiHttp.get(loginRouteService.social.get.expand(baasicApiService.findParams(params)));
+                    },
+                    /**
+                     * Returns a promise that is resolved once the post action has been performed. This action logs user into the application and success response returns the token resource.
+                     * @method social.get
+                     * @example 
+                     var postData = {
+                     email : '<email>',
+                     code::'<code>',
+                     activationUrl : '<activationUrl>',
+                     oAuthToken : '<oAuthToken>',
+                     oAuthVerifier : '<oAuthVerifier>',
+                     password : '<password>',
+                     returnUrl : '<returnUrl>'
+                     };
+                     baasicLoginService.social.post('<provider>', postData)
+                     .success(function (collection) {
+                     // perform success action here
+                     })
+                     .error(function (response, status, headers, config) {
+                     // perform error handling here
+                     });
+                     **/
+                    post: function (provider, data) {
+                        return baasicApiHttp({
+                            url: loginRouteService.social.post.expand({
+                                provider: provider
+                            }),
+                            method: 'POST',
+                            data: baasicApiService.createParams(data)[baasicConstants.modelPropertyName],
+                            headers: {
+                                'Content-Type': 'application/json; charset=UTF-8'
+                            }
+                        }).success(function (data) {
+                            if (data && !data.status) {
+                                authService.updateAccessToken(data);
+                            }
+                        });
+                    },
+                    /**
+                     * Parses social provider response parameters.
+                     * @method social.parseResponse
+                     * @example baasicLoginService.social.parseResponse('<provider>');
+                     **/
+                    parseResponse: function (provider, returnUrl) {
+                        var params = parseUrlParams();
+                        var result = {};
+                        switch (provider) {
+                        case 'twitter':
+                            /*jshint camelcase: false */
+                            result.oAuthToken = params.oauth_token;
+                            result.oAuthVerifier = params.oauth_verifier;
+                            break;
+                        default:
+                            result.code = params.code;
+                            result.returnUrl = returnUrl;
+                            break;
+                        }
+                        return result;
+                    }
+                }
             };
         }]);
     }(angular, module));
@@ -601,17 +721,6 @@
                  **/
                 get: uriTemplateService.parse('users/{username}/{?embed,fields}'),
                 /**
-                 * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
-                 * @method
-                 * @example 
-                 baasicUserRouteService.parse(
-                 '<route>/{?embed,fields,options}'
-                 ).expand(
-                 {embed: '<embedded-resource>'}
-                 );
-                 **/
-                parse: uriTemplateService.parse,
-                /**
                  * Parses create user route, this URI template does not expose any additional options.
                  * @method        
                  * @example baasicUserRouteService.create.expand({});              
@@ -626,6 +735,40 @@
                  );
                  **/
                 changePassword: uriTemplateService.parse('users/{username}/change-password'),
+                /**
+                 * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
+                 * @method
+                 * @example 
+                 baasicUserRouteService.parse(
+                 '<route>/{?embed,fields,options}'
+                 ).expand(
+                 {embed: '<embedded-resource>'}
+                 );
+                 **/
+                parse: uriTemplateService.parse,
+                social: {
+                    /**
+                     * Parses get social login route, URI template should be expanded with the username of the user resource whose social login connections should be retrieved.
+                     * @method social.get       
+                     * @example 
+                     baasicUserRouteService.social.get.expand({
+                     username : '<username>'
+                     });
+                     **/
+                    get: uriTemplateService.parse('users/{username}/social'),
+                    /**
+                     * Parses remove social login route which can be expanded with additional items. Supported items are:
+                     * - `username` - A username which uniquely identifies an application user whose social login connection needs to be removed.
+                     * - `provider` - Provider from which to disconnect the login resource from.
+                     * @method social.remove 
+                     * @example 
+                     baasicUserRouteService.social.remove.expand({
+                     username : '<username>',
+                     provider : '<provider>'
+                     });
+                     **/
+                    remove: uriTemplateService.parse('users/{username}/social/{provider}')
+                }
             };
         }]);
     }(angular, module));
@@ -880,7 +1023,54 @@
                  * @method        
                  * @example baasicUserService.routeService.get.expand(expandObject);
                  **/
-                routeService: userRouteService
+                routeService: userRouteService,
+                social: {
+                    /**
+                     * Returns a promise that is resolved once the get action has been performed. Success response returns a list user resource connected social login providers.
+                     * @method social.get
+                     * @example 
+                     baasicUserService.social.get('<username>')
+                     .success(function (collection) {
+                     // perform success action here
+                     })
+                     .error(function (response, status, headers, config) {
+                     // perform error handling here
+                     });
+                     **/
+                    get: function (username) {
+                        return baasicApiHttp.get(userRouteService.social.get.expand({
+                            username: username
+                        }));
+                    },
+                    /**
+                     * Returns a promise that is resolved once the remove action has been performed. This action removes the user resource social login connection from the specified provider.
+                     * @method social.remove
+                     * @example 
+                     baasicUserService.social.remove('<username>', '<provider>')
+                     .success(function (collection) {
+                     // perform success action here
+                     })
+                     .error(function (response, status, headers, config) {
+                     // perform error handling here
+                     });
+                     **/
+                    remove: function (username, provider) {
+                        var params;
+                        if (provider.hasOwnProperty('abrv')) {
+                            params = {
+                                provider: provider.abrv
+                            };
+                        } else if (provider.hasOwnProperty('id')) {
+                            params = {
+                                provider: provider.id
+                            };
+                        } else {
+                            params = angular.extend({}, provider);
+                        }
+                        params.username = username;
+                        return baasicApiHttp.delete(userRouteService.social.remove.expand(baasicApiService.findParams(params)));
+                    }
+                }
             };
         }]);
     }(angular, module));

@@ -28,7 +28,31 @@ baasicLoginRouteService.parse(
 	{embed: '<embedded-resource>'}
 );
                  **/    				
-                parse: uriTemplateService.parse
+                parse: uriTemplateService.parse,
+                social: {
+                    /**
+                    * Parses get social login route which can be expanded with additional items. Supported items are:
+                    * - `provider` - Provider name or Id for which the login URL should be generated.
+                    * - `returnUrl` - Redirect Uri for the provider which will be used when the user is redirected back to the application.
+                    * @method social.get       
+                    * @example 
+baasicUserRouteService.social.get.expand({
+  provider : '<provider>',
+  returnUrl: '<returnUrl>'
+});            
+                    **/                 
+                    get: uriTemplateService.parse('login/social/{provider}/{?returnUrl}'),
+                    /**
+                    * Parses post social login route which can be expanded with additional items. Supported items are:
+                    * - `provider` - Provider name or Id being used to login with.
+                    * @method social.get       
+                    * @example 
+baasicUserRouteService.social.post.expand({
+  provider : '<provider>'
+});            
+                    **/                                     
+                    post: uriTemplateService.parse('login/social/{provider}'),
+                }                
             };
         }]);
 }(angular, module));
