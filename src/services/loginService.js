@@ -138,7 +138,7 @@ baasicLoginService.social.get('<provider>', '<returnUrl>')
                     * @example 
 var postData = {
   email : '<email>',
-  code::'<code>',
+  code:'<code>',
   activationUrl : '<activationUrl>',
   oAuthToken : '<oAuthToken>',
   oAuthVerifier : '<oAuthVerifier>',
