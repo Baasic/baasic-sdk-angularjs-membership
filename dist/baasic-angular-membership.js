@@ -222,7 +222,7 @@
                     },
                     /**
                      * Returns a promise that is resolved once the post action has been performed. This action logs user into the application and success response returns the token resource.
-                     * @method social.get
+                     * @method social.post
                      * @example 
                      var postData = {
                      email : '<email>',
