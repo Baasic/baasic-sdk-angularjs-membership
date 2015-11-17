@@ -751,28 +751,28 @@
                  );
                  **/
                 parse: uriTemplateService.parse,
-                social: {
+                socialLogin: {
                     /**
                      * Parses get social login route, URI template should be expanded with the username of the user resource whose social login connections should be retrieved.
-                     * @method social.get       
+                     * @method socialLogin.get       
                      * @example 
-                     baasicUserRouteService.social.get.expand({
+                     baasicUserRouteService.socialLogin.get.expand({
                      username : '<username>'
                      });
                      **/
-                    get: uriTemplateService.parse('users/{username}/social'),
+                    get: uriTemplateService.parse('users/{username}/social-login'),
                     /**
                      * Parses remove social login route which can be expanded with additional items. Supported items are:
                      * - `username` - A username which uniquely identifies an application user whose social login connection needs to be removed.
                      * - `provider` - Provider from which to disconnect the login resource from.
-                     * @method social.remove 
+                     * @method socialLogin.remove 
                      * @example 
-                     baasicUserRouteService.social.remove.expand({
+                     baasicUserRouteService.socialLogin.remove.expand({
                      username : '<username>',
                      provider : '<provider>'
                      });
                      **/
-                    remove: uriTemplateService.parse('users/{username}/social/{provider}')
+                    remove: uriTemplateService.parse('users/{username}/social-login/{provider}')
                 }
             };
         }]);
@@ -1029,12 +1029,12 @@
                  * @example baasicUserService.routeService.get.expand(expandObject);
                  **/
                 routeService: userRouteService,
-                social: {
+                socialLogin: {
                     /**
                      * Returns a promise that is resolved once the get action has been performed. Success response returns a list user resource connected social login providers.
-                     * @method social.get
+                     * @method socialLogin.get
                      * @example 
-                     baasicUserService.social.get('<username>')
+                     baasicUserService.socialLogin.get('<username>')
                      .success(function (collection) {
                      // perform success action here
                      })
@@ -1043,15 +1043,15 @@
                      });
                      **/
                     get: function (username) {
-                        return baasicApiHttp.get(userRouteService.social.get.expand({
+                        return baasicApiHttp.get(userRouteService.socialLogin.get.expand({
                             username: username
                         }));
                     },
                     /**
                      * Returns a promise that is resolved once the remove action has been performed. This action removes the user resource social login connection from the specified provider.
-                     * @method social.remove
+                     * @method socialLogin.remove
                      * @example 
-                     baasicUserService.social.remove('<username>', '<provider>')
+                     baasicUserService.socialLogin.remove('<username>', '<provider>')
                      .success(function (collection) {
                      // perform success action here
                      })
@@ -1073,7 +1073,7 @@
                             params = angular.extend({}, provider);
                         }
                         params.username = username;
-                        return baasicApiHttp.delete(userRouteService.social.remove.expand(baasicApiService.findParams(params)));
+                        return baasicApiHttp.delete(userRouteService.socialLogin.remove.expand(baasicApiService.findParams(params)));
                     }
                 }
             };
