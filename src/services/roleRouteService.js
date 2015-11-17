@@ -20,7 +20,7 @@ baasicRoleRouteService.find.expand(
 	{searchQuery: '<search-phrase>'}
 );               
                 **/   			
-                find: uriTemplateService.parse('roles/{?searchQuery,page,rpp,sort,embed,fields}'),
+                find: uriTemplateService.parse('lookups/roles/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
                 * Parses get role route which should be expanded with the role Id. Note that the role Id is the primary key of the role.
                 * @method        
@@ -29,13 +29,13 @@ baasicRoleRouteService.get.expand(
 	{id: '<role-id>'}
 );               
                 **/   					
-                get: uriTemplateService.parse('roles/{id}/{?embed,fields}'),
+                get: uriTemplateService.parse('lookups/roles/{id}/{?embed,fields}'),
                 /**
                 * Parses create role route; this URI template does not expose any additional options.
                 * @method        
                 * @example baasicRoleRouteService.create.expand({});               
                 **/   				
-                create: uriTemplateService.parse('roles'),
+                create: uriTemplateService.parse('lookups/roles'),
                 /**
                 * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                 * @method
