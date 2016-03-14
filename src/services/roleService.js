@@ -1,7 +1,7 @@
 ﻿/* globals module */
 /**
  * @module baasicRoleService
- * @description Baasic Role Service provides an easy way to consume Baasic Role REST API end-points. In order to obtain a needed routes `baasicRoleService` uses `baasicRoleRouteService`.
+ * @description Baasic Role Service provides an easy way to consume Baasic Role REST API end-points. In order to obtain needed routes `baasicRoleService` uses `baasicRoleRouteService`.
 */
 (function (angular, module, undefined) {
     'use strict';

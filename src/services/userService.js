@@ -1,7 +1,7 @@
 ﻿/* globals module */
 /**
  * @module baasicUserService
- * @description Baasic User Service provides an easy way to consume Baasic User REST API end-points. In order to obtain a needed routes `baasicUserService` uses `baasicUserRouteService`.
+ * @description Baasic User Service provides an easy way to consume Baasic User REST API end-points. In order to obtain needed routes `baasicUserService` uses `baasicUserRouteService`.
 */
 (function (angular, module, undefined) {
     'use strict';

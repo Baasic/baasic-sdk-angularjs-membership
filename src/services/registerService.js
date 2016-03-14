@@ -1,7 +1,7 @@
 /* globals module */
 /**
  * @module baasicRegisterService
- * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
+ * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
 */
 (function (angular, module, undefined) {
 	'use strict';

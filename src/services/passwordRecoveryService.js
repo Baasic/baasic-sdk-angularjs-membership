@@ -1,7 +1,7 @@
 ﻿/* globals module */
 /**
  * @module baasicPasswordRecoveryService
- * @description Baasic Password Recovery Service provides an easy way to consume Baasic Password Recovery REST API end-points. In order to obtain a needed routes `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService`.
+ * @description Baasic Password Recovery Service provides an easy way to consume Baasic Password Recovery REST API end-points. In order to obtain needed routes `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService`.
 */
 (function (angular, module, undefined) {
     'use strict';
