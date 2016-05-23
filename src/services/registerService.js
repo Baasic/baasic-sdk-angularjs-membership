@@ -1,12 +1,12 @@
 /* globals module */
 /**
  * @module baasicRegisterService
- * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
+ * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
 */
 (function (angular, module, undefined) {
 	'use strict';
-	module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRegisterRouteService', 
-		function (baasicApiHttp, baasicApiService, baasicConstants, baasicRegisterRouteService) {
+	module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRegisterRouteService', 'baasicAuthorizationService',
+		function (baasicApiHttp, baasicApiService, baasicConstants, baasicRegisterRouteService, authService) {
 			return {
                 /**
                 * Returns a promise that is resolved once the register create has been performed. This action will create a new user if completed successfully. Created user is not approved immediately, instead an activation e-mail is sent to the user.
@@ -33,7 +33,7 @@ baasicRegisterService.create({
 					return baasicApiHttp.post(baasicRegisterRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
 				},
                 /**
-                * Returns a promise that is resolved once the account activation action has been performed; this action activates a user account.
+                * Returns a promise that is resolved once the account activation action has been performed; this action activates a user account and success response returns the token resource.
                 * @method        
                 * @example 
 baasicRegisterService.activate({
@@ -48,8 +48,14 @@ baasicRegisterService.activate({
 .finally (function () {});
                 **/  				
 				activate: function (data) {
-					var params = baasicApiService.getParams(data, 'activationToken');
-					return baasicApiHttp.put(baasicRegisterRouteService.activate.expand(params), {});
+                    var params = baasicApiService.getParams(data, 'activationToken');
+                    return baasicApiHttp({
+                        url: baasicRegisterRouteService.activate.expand(params),
+                        method: 'PUT'
+                    })
+					.success(function (data) {
+						authService.updateAccessToken(data);
+					});                					
 				},
                 /**
                 * Provides direct access to `baasicRegisterRouteService`.

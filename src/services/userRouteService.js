@@ -2,7 +2,7 @@
 
 /**
  * @module baasicUserRouteService
- * @description Baasic User Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic User Route Service to obtain a needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
+ * @description Baasic User Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic User Route Service to obtain needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
 */
 (function (angular, module, undefined) {
     'use strict';
@@ -43,17 +43,6 @@ baasicUserRouteService.get.expand(
                 **/   					
                 get: uriTemplateService.parse('users/{username}/{?embed,fields}'),
                 /**
-                * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
-                * @method
-                * @example 
-baasicUserRouteService.parse(
-	'<route>/{?embed,fields,options}'
-).expand(
-	{embed: '<embedded-resource>'}
-);
-                **/   				
-                parse: uriTemplateService.parse,
-                /**
                 * Parses create user route, this URI template does not expose any additional options.
                 * @method        
                 * @example baasicUserRouteService.create.expand({});              
@@ -67,7 +56,41 @@ baasicUserRouteService.changePassword.expand(
 	{username: '<username>'}
 );              
                 **/ 				
-                changePassword: uriTemplateService.parse('users/{username}/change-password'),
+                changePassword: uriTemplateService.parse('users/{username}/change-password'),                
+                /**
+                * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
+                * @method
+                * @example 
+baasicUserRouteService.parse(
+	'<route>/{?embed,fields,options}'
+).expand(
+	{embed: '<embedded-resource>'}
+);
+                **/   				
+                parse: uriTemplateService.parse,
+                socialLogin: {
+                    /**
+                    * Parses get social login route, URI template should be expanded with the username of the user resource whose social login connections should be retrieved.
+                    * @method socialLogin.get       
+                    * @example 
+baasicUserRouteService.socialLogin.get.expand({
+  username : '<username>'
+});            
+                    **/                 
+                    get: uriTemplateService.parse('users/{username}/social-login'),
+                    /**
+                    * Parses remove social login route which can be expanded with additional items. Supported items are:
+                    * - `username` - A username which uniquely identifies an application user whose social login connection needs to be removed.
+                    * - `provider` - Provider from which to disconnect the login resource from.
+                    * @method socialLogin.remove 
+                    * @example 
+baasicUserRouteService.socialLogin.remove.expand({
+  username : '<username>',
+  provider : '<provider>'
+});          
+                    **/                     
+                    remove: uriTemplateService.parse('users/{username}/social-login/{provider}')
+                }
             };
         }]);
 }(angular, module));

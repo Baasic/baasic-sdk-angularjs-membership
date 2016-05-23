@@ -1,7 +1,7 @@
 ﻿/* globals module */
 /**
  * @module baasicUserService
- * @description Baasic User Service provides an easy way to consume Baasic User REST API end-points. In order to obtain a needed routes `baasicUserService` uses `baasicUserRouteService`.
+ * @description Baasic User Service provides an easy way to consume Baasic User REST API end-points. In order to obtain needed routes `baasicUserService` uses `baasicUserRouteService`.
 */
 (function (angular, module, undefined) {
     'use strict';
@@ -241,7 +241,52 @@ baasicUserService.changePassword('<username>', {
                 * @method        
                 * @example baasicUserService.routeService.get.expand(expandObject);
                 **/               
-                routeService: userRouteService				
+                routeService: userRouteService,
+                socialLogin: {
+                    /**
+                    * Returns a promise that is resolved once the get action has been performed. Success response returns a list user resource connected social login providers.
+                    * @method socialLogin.get
+                    * @example 
+baasicUserService.socialLogin.get('<username>')
+.success(function (collection) {
+  // perform success action here
+})
+.error(function (response, status, headers, config) {
+  // perform error handling here
+});
+                    **/                 
+                    get: function (username) {
+                        return baasicApiHttp.get(userRouteService.socialLogin.get.expand({ username: username }));
+                    },
+                    /**
+                    * Returns a promise that is resolved once the remove action has been performed. This action removes the user resource social login connection from the specified provider.
+                    * @method socialLogin.remove
+                    * @example 
+baasicUserService.socialLogin.remove('<username>', '<provider>')
+.success(function (collection) {
+  // perform success action here
+})
+.error(function (response, status, headers, config) {
+  // perform error handling here
+});
+                    **/                     
+                    remove: function (username, provider){
+                        var params;
+                        if (provider.hasOwnProperty('abrv')){
+                            params = {
+                                provider: provider.abrv
+                            };
+                        } else if (provider.hasOwnProperty('id')){
+                            params = {
+                                provider: provider.id
+                            };                        
+                        } else{
+                            params = angular.extend({}, provider);
+                        }                        
+                        params.username = username;
+                        return baasicApiHttp.delete(userRouteService.socialLogin.remove.expand(baasicApiService.findParams(params)));
+                    }
+                }
             };
         }]);
 }(angular, module));

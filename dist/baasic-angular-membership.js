@@ -24,7 +24,7 @@
     /* globals module */
     /**
      * @module baasicLoginRouteService
-     * @description Baasic Login Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Login Route Service to obtain a needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
+     * @description Baasic Login Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Login Route Service to obtain needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -50,7 +50,31 @@
                  {embed: '<embedded-resource>'}
                  );
                  **/
-                parse: uriTemplateService.parse
+                parse: uriTemplateService.parse,
+                social: {
+                    /**
+                     * Parses get social login route which can be expanded with additional items. Supported items are:
+                     * - `provider` - Provider name or Id for which the login URL should be generated.
+                     * - `returnUrl` - Redirect Uri for the provider which will be used when the user is redirected back to the application.
+                     * @method social.get       
+                     * @example 
+                     baasicUserRouteService.social.get.expand({
+                     provider : '<provider>',
+                     returnUrl: '<returnUrl>'
+                     });
+                     **/
+                    get: uriTemplateService.parse('login/social/{provider}/{?returnUrl}'),
+                    /**
+                     * Parses post social login route which can be expanded with additional items. Supported items are:
+                     * - `provider` - Provider name or Id being used to login with.
+                     * @method social.get       
+                     * @example 
+                     baasicUserRouteService.social.post.expand({
+                     provider : '<provider>'
+                     });
+                     **/
+                    post: uriTemplateService.parse('login/social/{provider}'),
+                }
             };
         }]);
     }(angular, module));
@@ -64,11 +88,28 @@
     /* globals module */
     /**
      * @module baasicLoginService
-     * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain a needed routes `baasicLoginService` uses `baasicLoginRouteService`.
+     * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain needed routes `baasicLoginService` uses `baasicLoginRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
-        module.service('baasicLoginService', ['baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService', function (baasicApiHttp, authService, loginRouteService) {
+        module.service('baasicLoginService', ['baasicConstants', 'baasicApiService', 'baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService', function (baasicConstants, baasicApiService, baasicApiHttp, authService, loginRouteService) {
+            // Getting query string values in javascript: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+            var parseUrlParams = function () {
+                var urlParams;
+                var match, pl = /\+/g,
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) {
+                        return decodeURIComponent(s.replace(pl, ' '));
+                    },
+                    query = window.location.search.substring(1);
+
+                urlParams = {}; /*jshint -W084 */
+                while (match = search.exec(query)) {
+                    urlParams[decode(match[1])] = decode(match[2]);
+                }
+                return urlParams;
+            };
+
             return {
                 /**
                  * Returns a promise that is resolved once the login action has been performed. This action logs user into the application and success response returns the token resource.
@@ -158,7 +199,86 @@
                  * @method        
                  * @example baasicLoginService.routeService.get.expand(expandObject);
                  **/
-                routeService: loginRouteService
+                routeService: loginRouteService,
+                social: {
+                    /**
+                     * Returns a promise that is resolved once the get action has been performed. Success response returns a resolved social login provider Url.
+                     * @method social.get
+                     * @example 
+                     baasicLoginService.social.get('<provider>', '<returnUrl>')
+                     .success(function (collection) {
+                     // perform success action here
+                     })
+                     .error(function (response, status, headers, config) {
+                     // perform error handling here
+                     });
+                     **/
+                    get: function (provider, returnUrl) {
+                        var params = {
+                            provider: provider,
+                            returnUrl: returnUrl
+                        };
+                        return baasicApiHttp.get(loginRouteService.social.get.expand(baasicApiService.findParams(params)));
+                    },
+                    /**
+                     * Returns a promise that is resolved once the post action has been performed. This action logs user into the application and success response returns the token resource.
+                     * @method social.post
+                     * @example 
+                     var postData = {
+                     email : '<email>',
+                     code:'<code>',
+                     activationUrl : '<activationUrl>',
+                     oAuthToken : '<oAuthToken>',
+                     oAuthVerifier : '<oAuthVerifier>',
+                     password : '<password>',
+                     returnUrl : '<returnUrl>'
+                     };
+                     baasicLoginService.social.post('<provider>', postData)
+                     .success(function (collection) {
+                     // perform success action here
+                     })
+                     .error(function (response, status, headers, config) {
+                     // perform error handling here
+                     });
+                     **/
+                    post: function (provider, data) {
+                        return baasicApiHttp({
+                            url: loginRouteService.social.post.expand({
+                                provider: provider
+                            }),
+                            method: 'POST',
+                            data: baasicApiService.createParams(data)[baasicConstants.modelPropertyName],
+                            headers: {
+                                'Content-Type': 'application/json; charset=UTF-8'
+                            }
+                        }).success(function (data) {
+                            if (data && !data.status) {
+                                authService.updateAccessToken(data);
+                            }
+                        });
+                    },
+                    /**
+                     * Parses social provider response parameters.
+                     * @method social.parseResponse
+                     * @example baasicLoginService.social.parseResponse('<provider>');
+                     **/
+                    parseResponse: function (provider, returnUrl) {
+                        var params = parseUrlParams();
+                        var result = {};
+                        switch (provider) {
+                        case 'twitter':
+                            /*jshint camelcase: false */
+                            result.oAuthToken = params.oauth_token;
+                            result.oAuthVerifier = params.oauth_verifier;
+                            break;
+                        default:
+                            result.code = params.code;
+                            result.returnUrl = returnUrl;
+                            break;
+                        }
+                        return result;
+                    }
+                }
             };
         }]);
     }(angular, module));
@@ -171,7 +291,7 @@
     /* globals module */
     /**
      * @module baasicPasswordRecoveryRouteService 
-     * @description Baasic Password Recovery Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Password Recovery Route Service to obtain a needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
+     * @description Baasic Password Recovery Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Password Recovery Route Service to obtain needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -207,7 +327,7 @@
     /* globals module */
     /**
      * @module baasicPasswordRecoveryService
-     * @description Baasic Password Recovery Service provides an easy way to consume Baasic Password Recovery REST API end-points. In order to obtain a needed routes `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService`.
+     * @description Baasic Password Recovery Service provides an easy way to consume Baasic Password Recovery REST API end-points. In order to obtain needed routes `baasicPasswordRecoveryService` uses `baasicPasswordRecoveryRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -279,7 +399,7 @@
     /* globals module */
     /**
      * @module baasicRegisterRouteService
-     * @description Baasic Register Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Register Route Service to obtain a needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
+     * @description Baasic Register Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Register Route Service to obtain needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -313,11 +433,11 @@
     /* globals module */
     /**
      * @module baasicRegisterService
-     * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain a needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
+     * @description Baasic Register Service provides an easy way to consume Baasic Application Registration REST API end-points. In order to obtain needed routes `baasicRegisterService` uses `baasicRegisterRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
-        module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRegisterRouteService', function (baasicApiHttp, baasicApiService, baasicConstants, baasicRegisterRouteService) {
+        module.service('baasicRegisterService', ['baasicApiHttp', 'baasicApiService', 'baasicConstants', 'baasicRegisterRouteService', 'baasicAuthorizationService', function (baasicApiHttp, baasicApiService, baasicConstants, baasicRegisterRouteService, authService) {
             return {
                 /**
                  * Returns a promise that is resolved once the register create has been performed. This action will create a new user if completed successfully. Created user is not approved immediately, instead an activation e-mail is sent to the user.
@@ -344,7 +464,7 @@
                     return baasicApiHttp.post(baasicRegisterRouteService.create.expand({}), baasicApiService.createParams(data)[baasicConstants.modelPropertyName]);
                 },
                 /**
-                 * Returns a promise that is resolved once the account activation action has been performed; this action activates a user account.
+                 * Returns a promise that is resolved once the account activation action has been performed; this action activates a user account and success response returns the token resource.
                  * @method        
                  * @example 
                  baasicRegisterService.activate({
@@ -360,7 +480,12 @@
                  **/
                 activate: function (data) {
                     var params = baasicApiService.getParams(data, 'activationToken');
-                    return baasicApiHttp.put(baasicRegisterRouteService.activate.expand(params), {});
+                    return baasicApiHttp({
+                        url: baasicRegisterRouteService.activate.expand(params),
+                        method: 'PUT'
+                    }).success(function (data) {
+                        authService.updateAccessToken(data);
+                    });
                 },
                 /**
                  * Provides direct access to `baasicRegisterRouteService`.
@@ -380,7 +505,7 @@
     /* globals module */
     /**
      * @module baasicRoleRouteService
-     * @description Baasic Role Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Role Route Service to obtain a needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
+     * @description Baasic Role Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic Role Route Service to obtain needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -398,7 +523,7 @@
                  {searchQuery: '<search-phrase>'}
                  );
                  **/
-                find: uriTemplateService.parse('roles/{?searchQuery,page,rpp,sort,embed,fields}'),
+                find: uriTemplateService.parse('lookups/roles/{?searchQuery,page,rpp,sort,embed,fields}'),
                 /**
                  * Parses get role route which should be expanded with the role Id. Note that the role Id is the primary key of the role.
                  * @method        
@@ -407,13 +532,13 @@
                  {id: '<role-id>'}
                  );
                  **/
-                get: uriTemplateService.parse('roles/{id}/{?embed,fields}'),
+                get: uriTemplateService.parse('lookups/roles/{id}/{?embed,fields}'),
                 /**
                  * Parses create role route; this URI template does not expose any additional options.
                  * @method        
                  * @example baasicRoleRouteService.create.expand({});               
                  **/
-                create: uriTemplateService.parse('roles'),
+                create: uriTemplateService.parse('lookups/roles'),
                 /**
                  * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
                  * @method
@@ -438,7 +563,7 @@
     /* globals module */
     /**
      * @module baasicRoleService
-     * @description Baasic Role Service provides an easy way to consume Baasic Role REST API end-points. In order to obtain a needed routes `baasicRoleService` uses `baasicRoleRouteService`.
+     * @description Baasic Role Service provides an easy way to consume Baasic Role REST API end-points. In order to obtain needed routes `baasicRoleService` uses `baasicRoleRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -561,7 +686,7 @@
 
     /**
      * @module baasicUserRouteService
-     * @description Baasic User Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic User Route Service to obtain a needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
+     * @description Baasic User Route Service provides Baasic route templates which can be expanded to Baasic REST URIs. Various services can use Baasic User Route Service to obtain needed routes while other routes will be obtained through HAL. By convention, all route services use the same function names as their corresponding services.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -601,17 +726,6 @@
                  **/
                 get: uriTemplateService.parse('users/{username}/{?embed,fields}'),
                 /**
-                 * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
-                 * @method
-                 * @example 
-                 baasicUserRouteService.parse(
-                 '<route>/{?embed,fields,options}'
-                 ).expand(
-                 {embed: '<embedded-resource>'}
-                 );
-                 **/
-                parse: uriTemplateService.parse,
-                /**
                  * Parses create user route, this URI template does not expose any additional options.
                  * @method        
                  * @example baasicUserRouteService.create.expand({});              
@@ -626,6 +740,40 @@
                  );
                  **/
                 changePassword: uriTemplateService.parse('users/{username}/change-password'),
+                /**
+                 * Parses and expands URI templates based on [RFC6570](http://tools.ietf.org/html/rfc6570) specifications. For more information please visit the project [GitHub](https://github.com/Baasic/uritemplate-js) page.
+                 * @method
+                 * @example 
+                 baasicUserRouteService.parse(
+                 '<route>/{?embed,fields,options}'
+                 ).expand(
+                 {embed: '<embedded-resource>'}
+                 );
+                 **/
+                parse: uriTemplateService.parse,
+                socialLogin: {
+                    /**
+                     * Parses get social login route, URI template should be expanded with the username of the user resource whose social login connections should be retrieved.
+                     * @method socialLogin.get       
+                     * @example 
+                     baasicUserRouteService.socialLogin.get.expand({
+                     username : '<username>'
+                     });
+                     **/
+                    get: uriTemplateService.parse('users/{username}/social-login'),
+                    /**
+                     * Parses remove social login route which can be expanded with additional items. Supported items are:
+                     * - `username` - A username which uniquely identifies an application user whose social login connection needs to be removed.
+                     * - `provider` - Provider from which to disconnect the login resource from.
+                     * @method socialLogin.remove 
+                     * @example 
+                     baasicUserRouteService.socialLogin.remove.expand({
+                     username : '<username>',
+                     provider : '<provider>'
+                     });
+                     **/
+                    remove: uriTemplateService.parse('users/{username}/social-login/{provider}')
+                }
             };
         }]);
     }(angular, module));
@@ -639,7 +787,7 @@
     /* globals module */
     /**
      * @module baasicUserService
-     * @description Baasic User Service provides an easy way to consume Baasic User REST API end-points. In order to obtain a needed routes `baasicUserService` uses `baasicUserRouteService`.
+     * @description Baasic User Service provides an easy way to consume Baasic User REST API end-points. In order to obtain needed routes `baasicUserService` uses `baasicUserRouteService`.
      */
     (function (angular, module, undefined) {
         'use strict';
@@ -880,7 +1028,54 @@
                  * @method        
                  * @example baasicUserService.routeService.get.expand(expandObject);
                  **/
-                routeService: userRouteService
+                routeService: userRouteService,
+                socialLogin: {
+                    /**
+                     * Returns a promise that is resolved once the get action has been performed. Success response returns a list user resource connected social login providers.
+                     * @method socialLogin.get
+                     * @example 
+                     baasicUserService.socialLogin.get('<username>')
+                     .success(function (collection) {
+                     // perform success action here
+                     })
+                     .error(function (response, status, headers, config) {
+                     // perform error handling here
+                     });
+                     **/
+                    get: function (username) {
+                        return baasicApiHttp.get(userRouteService.socialLogin.get.expand({
+                            username: username
+                        }));
+                    },
+                    /**
+                     * Returns a promise that is resolved once the remove action has been performed. This action removes the user resource social login connection from the specified provider.
+                     * @method socialLogin.remove
+                     * @example 
+                     baasicUserService.socialLogin.remove('<username>', '<provider>')
+                     .success(function (collection) {
+                     // perform success action here
+                     })
+                     .error(function (response, status, headers, config) {
+                     // perform error handling here
+                     });
+                     **/
+                    remove: function (username, provider) {
+                        var params;
+                        if (provider.hasOwnProperty('abrv')) {
+                            params = {
+                                provider: provider.abrv
+                            };
+                        } else if (provider.hasOwnProperty('id')) {
+                            params = {
+                                provider: provider.id
+                            };
+                        } else {
+                            params = angular.extend({}, provider);
+                        }
+                        params.username = username;
+                        return baasicApiHttp.delete(userRouteService.socialLogin.remove.expand(baasicApiService.findParams(params)));
+                    }
+                }
             };
         }]);
     }(angular, module));
