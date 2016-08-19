@@ -826,8 +826,8 @@
                  // perform error handling here
                  });
                  **/
-                find: function (data) {
-                    return baasicApiHttp.get(userRouteService.find.expand(baasicApiService.findParams(data)));
+                find: function (options) {
+                    return baasicApiHttp.get(userRouteService.find.expand(baasicApiService.findParams(options)));
                 },
                 /**
                  * Returns a promise that is resolved once the get action has been performed. Success response returns the specified user resource.
@@ -844,8 +844,8 @@
                  // perform error handling here
                  });
                  **/
-                get: function (data) {
-                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(data, 'username')));
+                get: function (options) {
+                    return baasicApiHttp.get(userRouteService.get.expand(baasicApiService.getParams(options, 'username')));
                 },
                 /**
                  * Returns a promise that is resolved once the create user action has been performed; this action creates a new user.
