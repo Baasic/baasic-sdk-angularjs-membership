@@ -1,6 +1,6 @@
 {
   "name": "baasic-angular-membership",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "devDependencies": {
     "baasic-javascript-docgen": "git://github.com/Baasic/baasic-javascript-docgen",
     "gulp": ">3.4.0",
