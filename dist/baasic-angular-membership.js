@@ -94,7 +94,8 @@
         'use strict';
         module.service('baasicLoginService', ['baasicConstants', 'baasicApiService', 'baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService', function (baasicConstants, baasicApiService, baasicApiHttp, authService, loginRouteService) {
             // Getting query string values in javascript: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-            var parseUrlParams = function () {
+
+            function parseUrlParams() {
                 var urlParams;
                 var match, pl = /\+/g,
                     search = /([^&=]+)=?([^&]*)/g,
@@ -108,7 +109,20 @@
                     urlParams[decode(match[1])] = decode(match[2]);
                 }
                 return urlParams;
-            };
+            }
+
+            /**
+             * Returns url encoded form data.
+             */
+
+            function transformData(data) {
+                var items = [];
+                angular.forEach(data, function (value, key) {
+                    items.push([encodeURIComponent(key), encodeURIComponent(value)].join('='));
+                });
+
+                return items.join('&');
+            }
 
             return {
                 /**
@@ -130,7 +144,12 @@
                  **/
                 login: function login(data) {
                     var settings = angular.copy(data);
-                    var formData = 'grant_type=password&username=' + settings.username + '&password=' + settings.password;
+                    var formData = transformData({
+                        grant_type: 'password',
+                        // jshint ignore:line
+                        username: settings.username,
+                        password: settings.password
+                    });
 
                     if (settings.options) {
                         var options = settings.options;
