@@ -51,7 +51,7 @@ baasicUserRouteService.social.post.expand({
   provider : '<provider>'
 });            
                     **/                                     
-                    post: uriTemplateService.parse('login/social/{provider}'),
+                    post: uriTemplateService.parse('login/social/{provider}/{?embed,fields,options}'),
                 }                
             };
         }]);

@@ -73,7 +73,7 @@
                      provider : '<provider>'
                      });
                      **/
-                    post: uriTemplateService.parse('login/social/{provider}'),
+                    post: uriTemplateService.parse('login/social/{provider}/{?embed,fields,options}'),
                 }
             };
         }]);
@@ -241,10 +241,17 @@
                      // perform error handling here
                      });
                      **/
-                    post: function (provider, data) {
+                    post: function (provider, data, options) {
+                        var params = {
+                            provider: provider
+                        };
+                        if (options) {
+                            params.options = options;
+                        }
                         return baasicApiHttp({
                             url: loginRouteService.social.post.expand({
-                                provider: provider
+                                provider: provider,
+                                options: options
                             }),
                             method: 'POST',
                             data: baasicApiService.createParams(data)[baasicConstants.modelPropertyName],
