@@ -93,22 +93,6 @@
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicLoginService', ['baasicConstants', 'baasicApiService', 'baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService', function (baasicConstants, baasicApiService, baasicApiHttp, authService, loginRouteService) {
-            // Getting query string values in javascript: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-            var parseUrlParams = function () {
-                var urlParams;
-                var match, pl = /\+/g,
-                    search = /([^&=]+)=?([^&]*)/g,
-                    decode = function (s) {
-                        return decodeURIComponent(s.replace(pl, ' '));
-                    },
-                    query = window.location.search.substring(1);
-
-                urlParams = {}; /*jshint -W084 */
-                while (match = search.exec(query)) {
-                    urlParams[decode(match[1])] = decode(match[2]);
-                }
-                return urlParams;
-            };
 
             return {
                 /**
@@ -130,7 +114,6 @@
                  **/
                 login: function login(data) {
                     var settings = angular.copy(data);
-                    var formData = 'grant_type=password&username=' + settings.username + '&password=' + settings.password;
 
                     if (settings.options) {
                         var options = settings.options;
@@ -142,7 +125,12 @@
                     return baasicApiHttp({
                         url: loginRouteService.login.expand(settings),
                         method: 'POST',
-                        data: formData,
+                        data: transformData({
+                            grant_type: 'password',
+                            // jshint ignore:line
+                            username: settings.username,
+                            password: settings.password
+                        }),
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                         }
@@ -287,6 +275,37 @@
                     }
                 }
             };
+
+            // Getting query string values in javascript: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+
+            function parseUrlParams() {
+                var urlParams;
+                var match, pl = /\+/g,
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) {
+                        return decodeURIComponent(s.replace(pl, ' '));
+                    },
+                    query = window.location.search.substring(1);
+
+                urlParams = {}; /*jshint -W084 */
+                while (match = search.exec(query)) {
+                    urlParams[decode(match[1])] = decode(match[2]);
+                }
+                return urlParams;
+            }
+
+            /**
+             * Returns url encoded form data.
+             */
+
+            function transformData(data) {
+                var items = [];
+                angular.forEach(data, function (value, key) {
+                    items.push([encodeURIComponent(key), encodeURIComponent(value)].join('='));
+                });
+
+                return items.join('&');
+            }
         }]);
     }(angular, module));
     /**
