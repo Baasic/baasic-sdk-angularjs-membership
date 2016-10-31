@@ -1,3 +1,8 @@
+/*
+ Baasic AngularJS Membership v0.9.0
+ (c) 2014-2016 Mono http://baasic.com
+ License: MIT
+*/
 (function (angular, undefined) { /* exported module */
     /** 
      * @description The angular.module is a global place for creating, registering or retrieving modules. All modules should be registered in an application using this mechanism. An angular module is a container for the different parts of your app - services, directives etc. In order to use `baasic.membership` module functionality it must be added as a dependency to your app.
