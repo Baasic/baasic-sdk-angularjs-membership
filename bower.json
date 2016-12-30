@@ -28,6 +28,6 @@
   "devDependencies": {
   },
   "dependencies": {
-	"baasic-angular-security": "Baasic/baasic-sdk-angularjs-security#~0.2.0"
+	"baasic-angular-security": "Baasic/baasic-sdk-angularjs-security#~0.9.0"
   }
 }
