@@ -1,5 +1,5 @@
 /*
- Baasic AngularJS Membership v0.9.0
+ Baasic AngularJS Membership v0.9.1
  (c) 2014-2016 Mono http://baasic.com
  License: MIT
 */

@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
     <metadata>
         <id>Baasic.Angular.Membership</id>
-        <version>0.9.0</version>
+        <version>0.9.1</version>
         <title>Baasic Angular Membership Module</title>
         <authors>Kristijan Horvat</authors>
         <owners>Mono Ltd.</owners>
