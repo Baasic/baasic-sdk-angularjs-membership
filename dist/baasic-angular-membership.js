@@ -1,3 +1,8 @@
+/*
+ Baasic AngularJS Membership v0.9.1
+ (c) 2014-2016 Mono http://baasic.com
+ License: MIT
+*/
 (function (angular, undefined) { /* exported module */
     /** 
      * @description The angular.module is a global place for creating, registering or retrieving modules. All modules should be registered in an application using this mechanism. An angular module is a container for the different parts of your app - services, directives etc. In order to use `baasic.membership` module functionality it must be added as a dependency to your app.
@@ -73,7 +78,7 @@
                      provider : '<provider>'
                      });
                      **/
-                    post: uriTemplateService.parse('login/social/{provider}'),
+                    post: uriTemplateService.parse('login/social/{provider}/{?embed,fields,options}'),
                 }
             };
         }]);
@@ -93,22 +98,6 @@
     (function (angular, module, undefined) {
         'use strict';
         module.service('baasicLoginService', ['baasicConstants', 'baasicApiService', 'baasicApiHttp', 'baasicAuthorizationService', 'baasicLoginRouteService', function (baasicConstants, baasicApiService, baasicApiHttp, authService, loginRouteService) {
-            // Getting query string values in javascript: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
-            var parseUrlParams = function () {
-                var urlParams;
-                var match, pl = /\+/g,
-                    search = /([^&=]+)=?([^&]*)/g,
-                    decode = function (s) {
-                        return decodeURIComponent(s.replace(pl, ' '));
-                    },
-                    query = window.location.search.substring(1);
-
-                urlParams = {}; /*jshint -W084 */
-                while (match = search.exec(query)) {
-                    urlParams[decode(match[1])] = decode(match[2]);
-                }
-                return urlParams;
-            };
 
             return {
                 /**
@@ -130,7 +119,6 @@
                  **/
                 login: function login(data) {
                     var settings = angular.copy(data);
-                    var formData = 'grant_type=password&username=' + settings.username + '&password=' + settings.password;
 
                     if (settings.options) {
                         var options = settings.options;
@@ -142,7 +130,12 @@
                     return baasicApiHttp({
                         url: loginRouteService.login.expand(settings),
                         method: 'POST',
-                        data: formData,
+                        data: transformData({
+                            grant_type: 'password',
+                            // jshint ignore:line
+                            username: settings.username,
+                            password: settings.password
+                        }),
                         headers: {
                             'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
                         }
@@ -241,10 +234,17 @@
                      // perform error handling here
                      });
                      **/
-                    post: function (provider, data) {
+                    post: function (provider, data, options) {
+                        var params = {
+                            provider: provider
+                        };
+                        if (options) {
+                            params.options = options;
+                        }
                         return baasicApiHttp({
                             url: loginRouteService.social.post.expand({
-                                provider: provider
+                                provider: provider,
+                                options: options
                             }),
                             method: 'POST',
                             data: baasicApiService.createParams(data)[baasicConstants.modelPropertyName],
@@ -280,6 +280,37 @@
                     }
                 }
             };
+
+            // Getting query string values in javascript: http://stackoverflow.com/questions/901115/how-can-i-get-query-string-values-in-javascript
+
+            function parseUrlParams() {
+                var urlParams;
+                var match, pl = /\+/g,
+                    search = /([^&=]+)=?([^&]*)/g,
+                    decode = function (s) {
+                        return decodeURIComponent(s.replace(pl, ' '));
+                    },
+                    query = window.location.search.substring(1);
+
+                urlParams = {}; /*jshint -W084 */
+                while (match = search.exec(query)) {
+                    urlParams[decode(match[1])] = decode(match[2]);
+                }
+                return urlParams;
+            }
+
+            /**
+             * Returns url encoded form data.
+             */
+
+            function transformData(data) {
+                var items = [];
+                angular.forEach(data, function (value, key) {
+                    items.push([encodeURIComponent(key), encodeURIComponent(value)].join('='));
+                });
+
+                return items.join('&');
+            }
         }]);
     }(angular, module));
     /**
