@@ -28,7 +28,7 @@ baasicRegisterRouteService.activate.expand(
 /**
  * @overview 
  ***Notes:**
- - Refer to the [REST API documentation](https://github.com/Baasic/baasic-rest-api/wiki) for detailed information about available Baasic REST API end-points.
+ - Refer to the [Baasic REST API](http://dev.baasic.com/api/reference/home) for detailed information about available Baasic REST API end-points.
  - [URI Template](https://github.com/Baasic/uritemplate-js) syntax enables expanding the Baasic route templates to Baasic REST URIs providing it with an object that contains URI parameters.
  - All end-point objects are transformed by the associated route service.
 */

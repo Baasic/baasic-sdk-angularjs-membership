@@ -1,6 +1,6 @@
 # Baasic Membership AngularJS SDK
 
-Baasic AngularJS Membership library provides access to [Baasic REST API](https://api.baasic.com/beta) membership end-points.
+Baasic AngularJS Membership library provides access to [Baasic REST API](http://dev.baasic.com/api/reference/home) membership end-points.
 
 ## Dependencies
 
