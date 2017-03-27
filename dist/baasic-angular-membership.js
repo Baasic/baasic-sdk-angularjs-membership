@@ -1,6 +1,6 @@
 /*
- Baasic AngularJS Membership v0.9.1
- (c) 2014-2016 Mono http://baasic.com
+ Baasic AngularJS Membership v1.0.1
+ (c) 2014-2017 Mono Ltd. http://baasic.com
  License: MIT
 */
 (function (angular, undefined) { /* exported module */
